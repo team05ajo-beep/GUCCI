@@ -6,8 +6,6 @@ import WinnerCard from './components/WinnerCard';
 import ScratchCard from './components/ScratchCard';
 import { MessageCircle } from 'lucide-react';
 
-const STORAGE_KEY = 'gucci_lucky_draw_v1';
-
 const App: React.FC = () => {
   const [prize, setPrize] = useState<Prize | null>(null);
   const [code, setCode] = useState<string>('');
@@ -27,28 +25,8 @@ const App: React.FC = () => {
     }))
   ).current;
 
-  // Initialize Prize on Mount with LocalStorage Check
+  // Initialize Prize on Mount (Always generate new prize on refresh)
   useEffect(() => {
-    const storedData = localStorage.getItem(STORAGE_KEY);
-    
-    if (storedData) {
-      try {
-        const parsedData = JSON.parse(storedData);
-        const existingPrize = PRIZES.find(p => p.id === parsedData.prizeId);
-        
-        if (existingPrize && parsedData.code) {
-          setPrize(existingPrize);
-          setCode(parsedData.code);
-          setIsRevealed(true); // User has already played
-          return;
-        }
-      } catch (error) {
-        console.error("Error parsing stored lucky draw data:", error);
-        localStorage.removeItem(STORAGE_KEY);
-      }
-    }
-
-    // New User: Generate random prize
     const randomIndex = Math.floor(Math.random() * PRIZES.length);
     setPrize(PRIZES[randomIndex]);
     setCode(generateRandomCode());
@@ -72,14 +50,6 @@ const App: React.FC = () => {
 
   const handleReveal = () => {
     setIsRevealed(true);
-    // Save to local storage to prevent re-claiming/re-rolling
-    if (prize && code) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        prizeId: prize.id,
-        code: code,
-        timestamp: new Date().toISOString()
-      }));
-    }
   };
 
   const getWhatsAppLink = () => {
