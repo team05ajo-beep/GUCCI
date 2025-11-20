@@ -4,11 +4,11 @@ export const PRIZES: Prize[] = [
     { id: '1', amount: 'Rp 250.000', isGrandPrize: false },
     { id: '2', amount: 'Rp 300.000', isGrandPrize: false },
     { id: '3', amount: 'Rp 500.000', isGrandPrize: false },
-    { id: '4', amount: 'Rp 750.000', isGrandPrize: false },
-    { id: '5', amount: 'Rp 1.000.000', isGrandPrize: false },
-    { id: '6', amount: 'Rp 1.500.000', isGrandPrize: false },
-    { id: '7', amount: 'Rp 2.000.000', isGrandPrize: false },
-    { id: '8', amount: 'Rp 3.500.000', isGrandPrize: true },
+    { id: '4', amount: 'Rp 720.000', isGrandPrize: false },
+    { id: '5', amount: 'Rp 980.000', isGrandPrize: false },
+    { id: '6', amount: 'Rp 300.000', isGrandPrize: false },
+    { id: '7', amount: 'Rp 400.000', isGrandPrize: false },
+    { id: '8', amount: 'Rp 800.000', isGrandPrize: true },
 ];
 
 export const WHATSAPP_NUMBER = '6281385616098';
