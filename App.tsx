@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Prize } from './types';
 import { PRIZES, generateRandomCode, WHATSAPP_NUMBER } from './constants';
@@ -5,6 +6,8 @@ import EventBanner from './components/EventBanner';
 import WinnerCard from './components/WinnerCard';
 import ScratchCard from './components/ScratchCard';
 import { MessageCircle } from 'lucide-react';
+
+const STORAGE_KEY = 'gucci_lucky_draw_claim_v1';
 
 const App: React.FC = () => {
   const [prize, setPrize] = useState<Prize | null>(null);
@@ -25,8 +28,30 @@ const App: React.FC = () => {
     }))
   ).current;
 
-  // Initialize Prize on Mount (Always generate new prize on refresh)
+  // Initialize Prize and Check Local Storage
   useEffect(() => {
+    // 1. Check if user already played
+    const storedData = localStorage.getItem(STORAGE_KEY);
+
+    if (storedData) {
+      try {
+        const { prizeId, code: storedCode } = JSON.parse(storedData);
+        const foundPrize = PRIZES.find(p => p.id === prizeId);
+
+        if (foundPrize && storedCode) {
+          // Restore previous session
+          setPrize(foundPrize);
+          setCode(storedCode);
+          setIsRevealed(true); // Auto reveal (skip scratch)
+          return;
+        }
+      } catch (e) {
+        console.error("Error parsing stored claim data", e);
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+
+    // 2. If no valid history, generate new game
     const randomIndex = Math.floor(Math.random() * PRIZES.length);
     setPrize(PRIZES[randomIndex]);
     setCode(generateRandomCode());
@@ -50,6 +75,14 @@ const App: React.FC = () => {
 
   const handleReveal = () => {
     setIsRevealed(true);
+    
+    // Save result to LocalStorage to prevent re-rolling
+    if (prize && code) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        prizeId: prize.id,
+        code: code
+      }));
+    }
   };
 
   const getWhatsAppLink = () => {
@@ -132,18 +165,37 @@ const App: React.FC = () => {
         </div>
 
         {/* Action Button Area */}
-        <div className={`mt-8 transition-all duration-700 transform w-full flex justify-center ${isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-            <a 
-                href={getWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 bg-gucci-green text-gucci-cream px-6 py-4 rounded-lg border-2 border-gucci-gold shadow-[0_6px_15px_rgba(0,0,0,0.4)] hover:bg-[#2b5032] hover:-translate-y-1 transition-all duration-300"
-            >
-                <MessageCircle className="w-6 h-6 text-gucci-gold group-hover:scale-110 transition-transform" />
-                <span className="font-bold tracking-wide md:text-lg">
-                    HUBUNGI CS (KLAIM REWARD)
-                </span>
-            </a>
+        <div className={`mt-8 transition-all duration-700 transform w-full flex justify-center z-20 ${isRevealed ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-90 pointer-events-none'}`}>
+            <div className="relative group">
+                {/* 1. Ping Effect (Ripple) - Menarik perhatian */}
+                <div className="absolute -inset-1 bg-green-500 rounded-full opacity-75 animate-ping group-hover:opacity-0 duration-1000"></div>
+
+                {/* 2. Glow Effect - Bersinar di belakang */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-yellow-400 to-green-400 rounded-full blur opacity-30 group-hover:opacity-70 transition duration-500 animate-pulse"></div>
+
+                {/* 3. Main Button */}
+                <a 
+                    href={getWhatsAppLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative flex items-center gap-3 bg-gradient-to-r from-[#128C7E] to-[#25D366] text-white px-8 py-4 rounded-full border-2 border-yellow-200 shadow-[0_0_20px_rgba(37,211,102,0.5)] hover:shadow-[0_0_30px_rgba(37,211,102,0.8)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                >
+                    {/* Shine Overlay Animation */}
+                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shine" />
+                    
+                    {/* Icon with bounce on hover */}
+                    <MessageCircle className="w-7 h-7 md:w-8 md:h-8 fill-white text-white group-hover:animate-bounce" />
+                    
+                    <div className="flex flex-col items-start">
+                        <span className="font-black tracking-widest text-sm md:text-lg leading-none drop-shadow-md uppercase">
+                            KLAIM VIA WHATSAPP
+                        </span>
+                        <span className="text-[10px] md:text-xs font-bold text-yellow-100 opacity-90 mt-1">
+                            Klik Disini Hubungi CS
+                        </span>
+                    </div>
+                </a>
+            </div>
         </div>
 
         {/* Welcome / Info Text */}
