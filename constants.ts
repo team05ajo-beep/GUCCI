@@ -3,7 +3,7 @@ import { Prize } from "./types";
 export const PRIZES: Prize[] = [
     { id: '1', amount: 'Rp 10.000', isGrandPrize: false },
     { id: '2', amount: 'Rp 5.000 ', isGrandPrize: false },
-    { id: '3', amount: 'Rp 5.000', isGrandPrize: false },
+    { id: '3', amount: 'Rp 10.000', isGrandPrize: false },
     { id: '4', amount: 'Rp 10.000', isGrandPrize: false },
     { id: '5', amount: 'Rp 10.000', isGrandPrize: false },
     { id: '6', amount: 'Rp 10.000', isGrandPrize: false },
@@ -11,7 +11,7 @@ export const PRIZES: Prize[] = [
     { id: '8', amount: 'Rp 15.000', isGrandPrize: true },
 ];
 
-export const WHATSAPP_NUMBER = '6281374192171';
+export const WHATSAPP_NUMBER = '6282315438568';
 export const SCRATCH_THRESHOLD = 10; // Lowered to 10% for extremely easy win
 
 export const generateRandomCode = (length = 12): string => {
