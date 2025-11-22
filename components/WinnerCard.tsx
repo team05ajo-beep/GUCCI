@@ -18,7 +18,7 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code }) => {
 
       <div className="bg-black/40 text-gucci-gold text-[10px] md:text-xs px-3 py-1 rounded mb-2 backdrop-blur-sm">
         Masa Berlaku: 1 x 24 Jam<br />
-        Hingga 21 November 2025, 15:27 WIB
+        Hingga 23 November 2025, 15:27 WIB
       </div>
 
       <p className="text-[9px] text-gucci-cream opacity-80 italic px-4">
