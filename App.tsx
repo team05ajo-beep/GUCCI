@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Prize } from './types';
 import { PRIZES, generateRandomCode, WHATSAPP_NUMBER } from './constants';
 import EventBanner from './components/EventBanner';
@@ -16,8 +16,8 @@ const App: React.FC = () => {
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Generate static stars for background
-  const stars = useRef(
+  // Generate static stars for background using useMemo to prevent re-renders
+  const stars = useMemo(() => 
     Array.from({ length: 60 }).map((_, i) => ({
       id: i,
       left: Math.random() * 100,
@@ -25,8 +25,8 @@ const App: React.FC = () => {
       size: Math.random() * 3 + 2,
       delay: Math.random() * 5,
       duration: Math.random() * 3 + 2
-    }))
-  ).current;
+    })), []
+  );
 
   // Initialize Prize and Check Local Storage
   useEffect(() => {
