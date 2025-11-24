@@ -1,49 +1,69 @@
+
 import React, { useMemo } from 'react';
 import { WinnerCardProps } from '../types';
+import { useLanguage } from '../LanguageContext';
 
 const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code }) => {
+  const { t, language } = useLanguage();
   
-  // Menghitung Tanggal Kedaluwarsa: Waktu Sekarang + 24 Jam
   const expiryDateString = useMemo(() => {
     const date = new Date();
-    date.setHours(date.getHours() + 24); // Tambah 24 jam dari waktu sekarang
+    date.setHours(date.getHours() + 24); 
     
-    const day = date.getDate();
-    const monthNames = [
-      "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
-      "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-    ];
-    const month = monthNames[date.getMonth()];
-    const year = date.getFullYear();
-    // PadStart memastikan angka jam/menit selalu 2 digit (contoh: 09:05)
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    
-    return `${day} ${month} ${year}, ${hours}:${minutes} WIB`;
-  }, []);
+    // Map internal language codes to BCP 47 locale codes if necessary
+    const localeMap: Record<string, string> = {
+        'en': 'en-US',
+        'id': 'id-ID',
+        'it': 'it-IT',
+        'fr': 'fr-FR'
+    };
+
+    const locale = localeMap[language] || 'en-US';
+
+    return new Intl.DateTimeFormat(locale, {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short'
+    }).format(date);
+  }, [language]);
 
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-gradient-to-r from-gucci-green via-gucci-red to-gucci-green p-4 select-none">
-      <h2 className="text-gucci-gold text-sm md:text-lg font-bold mb-1 tracking-wider">
-        SELAMAT! ANDA MENDAPATKAN:
-      </h2>
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-[#F9F6EF] p-6 select-none border-4 border-double border-gray-200">
       
-      <div className="text-gucci-gold text-xl md:text-3xl font-black drop-shadow-md my-2 animate-bounce">
-        {prize.isGrandPrize ? `POTONGAN ${prize.amount}` : `VOUCHER ${prize.amount}`}
-      </div>
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none"></div>
 
-      <div className="bg-gucci-cream text-gray-900 font-mono font-bold text-xl md:text-2xl tracking-widest px-4 py-2 rounded shadow-inner border-2 border-yellow-700 mb-3">
-        {code}
-      </div>
+      <div className="relative z-10">
+        <h2 className="text-gray-500 text-xs font-sans font-bold tracking-[0.2em] uppercase mb-4">
+            {t('invitation')}
+        </h2>
+        
+        <div className="text-gray-900 text-2xl md:text-3xl font-serif font-black mb-2 leading-none uppercase">
+            {prize.isGrandPrize ? t('specialDiscount') : t('giftVoucher')}
+        </div>
+        
+        <div className="text-yellow-700 text-xl md:text-2xl font-serif italic font-bold mb-6">
+            {prize.amount}
+        </div>
 
-      <div className="bg-black/40 text-gucci-gold text-[10px] md:text-xs px-3 py-1 rounded mb-2 backdrop-blur-sm">
-        Masa Berlaku: 1 x 24 Jam<br />
-        Hingga <span className="font-bold text-yellow-200">{expiryDateString}</span>
-      </div>
+        <div className="inline-block bg-white border border-gray-300 px-6 py-2 shadow-sm mb-6">
+            <span className="font-mono text-gray-800 text-lg tracking-[0.15em] font-bold">
+                {code}
+            </span>
+        </div>
 
-      <p className="text-[9px] text-gucci-cream opacity-80 italic px-4">
-        *Tukarkan segera untuk seluruh transaksi di Gucci Indonesia
-      </p>
+        <div className="border-t border-gray-300 w-full mb-3"></div>
+
+        <div className="text-gray-600 text-[10px] font-sans leading-relaxed">
+            {t('validUntil')} <span className="text-gray-900 font-bold">{expiryDateString}</span>
+        </div>
+        <p className="text-[9px] text-gray-400 mt-1 italic">
+            {t('redeemable')}
+        </p>
+      </div>
     </div>
   );
 };
