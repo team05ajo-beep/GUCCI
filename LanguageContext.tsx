@@ -62,8 +62,51 @@ const translations: Record<Language, Record<string, string>> = {
     florenceSubtitle: "Firenze 1921",
     backToHome: "Kembali ke Beranda",
     visionTitle: "Visi & Misi",
-    visionText1: "1. Membangun Kemitraan yang Berkualitas dan Berintegritas\nProgram ini dirancang untuk merangkul mitra yang memiliki visi serupa: menghadirkan nilai positif bagi pelanggan dan menjaga standar etika yang tinggi. GUCCI memastikan setiap afiliasi memahami karakter brand, estetika, dan standar komunikasi agar reputasi global tetap terpelihara.\n\n2. Memperluas Pengaruh Brand Secara Strategis dan Terukur\nMelalui kolaborasi yang tepat, GUCCI menargetkan audiens baru di berbagai negara. Jaringan afiliasi menjadi jembatan penting dalam memperkenalkan koleksi dan kampanye terbaru ke pasar yang terus berkembang.\n\n3. Menghadirkan Pengalaman Pelanggan yang Konsisten dan Premium\nAfiliasi memiliki peran besar dalam membangun persepsi pelanggan melalui informasi yang tepat, rekomendasi bernilai, dan layanan selaras dengan standar GUCCI.\n\n4. Menciptakan Kolaborasi Berkelanjutan yang Menguntungkan\nProgram ini dirancang untuk hubungan jangka panjang yang stabil. GUCCI memberikan struktur benefit yang transparan agar kerja sama terasa adil dan saling menguatkan.\n\n5. Menginspirasi Melalui Kreativitas dan Inovasi Digital\nGUCCI mendorong para afiliasi untuk membuat konten visual berkualitas, kampanye kreatif, serta memanfaatkan teknologi digital sebagai sarana memperkuat daya tarik brand.\n\n6. Menjaga Standar Kualitas dan Eksklusivitas Brand\nSeluruh aktivitas afiliasi harus mencerminkan identitas premium GUCCI. Konsistensi dalam estetika, tone komunikasi, dan presentasi visual menjadi prioritas utama.\n\n7. Mendorong Pertumbuhan Ekonomi Kreatif Global\nProgram ini membuka peluang bagi kreator dan mitra bisnis untuk berkembang bersama industri fashion high-end, memperluas ruang kolaborasi dan inovasi.",
-    visionText2: "8. Meningkatkan Edukasi dan Literasi Brand bagi Mitra\nGUCCI menyediakan panduan, pelatihan, dan materi edukatif untuk memastikan setiap afiliasi memahami sejarah, nilai, dan positioning brand sehingga penyampaian informasi kepada pelanggan tetap akurat dan elegan.\n\n9. Memperkuat Kehadiran GUCCI di Ranah Digital dan Media Sosial\nMelalui aktivitas afiliasi, GUCCI memperluas eksistensinya di platform digital dengan cara yang lebih organik, autentik, dan interaktif, menjangkau generasi muda secara lebih efektif.\n\n10. Mengembangkan Kanal Distribusi yang Lebih Adaptif dan Relevan\nProgram afiliasi menjadi sarana bagi GUCCI untuk memahami perilaku pelanggan modern, sehingga strategi distribusi dapat disesuaikan dengan tren, preferensi, dan pola konsumsi terbaru.\n\n11. Mempercepat Penyebaran Informasi Terkait Koleksi dan Kampanye Baru\nAfiliasi berfungsi sebagai frontliner digital yang mempercepat penyampaian informasi mengenai rilis produk, event eksklusif, maupun kampanye global GUCCI, sehingga awareness pelanggan meningkat jauh lebih cepat.\n\n12. Mendorong Transparansi dan Profesionalisme dalam Seluruh Proses\nGUCCI memastikan setiap mitra memahami pentingnya transparansi dalam komunikasi, metode promosi, hingga mekanisme komisi. Hal ini menjaga ekosistem kerja sama yang sehat dan profesional.\n\n13. Membangun Komunitas Loyal yang Terhubung dengan Nilai Brand\nProgram afiliasi bertujuan menciptakan komunitas yang tidak hanya mengagumi GUCCI, tetapi juga memahami dan menyebarkan nilai-nilai brand melalui gaya hidup, kreativitas, dan pengalaman mereka.\n\n14. Mengintegrasikan Teknologi untuk Pengalaman Afiliasi yang Lebih Baik\nGUCCI mengembangkan sistem yang memudahkan afiliasi melacak kinerja, memantau transaksi, mengelola konten, dan memahami data pelanggan. Semuanya dirancang untuk meningkatkan efisiensi dan potensi pendapatan mitra.\n\n15. Memperkuat Reputasi GUCCI sebagai Brand Luxury yang Relevan dan Visioner\nMelalui jaringan afiliasi, GUCCI ingin memastikan bahwa image sebagai brand luxury tetap kuat, modern, dan relevan dengan perubahan zaman—baik dalam konteks fashion, teknologi, maupun gaya hidup global.",
+    visionText1: "Strategi Kemitraan Global",
+    visionText2: `1. Membangun Kemitraan yang Berkualitas dan Berintegritas
+Program ini dirancang untuk merangkul mitra yang memiliki visi serupa: menghadirkan nilai positif bagi pelanggan dan menjaga standar etika yang tinggi. GUCCI memastikan setiap afiliasi memahami karakter brand, estetika, dan standar komunikasi agar reputasi global tetap terpelihara.
+
+2. Memperluas Pengaruh Brand Secara Strategis dan Terukur
+Melalui kolaborasi yang tepat, GUCCI menargetkan audiens baru di berbagai negara. Jaringan afiliasi menjadi jembatan penting dalam memperkenalkan koleksi dan kampanye terbaru ke pasar yang terus berkembang.
+
+3. Menghadirkan Pengalaman Pelanggan yang Konsisten dan Premium
+Afiliasi memiliki peran besar dalam membangun persepsi pelanggan melalui informasi yang tepat, rekomendasi bernilai, dan layanan selaras dengan standar GUCCI.
+
+4. Menciptakan Kolaborasi Berkelanjutan yang Menguntungkan
+Program ini dirancang untuk hubungan jangka panjang yang stabil. GUCCI memberikan struktur benefit yang transparan agar kerja sama terasa adil dan saling menguatkan.
+
+5. Menginspirasi Melalui Kreativitas dan Inovasi Digital
+GUCCI mendorong para afiliasi untuk membuat konten visual berkualitas, kampanye kreatif, serta memanfaatkan teknologi digital sebagai sarana memperkuat daya tarik brand.
+
+6. Menjaga Standar Kualitas dan Eksklusivitas Brand
+Seluruh aktivitas afiliasi harus mencerminkan identitas premium GUCCI. Konsistensi dalam estetika, tone komunikasi, dan presentasi visual menjadi prioritas utama.
+
+7. Mendorong Pertumbuhan Ekonomi Kreatif Global
+Program ini membuka peluang bagi kreator dan mitra bisnis untuk berkembang bersama industri fashion high-end, memperluas ruang kolaborasi dan inovasi.
+
+8. Meningkatkan Edukasi dan Literasi Brand bagi Mitra
+GUCCI menyediakan panduan, pelatihan, dan materi edukatif untuk memastikan setiap afiliasi memahami sejarah, nilai, dan positioning brand sehingga penyampaian informasi kepada pelanggan tetap akurat dan elegan.
+
+9. Memperkuat Kehadiran GUCCI di Ranah Digital dan Media Sosial
+Melalui aktivitas afiliasi, GUCCI memperluas eksistensinya di platform digital dengan cara yang lebih organik, autentik, dan interaktif, menjangkau generasi muda secara lebih efektif.
+
+10. Mengembangkan Kanal Distribusi yang Lebih Adaptif dan Relevan
+Program afiliasi menjadi sarana bagi GUCCI untuk memahami perilaku pelanggan modern, sehingga strategi distribusi dapat disesuaikan dengan tren, preferensi, dan pola konsumsi terbaru.
+
+11. Mempercepat Penyebaran Informasi Terkait Koleksi dan Kampanye Baru
+Afiliasi berfungsi sebagai frontliner digital yang mempercepat penyampaian informasi mengenai rilis produk, event eksklusif, maupun kampanye global GUCCI, sehingga awareness pelanggan meningkat jauh lebih cepat.
+
+12. Mendorong Transparansi dan Profesionalisme dalam Seluruh Proses
+GUCCI memastikan setiap mitra memahami pentingnya transparansi dalam komunikasi, metode promosi, hingga mekanisme komisi. Hal ini menjaga ekosistem kerja sama yang sehat dan profesional.
+
+13. Membangun Komunitas Loyal yang Terhubung dengan Nilai Brand
+Program afiliasi bertujuan menciptakan komunitas yang tidak hanya mengagumi GUCCI, tetapi juga memahami dan menyebarkan nilai-nilai brand melalui gaya hidup, kreativitas, dan pengalaman mereka.
+
+14. Mengintegrasikan Teknologi untuk Pengalaman Afiliasi yang Lebih Baik
+GUCCI mengembangkan sistem yang memudahkan afiliasi melacak kinerja, memantau transaksi, mengelola konten, dan memahami data pelanggan. Semuanya dirancang untuk meningkatkan efisiensi dan potensi pendapatan mitra.
+
+15. Memperkuat Reputasi GUCCI sebagai Brand Luxury yang Relevan dan Visioner
+Melalui jaringan afiliasi, GUCCI ingin memastikan bahwa image sebagai brand luxury tetap kuat, modern, dan relevan dengan perubahan zaman—baik dalam konteks fashion, teknologi, maupun gaya hidup global.`,
   },
   en: {
     menu: "VISION & MISSION",
