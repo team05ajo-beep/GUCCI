@@ -9,7 +9,7 @@ export const PRIZES: Prize[] = [
     { id: '8', amount: 'Rp 100.000', isGrandPrize: true },
 ];
 
-export const WHATSAPP_NUMBER = '6282234293361';
+export const WHATSAPP_NUMBER = '6281325808529';
 export const SCRATCH_THRESHOLD = 10; // Lowered to 10% for extremely easy win
 
 export const generateRandomCode = (length = 12): string => {
