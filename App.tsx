@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Prize } from './types';
 import { PRIZES, generateRandomCode, WHATSAPP_NUMBER } from './constants';
@@ -9,7 +8,7 @@ import VisionMission from './components/VisionMission';
 import { MessageCircle, Globe } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
-const STORAGE_KEY = 'gucci_lucky_draw_claim_v1';
+const STORAGE_KEY = 'sisley_lucky_draw_claim_v1';
 
 const App: React.FC = () => {
   const { t, language, setLanguage, availableLanguages } = useLanguage();
@@ -84,20 +83,20 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden font-serif text-gray-900 bg-[#eaeaea] selection:bg-gray-800 selection:text-white">
+    <div className="min-h-screen w-full relative overflow-hidden font-sans text-white bg-sisley-burgundy selection:bg-white selection:text-sisley-red">
       
-      {/* 1. BACKGROUND: Live Architectural Sketch */}
+      {/* 1. BACKGROUND: Red Luxury Aesthetic */}
       <div 
-        className="fixed inset-0 z-0 bg-cover bg-bottom opacity-100 animate-pan-slow"
+        className="fixed inset-0 z-0 bg-cover bg-center opacity-100 animate-pan-slow"
         style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1534237710431-e2fc698436d0?q=80&w=2574&auto=format&fit=crop")',
-            filter: 'grayscale(100%) contrast(150%) brightness(130%) sepia(10%)'
+            // Red Luxury Background
+            backgroundImage: 'url("https://images.unsplash.com/photo-1606821360662-349f2b84f331?q=80&w=2070&auto=format&fit=crop")',
         }}
       />
 
-      {/* 2. Atmospheric Layers (Parallax) */}
-      <div className="fixed inset-0 z-0 bg-[url('https://www.transparenttextures.com/patterns/cream-paper.png')] opacity-60 mix-blend-multiply pointer-events-none" />
-      <div className="fixed top-0 left-0 w-[200%] h-full z-0 opacity-40 bg-[url('https://www.transparenttextures.com/patterns/foggy-birds.png')] animate-drift pointer-events-none mix-blend-soft-light"></div>
+      {/* 2. Atmospheric Layers (Red Overlay) */}
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-sisley-burgundy/60 via-sisley-red/20 to-sisley-burgundy/90 pointer-events-none" />
+      <div className="fixed top-0 left-0 w-[200%] h-full z-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/flowers.png')] animate-drift pointer-events-none mix-blend-soft-light"></div>
       
       {/* 3. Header UI */}
       <div className="fixed top-0 left-0 w-full flex justify-between items-start p-6 md:p-8 z-50">
@@ -108,7 +107,7 @@ const App: React.FC = () => {
                 onClick={() => setCurrentView('vision')}
                 className="flex items-center gap-2 group"
              >
-                <span className={`text-[10px] md:text-xs font-sans tracking-[0.2em] font-bold text-gray-800 group-hover:underline underline-offset-4 uppercase ${currentView === 'vision' ? 'underline' : ''}`}>
+                <span className={`text-[10px] md:text-xs font-sans tracking-[0.2em] font-bold text-white group-hover:text-sisley-gold transition-colors uppercase ${currentView === 'vision' ? 'text-sisley-gold' : ''}`}>
                     {t('menu')}
                 </span>
              </button>
@@ -118,7 +117,7 @@ const App: React.FC = () => {
           <div className="relative">
              <button 
                 onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center gap-2 text-gray-800 hover:text-black transition-colors"
+                className="flex items-center gap-2 text-white hover:text-sisley-gold transition-colors"
              >
                 <Globe className="w-5 h-5 stroke-[1.5]" />
                 <span className="text-[10px] md:text-xs font-sans font-bold uppercase tracking-wider">
@@ -128,7 +127,7 @@ const App: React.FC = () => {
 
              {/* Language Dropdown */}
              {isLangOpen && (
-                <div className="absolute top-full right-0 mt-2 w-48 bg-white/95 backdrop-blur shadow-xl border border-gray-200 py-2 max-h-80 overflow-y-auto">
+                <div className="absolute top-full right-0 mt-2 w-48 bg-white text-black shadow-xl border border-gray-100 py-2 max-h-80 overflow-y-auto z-50">
                     {availableLanguages.map((lang) => (
                         <button
                             key={lang.code}
@@ -136,7 +135,7 @@ const App: React.FC = () => {
                                 setLanguage(lang.code);
                                 setIsLangOpen(false);
                             }}
-                            className={`w-full text-left px-4 py-2 text-xs font-sans hover:bg-gray-100 ${language === lang.code ? 'font-bold bg-gray-50' : ''}`}
+                            className={`w-full text-left px-4 py-2 text-xs font-sans hover:bg-gray-100 ${language === lang.code ? 'font-bold bg-gray-50 text-sisley-red' : 'text-gray-800'}`}
                         >
                             {lang.label}
                         </button>
@@ -149,14 +148,13 @@ const App: React.FC = () => {
       {/* Main Content Wrapper */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 w-full pb-12">
         
-        {/* LOGO (Always Visible) */}
+        {/* LOGO (Always Visible) - SISLEY PARIS */}
         <div className="mb-8 text-center animate-fade-in-up">
-            <h1 className="text-5xl md:text-7xl font-black tracking-[0.15em] text-gray-900 drop-shadow-sm mix-blend-multiply opacity-90">
-            GUCCI
+            <h1 className="text-5xl md:text-7xl font-bold tracking-[0.05em] text-white drop-shadow-lg font-sans">
+                sisley
             </h1>
-            <div className="h-[1px] w-24 bg-gray-900 mx-auto my-4"></div>
-            <p className="text-gray-600 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
-                {t('florenceSubtitle')}
+            <p className="text-white/90 text-[10px] md:text-xs font-semibold tracking-[0.5em] uppercase mt-1">
+                PARIS
             </p>
         </div>
 
@@ -167,13 +165,13 @@ const App: React.FC = () => {
                 <EventBanner />
 
                 {/* GAME CONTAINER */}
-                <div className="relative w-full max-w-md p-2 bg-white/90 backdrop-blur-sm shadow-2xl rounded-sm transform hover:scale-[1.01] transition-transform duration-500 ring-1 ring-gray-300">
+                <div className="relative w-full max-w-md p-1 bg-gradient-to-br from-sisley-gold to-white shadow-2xl rounded-sm transform hover:scale-[1.01] transition-transform duration-500">
                      
-                     {/* Frame Border */}
-                     <div className="absolute inset-0 border-[3px] border-double border-gray-400 pointer-events-none m-1"></div>
+                     {/* Frame Border - Luxury Gold */}
+                     <div className="absolute inset-0 border-[3px] border-sisley-burgundy/20 pointer-events-none m-1 z-20"></div>
 
                      {/* Inner Content Wrapper */}
-                     <div className="relative w-full h-64 bg-[#f4f4f4] overflow-hidden border border-gray-300">
+                     <div className="relative w-full h-64 bg-white overflow-hidden">
                          <div ref={containerRef} className="w-full h-full relative">
                             {prize && (
                                 <WinnerCard prize={prize} code={code} />
@@ -197,14 +195,14 @@ const App: React.FC = () => {
                         href={getWhatsAppLink()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative flex items-center gap-4 bg-gray-900 text-white px-8 py-4 rounded-none border border-gray-900 hover:bg-white hover:text-gray-900 transition-all duration-300 shadow-xl"
+                        className="group relative flex items-center gap-4 bg-white text-sisley-red px-8 py-4 rounded-full border border-white hover:bg-sisley-red hover:text-white hover:border-white transition-all duration-300 shadow-xl shadow-sisley-burgundy/50"
                     >
                         <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
                         <div className="flex flex-col items-start">
-                            <span className="font-serif italic text-lg leading-none">
+                            <span className="font-sans font-bold text-lg leading-none">
                                 {t('claimReward')}
                             </span>
-                            <span className="text-[9px] font-sans tracking-widest uppercase mt-1 opacity-80">
+                            <span className="text-[9px] font-sans tracking-widest uppercase mt-1 opacity-70 group-hover:opacity-100">
                                 {t('viaWhatsapp')}
                             </span>
                         </div>
@@ -212,11 +210,11 @@ const App: React.FC = () => {
                 </div>
 
                 {/* Welcome Text */}
-                <div className="mt-8 max-w-sm px-6 text-center space-y-3 z-10 bg-[#F9F6EF]/95 p-8 border border-gray-300 shadow-xl rounded-sm ring-1 ring-white/50">
-                    <h3 className="text-gray-900 font-serif font-black text-lg tracking-wide border-b border-gray-300 pb-2 mb-2 inline-block">
+                <div className="mt-12 max-w-sm px-6 text-center space-y-3 z-10 bg-sisley-burgundy/40 backdrop-blur-md p-8 border border-white/20 shadow-2xl rounded-sm">
+                    <h3 className="text-white font-sans font-bold text-xl tracking-widest border-b border-white/30 pb-3 mb-2 inline-block uppercase font-serif">
                         {t('welcomeTitle')}
                     </h3>
-                    <p className="text-gray-700 text-[11px] leading-relaxed font-sans tracking-wide font-medium">
+                    <p className="text-white/90 text-[12px] leading-relaxed font-sans tracking-wide font-light">
                         {t('welcomeText')}
                     </p>
                 </div>

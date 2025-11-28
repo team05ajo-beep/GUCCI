@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLanguage } from '../LanguageContext';
 import { ChevronLeft } from 'lucide-react';
@@ -15,24 +14,24 @@ const VisionMission: React.FC<VisionMissionProps> = ({ onBack }) => {
       
       {/* Title */}
       <div className="mb-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-serif font-black tracking-widest text-gray-900 uppercase">
+        <h2 className="text-3xl md:text-4xl font-serif font-black tracking-widest text-white uppercase drop-shadow-md">
           {t('visionTitle')}
         </h2>
-        <div className="h-[2px] w-16 bg-gray-900 mx-auto my-3"></div>
+        <div className="h-[2px] w-16 bg-white mx-auto my-3"></div>
       </div>
 
-      {/* Content Box */}
-      <div className="bg-[#F9F6EF]/95 border border-gray-300 shadow-xl rounded-sm ring-1 ring-white/50 relative w-full flex flex-col max-h-[70vh]">
+      {/* Content Box - White Paper on Red Background */}
+      <div className="bg-white/95 border border-white shadow-2xl rounded-sm ring-1 ring-white/50 relative w-full flex flex-col max-h-[70vh]">
          {/* Decorative Corner Lines */}
-         <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-gray-400 z-10"></div>
-         <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-gray-400 z-10"></div>
-         <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-gray-400 z-10"></div>
-         <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-gray-400 z-10"></div>
+         <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-sisley-red z-10"></div>
+         <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-sisley-red z-10"></div>
+         <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-sisley-red z-10"></div>
+         <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-sisley-red z-10"></div>
 
          <div className="overflow-y-auto p-8 md:p-12 custom-scrollbar">
              {/* Optional Header Text */}
              {t('visionText1') && (
-                 <h3 className="text-gray-900 font-serif text-xl font-bold mb-6 text-center underline underline-offset-4 decoration-gray-400 decoration-1">
+                 <h3 className="text-sisley-red font-serif text-xl font-bold mb-6 text-center underline underline-offset-4 decoration-sisley-gold decoration-1">
                     {t('visionText1')}
                  </h3>
              )}
@@ -47,7 +46,7 @@ const VisionMission: React.FC<VisionMissionProps> = ({ onBack }) => {
       {/* Back Button */}
       <button 
         onClick={onBack}
-        className="mt-8 group flex items-center gap-2 px-6 py-3 border border-gray-800 bg-white/80 hover:bg-gray-900 hover:text-white transition-all duration-300 shadow-md backdrop-blur-sm"
+        className="mt-8 group flex items-center gap-2 px-6 py-3 border border-white bg-sisley-burgundy/80 hover:bg-white hover:text-sisley-red text-white transition-all duration-300 shadow-lg backdrop-blur-sm"
       >
         <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
         <span className="font-sans text-xs font-bold uppercase tracking-[0.2em]">

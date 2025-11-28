@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { WinnerCardProps } from '../types';
 import { useLanguage } from '../LanguageContext';
@@ -31,34 +30,34 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code }) => {
   }, [language]);
 
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-[#F9F6EF] p-6 select-none border-4 border-double border-gray-200">
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-white p-6 select-none border-4 border-sisley-gold">
       
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none"></div>
+      <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/flowers.png')] pointer-events-none"></div>
 
       <div className="relative z-10">
-        <h2 className="text-gray-500 text-xs font-sans font-bold tracking-[0.2em] uppercase mb-4">
+        <h2 className="text-sisley-red text-xs font-sans font-bold tracking-[0.2em] uppercase mb-4">
             {t('invitation')}
         </h2>
         
-        <div className="text-gray-900 text-2xl md:text-3xl font-serif font-black mb-2 leading-none uppercase">
+        <div className="text-black text-2xl md:text-3xl font-sans font-bold mb-2 leading-none uppercase">
             {prize.isGrandPrize ? t('specialDiscount') : t('giftVoucher')}
         </div>
         
-        <div className="text-yellow-700 text-xl md:text-2xl font-serif italic font-bold mb-6">
+        <div className="text-sisley-red text-xl md:text-3xl font-serif italic font-black mb-6 drop-shadow-sm">
             {prize.amount}
         </div>
 
-        <div className="inline-block bg-white border border-gray-300 px-6 py-2 shadow-sm mb-6">
-            <span className="font-mono text-gray-800 text-lg tracking-[0.15em] font-bold">
+        <div className="inline-block bg-sisley-burgundy text-white border border-sisley-burgundy px-6 py-2 shadow-md mb-6">
+            <span className="font-mono text-lg tracking-[0.15em] font-bold">
                 {code}
             </span>
         </div>
 
-        <div className="border-t border-gray-300 w-full mb-3"></div>
+        <div className="border-t border-gray-200 w-full mb-3"></div>
 
         <div className="text-gray-600 text-[10px] font-sans leading-relaxed">
-            {t('validUntil')} <span className="text-gray-900 font-bold">{expiryDateString}</span>
+            {t('validUntil')} <span className="text-sisley-red font-bold">{expiryDateString}</span>
         </div>
         <p className="text-[9px] text-gray-400 mt-1 italic">
             {t('redeemable')}
