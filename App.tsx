@@ -108,8 +108,8 @@ const App: React.FC = () => {
               {/* Right: Utilities */}
               <div className="flex items-center justify-end gap-6 w-1/4">
                   <div className="hidden md:flex items-center gap-4 text-[10px] font-bold uppercase tracking-wider">
-                      <a href="#" className="hover:text-gray-300">My Sisley Club</a>
-                      <a href="#" className="hover:text-gray-300">My Account</a>
+                      <a href="https://www.sisley-paris.com/en-ID/my-account/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">My Sisley Club</a>
+                      <a href="https://www.sisley-paris.com/en-ID/my-account/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">My Account</a>
                   </div>
                   
                   {/* Language Switcher */}
@@ -178,6 +178,7 @@ const App: React.FC = () => {
                           <a 
                              href={getWhatsAppLink()}
                              target="_blank"
+                             rel="noopener noreferrer"
                              className="inline-flex items-center gap-3 bg-white text-[#990000] px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-gray-100 transition-colors"
                           >
                              {t('claimReward')}
@@ -303,27 +304,27 @@ const App: React.FC = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-12 text-[10px] uppercase tracking-widest text-gray-400">
                   <div className="space-y-4">
                       <h5 className="text-white font-bold mb-6">Customer Service</h5>
-                      <a href="#" className="block hover:text-white">Contact Us</a>
-                      <a href="#" className="block hover:text-white">FAQ</a>
-                      <a href="#" className="block hover:text-white">Shipping & Returns</a>
+                      <a href="https://www.sisley-paris.com/en-ID/contact/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Contact Us</a>
+                      <a href="https://www.sisley-paris.com/en-ID/faq/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">FAQ</a>
+                      <a href="https://www.sisley-paris.com/en-ID/shipping/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Shipping & Returns</a>
                   </div>
                   <div className="space-y-4">
                       <h5 className="text-white font-bold mb-6">The Brand</h5>
-                      <a href="#" className="block hover:text-white">Our Story</a>
-                      <a href="#" className="block hover:text-white">Careers</a>
-                      <a href="#" className="block hover:text-white">Press</a>
+                      <a href="https://www.sisley-paris.com/en-ID/our-story/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Our Story</a>
+                      <a href="https://www.linkedin.com/company/sisley/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Careers</a>
+                      <a href="https://www.sisley-paris.com/en-ID/press/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Press</a>
                   </div>
                   <div className="space-y-4">
                       <h5 className="text-white font-bold mb-6">Services</h5>
-                      <a href="#" className="block hover:text-white">Store Locator</a>
-                      <a href="#" className="block hover:text-white">Beauty Subscription</a>
-                      <a href="#" className="block hover:text-white">Maison Sisley</a>
+                      <a href="https://www.sisley-paris.com/en-ID/store-locator/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Store Locator</a>
+                      <a href="https://www.sisley-paris.com/en-ID/beauty-subscription/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Beauty Subscription</a>
+                      <a href="https://www.sisley-paris.com/en-ID/maison-sisley/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Maison Sisley</a>
                   </div>
                   <div className="space-y-4">
                       <h5 className="text-white font-bold mb-6">Social</h5>
-                      <a href="#" className="block hover:text-white">Instagram</a>
-                      <a href="#" className="block hover:text-white">Facebook</a>
-                      <a href="#" className="block hover:text-white">YouTube</a>
+                      <a href="https://www.instagram.com/sisleyparisofficial/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Instagram</a>
+                      <a href="https://www.facebook.com/SisleyParis/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Facebook</a>
+                      <a href="https://www.youtube.com/user/SisleyParis" target="_blank" rel="noopener noreferrer" className="block hover:text-white">YouTube</a>
                   </div>
               </div>
 
