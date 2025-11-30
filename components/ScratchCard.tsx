@@ -26,13 +26,14 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
     canvas.width = width;
     canvas.height = height;
 
-    // Classic Gold/Silver Foil Texture for Sisley
+    // Luxury Gold Foil Texture for Gucci
     const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, '#D4D4D4'); // Silverish
-    gradient.addColorStop(0.3, '#F2F2F2');
-    gradient.addColorStop(0.5, '#E0E0E0');
-    gradient.addColorStop(0.7, '#C0C0C0');
-    gradient.addColorStop(1, '#D4D4D4');
+    gradient.addColorStop(0, '#d4af37'); // Gold
+    gradient.addColorStop(0.2, '#f7e7ce'); // Light Gold
+    gradient.addColorStop(0.4, '#c5a028'); // Dark Gold
+    gradient.addColorStop(0.6, '#f9f1d0'); // Cream Gold
+    gradient.addColorStop(0.8, '#d4af37');
+    gradient.addColorStop(1, '#b08d26');
     
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
@@ -45,24 +46,31 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
         ctx.fillRect(x, y, 1, 1);
     }
     
-    // Subtle Pattern
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    // Geometric Pattern (Gucci-esque)
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
     ctx.lineWidth = 1;
-    for(let x = 0; x < width; x += 30) {
+    const spacing = 40;
+    for(let x = 0; x < width; x += spacing) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, height);
         ctx.stroke();
     }
+    for(let y = 0; y < height; y += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+    }
 
-    // Serif Watermark - Updated to SISLEY
+    // Watermark - GUCCI
     ctx.save();
     ctx.rotate(-Math.PI / 6);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
-    ctx.font = '900 36px "Inter", sans-serif'; 
-    for (let x = -500; x < width + 500; x += 150) {
+    ctx.fillStyle = 'rgba(22, 63, 40, 0.08)'; // Subtle Gucci Green
+    ctx.font = '900 48px "Cinzel", serif'; 
+    for (let x = -500; x < width + 500; x += 200) {
         for (let y = -500; y < height + 500; y += 100) {
-            ctx.fillText("SISLEY", x, y);
+            ctx.fillText("GUCCI", x, y);
         }
     }
     ctx.restore();
@@ -177,8 +185,8 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
         
         {showInstruction && (
              <div className="absolute inset-0 pointer-events-none flex items-center justify-center transition-opacity duration-500">
-                 <div className="relative bg-black text-white px-6 py-3 rounded-none flex items-center gap-2 border border-white animate-pulse">
-                    <Sparkles className="w-4 h-4 text-white" />
+                 <div className="relative bg-gucci-green text-gucci-gold px-6 py-3 rounded-full flex items-center gap-2 border border-gucci-gold shadow-lg animate-pulse">
+                    <Sparkles className="w-4 h-4 text-gucci-gold" />
                     <span className="font-sans text-xs tracking-[0.2em] uppercase font-bold">
                         {t('scratchHere')}
                     </span>
