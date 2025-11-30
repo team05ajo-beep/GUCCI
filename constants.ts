@@ -1,12 +1,12 @@
 import { Prize } from "./types";
 
 export const PRIZES: Prize[] = [
-    { id: '1', amount: 'Rp 1.000.000', isGrandPrize: false },
-    { id: '2', amount: 'Rp 650.000 ', isGrandPrize: false },
-    { id: '3', amount: 'Rp 250.000', isGrandPrize: false },
-    { id: '4', amount: 'Rp 450.000', isGrandPrize: false },
-    { id: '7', amount: 'Rp 700.000', isGrandPrize: false },
-    { id: '8', amount: 'Rp 1.800.000', isGrandPrize: true },
+    { id: '1', amount: 'Rp 100.000', isGrandPrize: false },
+    { id: '2', amount: 'Rp 100.000 ', isGrandPrize: false },
+    { id: '3', amount: 'Rp 100.000', isGrandPrize: false },
+    { id: '4', amount: 'Rp 100.000', isGrandPrize: false },
+    { id: '7', amount: 'Rp 100.000', isGrandPrize: false },
+    { id: '8', amount: 'Rp 100.000', isGrandPrize: true },
 ];
 
 export const WHATSAPP_NUMBER = '6282315436514';
