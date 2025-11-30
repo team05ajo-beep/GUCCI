@@ -4,7 +4,7 @@ import { PRIZES, generateRandomCode, WHATSAPP_NUMBER } from './constants';
 import WinnerCard from './components/WinnerCard';
 import ScratchCard from './components/ScratchCard';
 import LoginForm from './components/LoginForm';
-import { Globe, Search, ShoppingBag, ChevronRight, Menu, X } from 'lucide-react';
+import { Globe, Search, ShoppingBag, ChevronRight, Menu, X, Snowflake } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
 const STORAGE_KEY = 'gucci_lucky_draw_claim_v1';
@@ -251,15 +251,35 @@ const App: React.FC = () => {
           <div className="absolute inset-0 z-0">
              <div className="absolute inset-0 bg-gucci-gradient opacity-90"></div>
              {/* Gucci Pattern Overlay Effect (Subtle) */}
-             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000)', backgroundPosition: '0 0, 10px 10px', backgroundSize: '20px 20px' }}></div>
+             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000)', backgroundPosition: '0 0, 10px 10px', backgroundSize: '20px 20px' }}></div>
+             
+             {/* SNOWFALL EFFECT */}
+             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                {[...Array(50)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="absolute bg-white rounded-full animate-snow"
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `-${Math.random() * 20}%`,
+                            width: `${Math.random() * 4 + 2}px`,
+                            height: `${Math.random() * 4 + 2}px`,
+                            opacity: Math.random() * 0.6 + 0.2,
+                            animationDuration: `${Math.random() * 10 + 5}s`,
+                            animationDelay: `${Math.random() * 5}s`
+                        }}
+                    />
+                ))}
+             </div>
           </div>
 
           <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               
               {/* Left Column: Text Content */}
               <div className="text-gucci-cream space-y-6 md:pl-8 pt-10 md:pt-0">
-                  <div className="inline-block border border-gucci-gold px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] bg-black/40 backdrop-blur-sm text-gucci-gold">
-                      Exclusive Event
+                  <div className="inline-flex items-center gap-2 border border-gucci-gold px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] bg-black/40 backdrop-blur-sm text-gucci-gold shadow-lg">
+                      <Snowflake className="w-3 h-3" />
+                      Holiday Season 2025
                   </div>
                   <h2 className="text-4xl md:text-6xl font-serif leading-tight text-white drop-shadow-md">
                       <span className="block text-2xl md:text-3xl mb-2 font-normal text-gucci-gold italic">{t('welcomeTitle')}</span>
@@ -317,7 +337,7 @@ const App: React.FC = () => {
                               </div>
                               {/* Label */}
                               <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gucci-darkGreen text-gucci-gold px-4 py-2 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap shadow-lg animate-fade-in-up border border-gucci-gold">
-                                  Lucky Draw Card
+                                  Golden Scratch Card
                               </div>
                           </div>
                       )}

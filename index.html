@@ -31,11 +31,23 @@
                     animation: {
                         'fade-in-up': 'fadeInUp 1s ease-out forwards',
                         'bounce': 'bounce 2s infinite',
+                        'snow': 'snow 10s linear infinite',
+                        'twinkle': 'twinkle 3s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
                     },
                     keyframes: {
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        snow: {
+                            '0%': { transform: 'translateY(-10vh)', opacity: '0' },
+                            '10%': { opacity: '0.8' },
+                            '100%': { transform: 'translateY(100vh)', opacity: '0.3' },
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.3', transform: 'scale(0.8)' },
                         }
                     }
                 }
