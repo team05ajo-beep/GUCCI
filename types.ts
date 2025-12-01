@@ -1,8 +1,11 @@
 
+export type PrizeCategory = 'umroh' | 'electronics' | 'fashion' | 'home' | 'voucher';
+
 export interface Prize {
     id: string;
-    amount: string;
+    amount: string; // This is the prize name
     isGrandPrize: boolean;
+    category: PrizeCategory;
 }
 
 export interface ScratchCardProps {
