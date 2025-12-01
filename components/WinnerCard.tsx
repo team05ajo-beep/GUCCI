@@ -1,17 +1,8 @@
 
 import React, { useMemo } from 'react';
-import { WinnerCardProps, PrizeCategory } from '../types';
+import { WinnerCardProps } from '../types';
 import { useLanguage } from '../LanguageContext';
-import { Snowflake, Sparkles, Gift, Plane, Smartphone, Watch, ShoppingBag, Home } from 'lucide-react';
-
-// Map categories to high-quality generic Unsplash images for visuals
-const categoryImages: Record<PrizeCategory, string> = {
-    umroh: 'https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=600&q=80', // Mecca
-    electronics: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80', // Modern Tech
-    fashion: 'https://images.unsplash.com/photo-1549675583-042981794b1c?auto=format&fit=crop&w=600&q=80', // Luxury Bag/Accessory
-    home: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80', // Modern Interior
-    voucher: 'https://images.unsplash.com/photo-1628102491629-778571d893a3?auto=format&fit=crop&w=600&q=80' // Gift Box
-};
+import { Snowflake, Sparkles } from 'lucide-react';
 
 const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code }) => {
   const { t, language } = useLanguage();
@@ -36,10 +27,8 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code }) => {
     }).format(date);
   }, [language]);
 
-  const imageUrl = categoryImages[prize.category];
-
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-between text-center bg-gucci-darkGreen overflow-hidden">
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-gucci-darkGreen overflow-hidden">
       
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-gucci-gold/10 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
@@ -52,60 +41,39 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code }) => {
           <Sparkles className="w-5 h-5 text-gucci-gold/50" />
       </div>
 
-      <div className="relative z-10 w-full h-full flex flex-col items-center p-4">
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-6 space-y-4">
         
         {/* Header: Congratulations */}
-        <div className="mt-2 mb-2">
-            <h2 className="text-gucci-gold text-[10px] font-sans font-bold tracking-[0.25em] uppercase flex items-center gap-2 justify-center">
+        <div>
+            <h2 className="text-gucci-gold text-xs font-sans font-bold tracking-[0.25em] uppercase flex items-center gap-2 justify-center">
                 <Sparkles className="w-3 h-3" />
                 {t('invitation')}
                 <Sparkles className="w-3 h-3" />
             </h2>
-            <div className="text-white text-lg md:text-xl font-display font-bold leading-none uppercase tracking-wide drop-shadow-md mt-1">
+            <div className="text-white text-xl md:text-2xl font-display font-bold leading-tight uppercase tracking-wide drop-shadow-md mt-2">
                 {prize.isGrandPrize ? t('specialDiscount') : t('giftVoucher')}
             </div>
         </div>
         
-        {/* Main Visual: Image of Prize Category */}
-        <div className="relative w-32 h-32 md:w-40 md:h-40 my-auto group">
-            <div className="absolute inset-0 bg-gucci-gold rounded-full blur-md opacity-30 group-hover:opacity-50 transition-opacity duration-700 animate-pulse"></div>
-            <div className="w-full h-full rounded-full border-[3px] border-gucci-gold shadow-2xl overflow-hidden relative bg-black">
-                <img 
-                    src={imageUrl} 
-                    alt={prize.category} 
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            </div>
-            {/* Category Icon Overlay */}
-            <div className="absolute bottom-0 right-0 bg-gucci-gold text-gucci-darkGreen p-1.5 rounded-full shadow-lg border border-white">
-                {prize.category === 'umroh' && <Plane className="w-4 h-4" />}
-                {prize.category === 'electronics' && <Smartphone className="w-4 h-4" />}
-                {prize.category === 'fashion' && <ShoppingBag className="w-4 h-4" />}
-                {prize.category === 'home' && <Home className="w-4 h-4" />}
-                {prize.category === 'voucher' && <Gift className="w-4 h-4" />}
-            </div>
-        </div>
-
-        {/* Prize Name */}
-        <div className="w-full px-2 mb-2">
-            <div className="text-gucci-cream text-lg md:text-2xl font-serif italic font-bold leading-tight drop-shadow-md animate-fade-in-up">
+        {/* Prize Name (Text Only) */}
+        <div className="w-full px-2 py-4 border-y border-gucci-gold/30 bg-white/5 backdrop-blur-sm">
+            <div className="text-gucci-gold text-2xl md:text-3xl font-serif italic font-bold leading-tight drop-shadow-md animate-fade-in-up">
                 {prize.amount}
             </div>
         </div>
 
         {/* Code Section */}
-        <div className="w-full max-w-[200px] bg-gucci-cream/10 backdrop-blur-md border border-gucci-gold/50 px-3 py-1.5 mb-2 rounded shadow-lg relative overflow-hidden group">
-            <div className="text-[8px] text-gucci-gold uppercase tracking-widest mb-0.5">Kode Unik</div>
-            <span className="font-mono text-base md:text-lg tracking-[0.1em] font-bold text-white relative z-10 block group-hover:scale-105 transition-transform">
+        <div className="w-full max-w-[220px] bg-gucci-cream text-gucci-black px-4 py-2 rounded shadow-xl border-2 border-gucci-gold relative overflow-hidden group transform hover:scale-105 transition-transform duration-300">
+            <div className="text-[9px] text-gucci-darkGreen uppercase tracking-widest mb-1 font-bold">Kode Unik</div>
+            <span className="font-mono text-xl md:text-2xl tracking-[0.1em] font-black block">
                 {code}
             </span>
         </div>
 
         {/* Footer Info */}
-        <div className="bg-black/40 backdrop-blur-sm text-gucci-cream text-[9px] font-sans leading-relaxed rounded p-2 w-full border border-white/10 mt-auto">
+        <div className="text-gucci-cream text-[10px] font-sans leading-relaxed mt-4 opacity-80">
             {t('validUntil')} <span className="text-gucci-gold font-bold">{expiryDateString}</span>
-            <p className="text-[8px] text-white/50 mt-1 italic">
+            <p className="text-[9px] text-white/50 mt-1 italic">
                 *Tukarkan segera di Butik Gucci Indonesia
             </p>
         </div>
