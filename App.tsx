@@ -4,7 +4,7 @@ import { PRIZES, generateRandomCode, WHATSAPP_NUMBER } from './constants';
 import WinnerCard from './components/WinnerCard';
 import ScratchCard from './components/ScratchCard';
 import LoginForm from './components/LoginForm';
-import { Globe, Search, ShoppingBag, ChevronRight, Menu, X, Snowflake } from 'lucide-react';
+import { Globe, ShoppingBag, ChevronRight, Menu, X, Snowflake } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
 const STORAGE_KEY = 'gucci_lucky_draw_claim_v1';
@@ -128,7 +128,7 @@ const App: React.FC = () => {
           {/* Top Bar: Search, Logo, Utilities */}
           <div className="container mx-auto px-6 py-5 flex items-center justify-between">
               
-              {/* Left: Mobile Menu & Search */}
+              {/* Left: Mobile Menu & Search (Search Removed) */}
               <div className="flex items-center gap-4 w-1/4">
                   <button 
                     onClick={() => setIsMenuOpen(true)}
@@ -136,11 +136,7 @@ const App: React.FC = () => {
                   >
                       <Menu className="w-6 h-6" />
                   </button>
-
-                  <div className="hidden md:flex items-center gap-2 border border-gucci-gold/30 rounded-full px-4 py-1.5 w-64 hover:border-gucci-gold transition-colors cursor-pointer group">
-                      <Search className="w-3.5 h-3.5 text-gray-400 group-hover:text-gucci-gold" />
-                      <span className="text-[10px] text-gray-400 uppercase tracking-widest group-hover:text-gucci-gold">Search</span>
-                  </div>
+                  {/* Search Bar was here, now removed */}
               </div>
 
               {/* Center: LOGO */}
