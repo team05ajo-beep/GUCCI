@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { LoginFormProps } from '../types';
 import { useLanguage } from '../LanguageContext';
@@ -23,12 +24,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
   return (
     <div className="w-full h-full flex flex-col justify-center animate-fade-in-up">
-      <div className="bg-gucci-cream p-8 md:p-10 shadow-2xl relative border-4 border-double border-gucci-gold">
+      <div className="bg-gucci-cream p-6 md:p-10 shadow-2xl relative border-4 border-double border-gucci-gold h-full md:h-auto flex flex-col justify-center">
         {/* Decorative Top */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gucci-green via-gucci-red to-gucci-green"></div>
 
-        <div className="mb-8 text-center">
-            <h3 className="text-2xl font-serif font-bold text-gucci-green mb-2 uppercase tracking-wide">
+        <div className="mb-6 md:mb-8 text-center">
+            <h3 className="text-xl md:text-2xl font-serif font-bold text-gucci-green mb-2 uppercase tracking-wide">
                 {t('loginTitle')}
             </h3>
             <p className="text-xs text-gray-600 font-sans tracking-wide">
@@ -36,53 +37,54 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
             <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen block">
                     {t('fullName')}
                 </label>
+                {/* Text base (16px) prevents iOS zoom */}
                 <input 
                     type="text" 
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-sm focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black"
+                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-base focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black rounded-none appearance-none"
                     placeholder="Jane Doe"
                 />
             </div>
 
             <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen block">
                     {t('phoneNumber')}
                 </label>
                 <input 
                     type="tel" 
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-sm focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black"
+                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-base focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black rounded-none appearance-none"
                     placeholder="+62 812..."
                 />
             </div>
 
             <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen">
+                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen block">
                     {t('password')}
                 </label>
                 <input 
                     type="password" 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-sm focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black"
+                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-base focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black rounded-none appearance-none"
                     placeholder="••••••••"
                 />
             </div>
 
             {error && (
-                <div className="text-gucci-red text-xs text-center pt-2">{error}</div>
+                <div className="text-gucci-red text-xs text-center pt-2 font-bold">{error}</div>
             )}
 
             <button 
                 type="submit" 
-                className="w-full bg-gucci-green text-gucci-gold py-4 mt-4 flex items-center justify-center gap-2 group hover:bg-gucci-black transition-colors duration-500 border border-gucci-gold"
+                className="w-full bg-gucci-green text-gucci-gold py-4 mt-4 flex items-center justify-center gap-2 group hover:bg-gucci-black active:bg-black transition-all duration-300 border border-gucci-gold active:scale-[0.98]"
             >
                 <span className="text-xs font-bold uppercase tracking-[0.2em]">
                     {t('startJourney')}

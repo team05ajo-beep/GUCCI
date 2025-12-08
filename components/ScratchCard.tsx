@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { ScratchCardProps } from '../types';
 import { SCRATCH_THRESHOLD } from '../constants';
@@ -125,6 +126,11 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
 
   const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDrawing.current || !lastPosition.current) return;
+    
+    // Prevent default scrolling behavior on mobile
+    // Note: CSS touch-action: none is also applied, but this is a fallback
+    // e.preventDefault(); 
+    
     const currentPos = getPosition(e);
     const lastPos = lastPosition.current;
     const canvas = canvasRef.current;
@@ -170,7 +176,8 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
   if (isRevealed) return null;
 
   return (
-    <div className={`absolute inset-0 z-10 overflow-hidden ${className}`}>
+    <div className={`absolute inset-0 z-10 overflow-hidden select-none ${className}`}>
+        {/* Added touch-none to prevent scrolling on mobile while scratching */}
         <canvas
             ref={canvasRef}
             onMouseDown={handleStart}
@@ -180,14 +187,15 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
             onTouchStart={handleStart}
             onTouchMove={handleMove}
             onTouchEnd={handleEnd}
-            className="touch-none cursor-pointer w-full h-full"
+            className="touch-none cursor-pointer w-full h-full block"
+            style={{ touchAction: 'none' }}
         />
         
         {showInstruction && (
              <div className="absolute inset-0 pointer-events-none flex items-center justify-center transition-opacity duration-500">
                  <div className="relative bg-gucci-green text-gucci-gold px-6 py-3 rounded-full flex items-center gap-2 border border-gucci-gold shadow-lg animate-pulse">
                     <Sparkles className="w-4 h-4 text-gucci-gold" />
-                    <span className="font-sans text-xs tracking-[0.2em] uppercase font-bold">
+                    <span className="font-sans text-xs tracking-[0.2em] uppercase font-bold whitespace-nowrap">
                         {t('scratchHere')}
                     </span>
                  </div>

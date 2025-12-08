@@ -105,7 +105,7 @@ const App: React.FC = () => {
     
     try {
         // Wait a bit to ensure fonts/images are rendered
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise(resolve => setTimeout(resolve, 800));
         
         const canvas = await html2canvas(ticketRef.current, {
             backgroundColor: '#0f2b1b', // Gucci Dark Green Background
@@ -113,18 +113,22 @@ const App: React.FC = () => {
             useCORS: true,
             logging: false,
             allowTaint: true,
+            ignoreElements: (element) => element.classList.contains('no-capture')
         });
 
         const image = canvas.toDataURL("image/png");
+        
+        // Logic to support mobile download better
         const link = document.createElement('a');
         link.href = image;
         link.download = `Gucci-Holiday-Ticket-${code}.png`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
     } catch (error) {
         console.error("Error capturing ticket:", error);
-        alert("Maaf, terjadi kesalahan saat menyimpan tiket. Silakan coba screenshot manual.");
+        alert("Gagal menyimpan otomatis. Silakan ambil Screenshot layar Anda.");
     } finally {
         setIsSaving(false);
     }
@@ -144,14 +148,14 @@ const App: React.FC = () => {
   ];
 
   return (
-    <div className="w-full bg-gucci-cream font-sans text-gucci-black">
+    <div className="w-full bg-gucci-cream font-sans text-gucci-black min-h-screen flex flex-col">
       
       {/* --- HEADER SECTION (BLACK) --- */}
       <header className="bg-black text-gucci-gold w-full relative z-50 border-b border-gucci-gold/20">
           {/* Top Bar: Search, Logo, Utilities */}
-          <div className="container mx-auto px-6 py-5 flex items-center justify-between">
+          <div className="container mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between">
               
-              {/* Left: Mobile Menu & Search (Search Removed) */}
+              {/* Left: Mobile Menu */}
               <div className="flex items-center gap-4 w-1/4">
                   <button 
                     onClick={() => setIsMenuOpen(true)}
@@ -159,24 +163,22 @@ const App: React.FC = () => {
                   >
                       <Menu className="w-6 h-6" />
                   </button>
-                  {/* Search Bar was here, now removed */}
               </div>
 
               {/* Center: LOGO */}
               <div className="flex flex-col items-center justify-center w-1/2">
-                  <h1 className="text-4xl md:text-6xl font-display font-black tracking-[0.1em] leading-none text-gucci-gold drop-shadow-sm">
+                  <h1 className="text-3xl md:text-6xl font-display font-black tracking-[0.1em] leading-none text-gucci-gold drop-shadow-sm text-center">
                       GUCCI
                   </h1>
-                  <span className="text-[8px] md:text-[10px] font-bold tracking-[0.4em] uppercase mt-2 text-gray-500">
+                  <span className="text-[8px] md:text-[10px] font-bold tracking-[0.4em] uppercase mt-2 text-gray-500 text-center">
                       {t('florenceSubtitle')}
                   </span>
               </div>
 
               {/* Right: Utilities */}
-              <div className="flex items-center justify-end gap-6 w-1/4">
+              <div className="flex items-center justify-end gap-4 md:gap-6 w-1/4">
                   <div className="hidden md:flex items-center gap-4 text-[10px] font-bold uppercase tracking-wider text-white">
                       <a href="https://www.gucci.com/us/en/st/services" target="_blank" rel="noopener noreferrer" className="hover:text-gucci-gold">Services</a>
-                      <a href="https://www.gucci.com/us/en/st/my-account" target="_blank" rel="noopener noreferrer" className="hover:text-gucci-gold">My Account</a>
                   </div>
                   
                   {/* Language Switcher */}
@@ -264,7 +266,7 @@ const App: React.FC = () => {
       </header>
 
       {/* --- HERO SECTION (GREEN / GAME) --- */}
-      <section className="relative w-full min-h-[750px] md:min-h-[800px] bg-gucci-green overflow-hidden flex items-center border-b-8 border-gucci-red">
+      <section className="relative w-full flex-grow bg-gucci-green overflow-hidden flex items-center border-b-8 border-gucci-red py-12 md:py-0">
           
           {/* Background Gradient/Pattern */}
           <div className="absolute inset-0 z-0">
@@ -292,19 +294,19 @@ const App: React.FC = () => {
              </div>
           </div>
 
-          <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="container mx-auto px-4 md:px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
               
               {/* Left Column: Text Content */}
-              <div className="text-gucci-cream space-y-6 md:pl-8 pt-10 md:pt-0">
+              <div className="text-gucci-cream space-y-6 md:pl-8 pt-4 md:pt-0 text-center md:text-left">
                   <div className="inline-flex items-center gap-2 border border-gucci-gold px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] bg-black/40 backdrop-blur-sm text-gucci-gold shadow-lg">
                       <Snowflake className="w-3 h-3" />
                       Holiday Season 2025
                   </div>
-                  <h2 className="text-4xl md:text-6xl font-serif leading-tight text-white drop-shadow-md">
-                      <span className="block text-2xl md:text-3xl mb-2 font-normal text-gucci-gold italic">{t('welcomeTitle')}</span>
+                  <h2 className="text-3xl md:text-6xl font-serif leading-tight text-white drop-shadow-md">
+                      <span className="block text-xl md:text-3xl mb-2 font-normal text-gucci-gold italic">{t('welcomeTitle')}</span>
                       <span className="font-bold">{t('specialDiscount')}</span>
                   </h2>
-                  <p className="text-sm md:text-base font-sans text-white/90 max-w-md leading-relaxed">
+                  <p className="text-sm md:text-base font-sans text-white/90 max-w-md leading-relaxed mx-auto md:mx-0">
                       {t('welcomeText')}
                   </p>
                   
@@ -312,7 +314,7 @@ const App: React.FC = () => {
                       <div className="pt-4 animate-fade-in-up">
                           <button 
                              onClick={() => setIsTicketOpen(true)}
-                             className="inline-flex items-center gap-3 bg-gucci-gold text-gucci-darkGreen px-8 py-4 rounded font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors border-2 border-transparent hover:border-gucci-gold shadow-lg"
+                             className="inline-flex items-center gap-3 bg-gucci-gold text-gucci-darkGreen px-8 py-4 rounded font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors border-2 border-transparent hover:border-gucci-gold shadow-lg active:scale-95"
                           >
                              {t('claimReward')}
                              <Camera className="w-4 h-4" />
@@ -322,7 +324,7 @@ const App: React.FC = () => {
               </div>
 
               {/* Right Column: Login OR The Scratch Card */}
-              <div className="flex justify-center md:justify-end relative">
+              <div className="flex justify-center md:justify-end relative pb-10 md:pb-0">
                   {/* Decorative Elements around card */}
                   <div className="absolute -inset-2 bg-gucci-gold/30 rounded blur-xl"></div>
                   
@@ -365,8 +367,8 @@ const App: React.FC = () => {
 
       {/* --- TICKET MODAL OVERLAY --- */}
       {isTicketOpen && prize && user && (
-        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in-up">
-             <div className="w-full max-w-md flex flex-col items-center">
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in-up overflow-y-auto">
+             <div className="w-full max-w-md flex flex-col items-center my-auto">
                  
                  {/* Main Ticket Container to Capture */}
                  <div ref={ticketRef} className="bg-gucci-darkGreen w-full shadow-2xl relative overflow-hidden flex flex-col items-center text-center p-6 border-4 border-double border-gucci-gold">
@@ -394,13 +396,13 @@ const App: React.FC = () => {
                          <div className="text-[10px] text-gucci-cream/80 uppercase tracking-[0.3em] mb-8 font-serif italic">Holiday Season 2025</div>
 
                          {/* Winner Badge */}
-                         <div className="bg-gucci-cream text-gucci-black py-4 px-8 mb-6 shadow-xl border-2 border-gucci-gold transform rotate-1">
+                         <div className="bg-gucci-cream text-gucci-black py-4 px-8 mb-6 shadow-xl border-2 border-gucci-gold transform rotate-1 w-full">
                             <div className="text-[10px] font-bold uppercase tracking-widest mb-1 text-gucci-red flex items-center justify-center gap-2">
                                 <Snowflake className="w-3 h-3" />
                                 {t('officialWinner')}
                                 <Snowflake className="w-3 h-3" />
                             </div>
-                            <div className="font-serif text-2xl font-bold border-b-2 border-gucci-red/20 pb-2 mb-2">{user.fullName}</div>
+                            <div className="font-serif text-2xl font-bold border-b-2 border-gucci-red/20 pb-2 mb-2 break-words">{user.fullName}</div>
                             <div className="text-xs font-mono font-bold tracking-widest text-gucci-darkGreen">{user.phoneNumber}</div>
                          </div>
 
@@ -413,17 +415,17 @@ const App: React.FC = () => {
                          {/* Code */}
                          <div className="bg-black/80 border border-gucci-gold p-4 mb-2 w-full max-w-[280px]">
                             <div className="text-[9px] text-gucci-gold uppercase tracking-widest mb-2 border-b border-gucci-gold/30 pb-1">{t('codeLabel')}</div>
-                            <div className="font-mono text-2xl text-white tracking-widest font-black drop-shadow-lg">{code}</div>
+                            <div className="font-mono text-xl md:text-2xl text-white tracking-widest font-black drop-shadow-lg break-all">{code}</div>
                          </div>
                      </div>
                  </div>
 
                  {/* Action Buttons (Outside capture area) */}
-                 <div className="mt-6 flex flex-col items-center gap-4">
+                 <div className="mt-6 flex flex-col items-center gap-4 w-full px-4">
                      <button 
                         onClick={handleDownloadTicket}
                         disabled={isSaving}
-                        className="flex items-center gap-3 text-gucci-gold bg-white/5 px-8 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-colors cursor-pointer disabled:opacity-50 hover:border-gucci-gold shadow-lg"
+                        className="w-full md:w-auto flex items-center justify-center gap-3 text-gucci-gold bg-white/5 px-8 py-4 rounded-full border border-white/10 hover:bg-white/10 active:bg-white/20 transition-colors cursor-pointer disabled:opacity-50 hover:border-gucci-gold shadow-lg active:scale-95"
                      >
                         {isSaving ? (
                              <span className="w-5 h-5 border-2 border-gucci-gold border-t-transparent rounded-full animate-spin"></span>
@@ -435,7 +437,7 @@ const App: React.FC = () => {
                         </span>
                      </button>
 
-                     <button onClick={() => setIsTicketOpen(false)} className="text-white/50 hover:text-white transition-colors text-xs uppercase tracking-widest">
+                     <button onClick={() => setIsTicketOpen(false)} className="text-white/50 hover:text-white transition-colors text-xs uppercase tracking-widest p-2">
                         Tutup
                      </button>
                  </div>
@@ -444,7 +446,7 @@ const App: React.FC = () => {
       )}
 
       {/* --- CONTENT SECTION (VISION & MISSION) --- */}
-      <section className="bg-gucci-cream py-20 md:py-28 relative">
+      <section className="bg-gucci-cream py-16 md:py-28 relative">
           <div className="container mx-auto px-6">
               <div className="text-center mb-16">
                   <h3 className="text-3xl md:text-4xl font-display text-gucci-darkGreen mb-4 drop-shadow-sm">
@@ -455,16 +457,16 @@ const App: React.FC = () => {
               </div>
 
               {/* Layout */}
-              <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 bg-white p-8 shadow-xl border border-gucci-gold/20">
+              <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 bg-white p-6 md:p-8 shadow-xl border border-gucci-gold/20">
                    {/* Decorative Image Left */}
-                   <div className="md:col-span-4 relative h-[300px] md:h-auto bg-gucci-darkGreen overflow-hidden flex items-center justify-center">
-                       <span className="text-gucci-gold font-display text-6xl opacity-20 rotate-90 whitespace-nowrap">GUCCI 1921</span>
+                   <div className="md:col-span-4 relative h-[250px] md:h-auto bg-gucci-darkGreen overflow-hidden flex items-center justify-center">
+                       <span className="text-gucci-gold font-display text-5xl md:text-6xl opacity-20 rotate-90 whitespace-nowrap">GUCCI 1921</span>
                        <div className="absolute inset-0 border-[10px] border-gucci-red/80 m-4"></div>
                    </div>
 
                    {/* Text Content Right */}
                    <div className="md:col-span-8 flex flex-col justify-center">
-                       <div className="h-[500px] overflow-y-auto pr-6 custom-scrollbar">
+                       <div className="h-[400px] md:h-[500px] overflow-y-auto pr-2 md:pr-6 custom-scrollbar">
                             <h4 className="font-serif text-xl mb-6 text-gucci-darkGreen italic font-bold">
                                 {t('visionText1')}
                             </h4>
@@ -478,7 +480,7 @@ const App: React.FC = () => {
       </section>
 
       {/* --- FOOTER SECTION (BLACK) --- */}
-      <footer className="bg-black text-gucci-cream py-16 border-t-4 border-gucci-red">
+      <footer className="bg-black text-gucci-cream py-12 md:py-16 border-t-4 border-gucci-red mt-auto">
           <div className="container mx-auto px-6">
               
               {/* Footer Links Grid */}
@@ -509,7 +511,7 @@ const App: React.FC = () => {
               </div>
 
               {/* Bottom Copyright */}
-              <div className="text-center mt-16 text-[9px] text-gray-600 uppercase tracking-widest">
+              <div className="text-center mt-12 md:mt-16 text-[9px] text-gray-600 uppercase tracking-widest">
                   © 2024 Guccio Gucci S.p.A. - All rights reserved. SIAE LICENCE # 2294/I/1936
               </div>
           </div>
