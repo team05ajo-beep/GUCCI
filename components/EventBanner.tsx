@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Sparkles } from 'lucide-react';
 import { useLanguage } from '../LanguageContext';
@@ -9,10 +10,10 @@ const EventBanner: React.FC = () => {
     <div className="w-full max-w-lg mx-auto mb-8 relative z-20">
         <div className="relative px-6 py-3 bg-black/30 backdrop-blur-sm border-y border-white/20 shadow-lg flex items-center justify-between group rounded-full">
             
-            {/* Minimalist Decoration Lines - Removed for cleaner look on Red */}
+            {/* Minimalist Decoration Lines */}
             
             {/* Left Icon */}
-            <Sparkles strokeWidth={1} className="w-4 h-4 text-sisley-gold group-hover:text-white transition-colors" />
+            <Sparkles strokeWidth={1} className="w-4 h-4 text-gucci-gold group-hover:text-white transition-colors" />
 
             {/* Text Content */}
             <div className="flex items-center gap-3">
@@ -26,7 +27,7 @@ const EventBanner: React.FC = () => {
             </div>
 
             {/* Right Icon */}
-            <Sparkles strokeWidth={1} className="w-4 h-4 text-sisley-gold group-hover:text-white transition-colors" />
+            <Sparkles strokeWidth={1} className="w-4 h-4 text-gucci-gold group-hover:text-white transition-colors" />
         </div>
     </div>
   );
