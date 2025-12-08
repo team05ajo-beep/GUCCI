@@ -1,11 +1,13 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Prize, User } from './types';
-import { PRIZES, generateRandomCode, WHATSAPP_NUMBER } from './constants';
+import { PRIZES, generateRandomCode } from './constants';
 import WinnerCard from './components/WinnerCard';
 import ScratchCard from './components/ScratchCard';
 import LoginForm from './components/LoginForm';
-import { Globe, ShoppingBag, ChevronRight, Menu, X, Snowflake } from 'lucide-react';
+import { Globe, ShoppingBag, Menu, X, Snowflake, Camera, Download } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
+import html2canvas from 'html2canvas';
 
 const STORAGE_KEY = 'gucci_lucky_draw_claim_v1';
 const USER_KEY = 'gucci_lucky_draw_user_v1';
@@ -19,8 +21,11 @@ const App: React.FC = () => {
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isTicketOpen, setIsTicketOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
+  const ticketRef = useRef<HTMLDivElement>(null);
 
   // Check for existing User Login
   useEffect(() => {
@@ -93,18 +98,36 @@ const App: React.FC = () => {
     }
   };
 
-  const getWhatsAppLink = () => {
-    if (!prize || !code) return '#';
-    const rewardType = prize.isGrandPrize ? t('discountPrefix') : t('voucherPrefix');
+  const handleDownloadTicket = async () => {
+    if (!ticketRef.current || isSaving) return;
     
-    // Add User Info to message if available
-    let userInfo = "";
-    if (user) {
-        userInfo = `Nama: ${user.fullName}\nNo HP: ${user.phoneNumber}\n`;
-    }
+    setIsSaving(true);
+    
+    try {
+        // Wait a bit to ensure fonts/images are rendered
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        const canvas = await html2canvas(ticketRef.current, {
+            backgroundColor: '#0f2b1b', // Gucci Dark Green Background
+            scale: 2, // Higher quality
+            useCORS: true,
+            logging: false,
+            allowTaint: true,
+        });
 
-    const message = `${t('claimMessage')}\n${userInfo}${rewardType} ${prize.amount} ${t('codeLabel')} ${code}. ${t('processRequest')}`;
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = `Gucci-Holiday-Ticket-${code}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } catch (error) {
+        console.error("Error capturing ticket:", error);
+        alert("Maaf, terjadi kesalahan saat menyimpan tiket. Silakan coba screenshot manual.");
+    } finally {
+        setIsSaving(false);
+    }
   };
 
   // Official Gucci Links
@@ -287,15 +310,13 @@ const App: React.FC = () => {
                   
                   {user && isRevealed && (
                       <div className="pt-4 animate-fade-in-up">
-                          <a 
-                             href={getWhatsAppLink()}
-                             target="_blank"
-                             rel="noopener noreferrer"
+                          <button 
+                             onClick={() => setIsTicketOpen(true)}
                              className="inline-flex items-center gap-3 bg-gucci-gold text-gucci-darkGreen px-8 py-4 rounded font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors border-2 border-transparent hover:border-gucci-gold shadow-lg"
                           >
                              {t('claimReward')}
-                             <ChevronRight className="w-4 h-4" />
-                          </a>
+                             <Camera className="w-4 h-4" />
+                          </button>
                       </div>
                   )}
               </div>
@@ -318,7 +339,7 @@ const App: React.FC = () => {
                               <div ref={containerRef} className="w-full h-full relative">
                                   {/* Content behind scratch */}
                                   {prize && (
-                                      <WinnerCard prize={prize} code={code} />
+                                      <WinnerCard prize={prize} code={code} user={user} />
                                   )}
                                   
                                   {/* Scratch Layer */}
@@ -341,6 +362,86 @@ const App: React.FC = () => {
               </div>
           </div>
       </section>
+
+      {/* --- TICKET MODAL OVERLAY --- */}
+      {isTicketOpen && prize && user && (
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in-up">
+             <div className="w-full max-w-md flex flex-col items-center">
+                 
+                 {/* Main Ticket Container to Capture */}
+                 <div ref={ticketRef} className="bg-gucci-darkGreen w-full shadow-2xl relative overflow-hidden flex flex-col items-center text-center p-6 border-4 border-double border-gucci-gold">
+                     
+                     {/* PREMIUM BATIK BACKGROUND */}
+                     <div 
+                        className="absolute inset-0 opacity-15 pointer-events-none" 
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zm0 10c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm-10-20c-5.523 0-10-4.477-10-10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10zm0 20c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zM50 10c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zm0 20c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z' fill='%23d4af37' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+                            backgroundSize: '40px 40px'
+                        }}
+                     ></div>
+
+                     {/* Inner Frame */}
+                     <div className="relative w-full h-full border border-gucci-gold/50 p-6 flex flex-col items-center bg-gucci-darkGreen/50 backdrop-blur-sm">
+                        
+                         {/* Corner Ornaments */}
+                         <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-gucci-gold"></div>
+                         <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-gucci-gold"></div>
+                         <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-gucci-gold"></div>
+                         <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-gucci-gold"></div>
+
+                         {/* Header */}
+                         <h2 className="text-gucci-gold font-display text-4xl tracking-widest mb-1 drop-shadow-lg">GUCCI</h2>
+                         <div className="text-[10px] text-gucci-cream/80 uppercase tracking-[0.3em] mb-8 font-serif italic">Holiday Season 2025</div>
+
+                         {/* Winner Badge */}
+                         <div className="bg-gucci-cream text-gucci-black py-4 px-8 mb-6 shadow-xl border-2 border-gucci-gold transform rotate-1">
+                            <div className="text-[10px] font-bold uppercase tracking-widest mb-1 text-gucci-red flex items-center justify-center gap-2">
+                                <Snowflake className="w-3 h-3" />
+                                {t('officialWinner')}
+                                <Snowflake className="w-3 h-3" />
+                            </div>
+                            <div className="font-serif text-2xl font-bold border-b-2 border-gucci-red/20 pb-2 mb-2">{user.fullName}</div>
+                            <div className="text-xs font-mono font-bold tracking-widest text-gucci-darkGreen">{user.phoneNumber}</div>
+                         </div>
+
+                         {/* Prize Info */}
+                         <div className="space-y-3 mb-8 text-center relative z-10">
+                            <div className="text-gucci-gold text-xs uppercase tracking-widest font-bold">{prize.isGrandPrize ? t('specialDiscount') : t('giftVoucher')}</div>
+                            <div className="text-white font-serif text-3xl italic leading-tight drop-shadow-md">{prize.amount}</div>
+                         </div>
+
+                         {/* Code */}
+                         <div className="bg-black/80 border border-gucci-gold p-4 mb-2 w-full max-w-[280px]">
+                            <div className="text-[9px] text-gucci-gold uppercase tracking-widest mb-2 border-b border-gucci-gold/30 pb-1">{t('codeLabel')}</div>
+                            <div className="font-mono text-2xl text-white tracking-widest font-black drop-shadow-lg">{code}</div>
+                         </div>
+                     </div>
+                 </div>
+
+                 {/* Action Buttons (Outside capture area) */}
+                 <div className="mt-6 flex flex-col items-center gap-4">
+                     <button 
+                        onClick={handleDownloadTicket}
+                        disabled={isSaving}
+                        className="flex items-center gap-3 text-gucci-gold bg-white/5 px-8 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-colors cursor-pointer disabled:opacity-50 hover:border-gucci-gold shadow-lg"
+                     >
+                        {isSaving ? (
+                             <span className="w-5 h-5 border-2 border-gucci-gold border-t-transparent rounded-full animate-spin"></span>
+                        ) : (
+                             <Download className="w-5 h-5" />
+                        )}
+                        <span className="text-[10px] font-bold uppercase tracking-widest">
+                            {isSaving ? 'Menyimpan...' : t('screenshotInstruction')}
+                        </span>
+                     </button>
+
+                     <button onClick={() => setIsTicketOpen(false)} className="text-white/50 hover:text-white transition-colors text-xs uppercase tracking-widest">
+                        Tutup
+                     </button>
+                 </div>
+            </div>
+        </div>
+      )}
 
       {/* --- CONTENT SECTION (VISION & MISSION) --- */}
       <section className="bg-gucci-cream py-20 md:py-28 relative">

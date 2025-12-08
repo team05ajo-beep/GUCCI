@@ -16,15 +16,16 @@ export interface ScratchCardProps {
     className?: string;
 }
 
-export interface WinnerCardProps {
-    prize: Prize;
-    code: string;
-}
-
 export interface User {
     fullName: string;
     phoneNumber: string;
     password?: string; // Optional in state, strictly used for auth simulation
+}
+
+export interface WinnerCardProps {
+    prize: Prize;
+    code: string;
+    user: User | null;
 }
 
 export interface LoginFormProps {
