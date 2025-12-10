@@ -395,8 +395,8 @@ const App: React.FC = () => {
                          <h2 className="text-gucci-gold font-display text-4xl tracking-widest mb-1 drop-shadow-lg">GUCCI</h2>
                          <div className="text-[10px] text-gucci-cream/80 uppercase tracking-[0.3em] mb-8 font-serif italic">Holiday Season 2025</div>
 
-                         {/* Winner Badge */}
-                         <div className="bg-gucci-cream text-gucci-black py-4 px-8 mb-6 shadow-xl border-2 border-gucci-gold transform rotate-1 w-full">
+                         {/* Winner Badge - REMOVED ROTATION HERE */}
+                         <div className="bg-gucci-cream text-gucci-black py-4 px-8 mb-6 shadow-xl border-2 border-gucci-gold w-full">
                             <div className="text-[10px] font-bold uppercase tracking-widest mb-1 text-gucci-red flex items-center justify-center gap-2">
                                 <Snowflake className="w-3 h-3" />
                                 {t('officialWinner')}
