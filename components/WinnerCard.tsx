@@ -7,85 +7,81 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
   const { t } = useLanguage();
   
   const expiryDateString = useMemo(() => {
-    return "1 Januari 2026";
-  }, []);
+    return t('expiryDate');
+  }, [t]);
 
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-[#0a0a0a] overflow-hidden border-[10px] md:border-[14px] border-double border-gucci-gold/30 shadow-2xl select-none">
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-[#0a0a0a] overflow-hidden border-[8px] md:border-[12px] border-double border-gucci-gold/20 shadow-2xl select-none">
       
-      {/* LUXURY DIAMOND PATTERN - EXACT MATCH */}
-      <div className="absolute inset-0 opacity-[0.12] pointer-events-none" 
+      {/* LUXURY DIAMOND PATTERN */}
+      <div className="absolute inset-0 opacity-[0.08] pointer-events-none" 
            style={{ 
-             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30-30-30z' fill='none' stroke='%23d4af37' stroke-width='0.7'/%3E%3C/svg%3E")`,
-             backgroundSize: '60px 60px'
+             backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l20 20-20 20-20-20z' fill='none' stroke='%23d4af37' stroke-width='0.5'/%3E%3C/svg%3E")`,
+             backgroundSize: '40px 40px'
            }}>
       </div>
 
-      {/* INNER FRAME LINES */}
-      <div className="absolute inset-4 border border-gucci-gold/15 pointer-events-none"></div>
+      <div className="absolute inset-3 border border-gucci-gold/10 pointer-events-none"></div>
       
       {/* CORNER ACCENTS */}
-      <div className="absolute top-8 left-8 w-12 h-12 border-t border-l border-gucci-gold pointer-events-none"></div>
-      <div className="absolute bottom-8 right-8 w-12 h-12 border-b border-r border-gucci-gold pointer-events-none"></div>
+      <div className="absolute top-4 left-4 w-8 h-8 border-t border-l border-gucci-gold/40 pointer-events-none"></div>
+      <div className="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-gucci-gold/40 pointer-events-none"></div>
 
-      <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-10 px-4 md:py-14 md:px-8">
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-8 px-6 md:py-12 md:px-8">
         
-        {/* TOP: GUCCI LOGO & SUBTITLE */}
-        <div className="space-y-4 w-full">
-            <h1 className="text-gucci-gold text-3xl md:text-5xl font-display font-bold tracking-[0.4em] uppercase drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+        {/* HEADER */}
+        <div className="space-y-2 w-full">
+            <h1 className="text-gucci-gold text-2xl md:text-4xl font-display font-bold tracking-[0.3em] uppercase">
                 GUCCI
             </h1>
-            <div className="flex flex-col items-center gap-2">
-                <div className="w-1.5 h-1.5 border border-gucci-gold rotate-45 mb-1 bg-gucci-gold"></div>
-                <h2 className="text-white/70 text-[9px] md:text-[11px] font-sans font-black tracking-[0.5em] uppercase">
+            <div className="flex flex-col items-center gap-1">
+                <div className="w-1 h-1 bg-gucci-gold rotate-45 mb-1"></div>
+                <h2 className="text-white/50 text-[7px] md:text-[9px] font-sans font-black tracking-[0.4em] uppercase">
                     {t('officialWinner')}
                 </h2>
             </div>
         </div>
 
-        {/* MIDDLE: NAME & PRIZE (Matches Screenshot) */}
-        <div className="w-full space-y-4 flex flex-col items-center justify-center">
+        {/* PRIZE SECTION */}
+        <div className="w-full space-y-3 flex flex-col items-center">
             {user && (
-                <div className="text-gucci-gold text-2xl md:text-4xl font-serif font-bold italic tracking-wide drop-shadow-lg">
+                <div className="text-gucci-gold text-lg md:text-3xl font-serif font-bold italic tracking-wide">
                     {user.fullName}
                 </div>
             )}
             
-            <div className="text-white/40 text-[8px] md:text-[10px] font-serif uppercase tracking-[0.7em] italic font-medium">
+            <div className="text-white/30 text-[7px] md:text-[9px] font-serif uppercase tracking-[0.5em] italic">
                 SELAMAT TAHUN BARU
             </div>
             
-            <div className="text-white text-6xl md:text-8xl font-serif italic font-black leading-none py-2">
-                <span className="bg-gradient-to-b from-white via-gray-100 to-gray-500 bg-clip-text text-transparent drop-shadow-[0_12px_24px_rgba(0,0,0,1)]">
+            <div className="text-white text-4xl md:text-7xl font-serif italic font-black leading-none py-1">
+                <span className="bg-gradient-to-b from-white via-gray-200 to-gray-500 bg-clip-text text-transparent">
                     {prize.amount}
                 </span>
             </div>
         </div>
 
-        {/* BOTTOM: CODE BOX WITH OVERLAPPING LABEL */}
-        <div className="w-full flex flex-col items-center mt-4">
-            <div className="relative w-full max-w-[320px]">
-                {/* Overlapping Box Header */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 bg-black border border-gucci-gold/40 px-6 py-1.5 min-w-[200px]">
-                    <div className="text-[7px] md:text-[9px] text-gucci-gold uppercase font-black tracking-[0.4em] text-center">
+        {/* FOOTER & CODE */}
+        <div className="w-full flex flex-col items-center">
+            <div className="relative w-full max-w-[280px]">
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20 bg-black border border-gucci-gold/30 px-4 py-1">
+                    <div className="text-[6px] md:text-[8px] text-gucci-gold uppercase font-black tracking-[0.3em]">
                         {t('codeLabel')}
                     </div>
                 </div>
                 
-                {/* Main Voucher Card Area */}
-                <div className="bg-gucci-cream border-2 border-gucci-gold/40 pt-10 pb-8 px-4 shadow-[0_40px_80px_rgba(0,0,0,1)]">
-                    <span className="font-sans text-xl md:text-3xl tracking-[0.2em] font-black text-[#111111] block leading-relaxed break-words">
-                        {code.replace(/-/g, ' - ')}
+                <div className="bg-gucci-cream border border-gucci-gold/30 pt-8 pb-6 px-4">
+                    <span className="font-sans text-lg md:text-2xl tracking-[0.15em] font-black text-[#111] block break-words">
+                        {code.replace(/-/g, ' ')}
                     </span>
                 </div>
             </div>
 
-            {/* EXPIRY FOOTER */}
-            <div className="mt-8 md:mt-12 space-y-2">
-                <div className="text-gucci-gold/40 text-[9px] font-sans uppercase tracking-[0.6em] font-black">
-                    BERLAKU HINGGA
+            <div className="mt-6 md:mt-10 space-y-1">
+                <div className="text-gucci-gold/30 text-[7px] font-sans uppercase tracking-[0.5em] font-black">
+                    VALID UNTIL
                 </div>
-                <div className="text-white/80 text-sm md:text-base font-serif font-bold italic tracking-[0.2em] drop-shadow-lg">
+                <div className="text-white/80 text-xs md:text-sm font-serif font-bold italic tracking-wider">
                     {expiryDateString}
                 </div>
             </div>

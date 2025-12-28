@@ -19,7 +19,7 @@ const EventBanner: React.FC = () => {
                 </span>
                 <div className="h-4 w-[1px] bg-white/20"></div>
                 <span className="text-white font-serif font-bold italic tracking-wider text-sm">
-                    1 January 2026
+                    {t('expiryDate')}
                 </span>
             </div>
 
