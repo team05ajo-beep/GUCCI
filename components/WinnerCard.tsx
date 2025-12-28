@@ -50,8 +50,8 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
             </div>
         </div>
 
-        {/* PRIZE DISPLAY - MAX CONTRAST FOR ANDROID/MOBILE */}
-        <div className="w-full flex flex-col items-center justify-center space-y-4 md:space-y-6">
+        {/* PRIZE DISPLAY - IMPROVED SPACING & RESOLUTION */}
+        <div className="w-full flex flex-col items-center justify-center space-y-3 md:space-y-5">
             {user && (
                 <div className="text-gucci-gold text-xl md:text-4xl font-serif font-bold italic tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] px-2">
                     {user.fullName}
@@ -62,14 +62,14 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
                 SELAMAT TAHUN BARU
             </div>
             
-            <div className="flex flex-col items-center justify-center w-full">
+            <div className="flex flex-col items-center justify-center w-full space-y-1">
                 {amountParts.currency && (
-                  <span className="text-white text-3xl md:text-5xl font-serif italic font-black drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] leading-none">
+                  <span className="text-white text-3xl md:text-5xl font-serif italic font-black drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] leading-none tracking-widest">
                     {amountParts.currency}
                   </span>
                 )}
-                <div className="w-full flex justify-center items-center py-1">
-                    <span className="text-white text-[44px] md:text-[86px] font-serif italic font-black leading-none tracking-tight whitespace-nowrap drop-shadow-[0_8px_20px_rgba(0,0,0,1)] bg-gradient-to-b from-white via-white to-[#d1d1d1] bg-clip-text text-transparent">
+                <div className="w-full flex justify-center items-center px-4">
+                    <span className="text-white text-[42px] md:text-[82px] font-serif italic font-black leading-none tracking-normal whitespace-nowrap drop-shadow-[0_8px_20px_rgba(0,0,0,1)] bg-gradient-to-b from-white via-white to-[#d1d1d1] bg-clip-text text-transparent">
                         {amountParts.value}
                     </span>
                 </div>
@@ -88,7 +88,7 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
                 
                 {/* The Code Content */}
                 <div className="bg-[#fcfaf2] border-2 border-gucci-gold/40 pt-10 pb-7 md:pt-12 md:pb-9 px-4 md:px-6 shadow-[0_30px_70px_rgba(0,0,0,1)]">
-                    <span className="font-sans text-base md:text-3xl tracking-[0.25em] font-black text-[#050505] block leading-tight break-words uppercase">
+                    <span className="font-sans text-sm md:text-3xl tracking-[0.15em] font-black text-[#050505] block leading-tight break-words uppercase">
                         {code.replace(/-/g, ' ')}
                     </span>
                 </div>
