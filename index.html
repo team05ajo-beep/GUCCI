@@ -1,11 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GUCCI Indonesia - Exclusive Event</title>
+    <title>GUCCI Indonesia - New Year Celebration</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;800;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -25,30 +26,14 @@
                         sans: ['"Inter"', 'sans-serif'],
                         display: ['"Cinzel"', 'serif'],
                     },
-                    backgroundImage: {
-                        'gucci-gradient': 'linear-gradient(135deg, #163f28 0%, #0f2b1b 50%, #c51f28 100%)',
-                    },
                     animation: {
-                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
-                        'bounce': 'bounce 2s infinite',
-                        'snow': 'snow 10s linear infinite',
-                        'twinkle': 'twinkle 3s ease-in-out infinite',
-                        'spin-slow': 'spin 8s linear infinite',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                     },
                     keyframes: {
                         fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                            '0%': { opacity: '0', transform: 'translateY(15px) scale(0.98)' },
+                            '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
                         },
-                        snow: {
-                            '0%': { transform: 'translateY(-10vh)', opacity: '0' },
-                            '10%': { opacity: '0.8' },
-                            '100%': { transform: 'translateY(100vh)', opacity: '0.3' },
-                        },
-                        twinkle: {
-                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
-                            '50%': { opacity: '0.3', transform: 'scale(0.8)' },
-                        }
                     }
                 }
             }
@@ -56,21 +41,26 @@
     </script>
     <style>
         body {
-            background-color: #f7f4e9;
+            background-color: #050505;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://media.gucci.com/content/DiaryArticleDouble_Standard_1400x894/1671723004/DiaryArticleDouble_Gucci-CNY-Campaign-Dec2022-01_001_Default.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            overflow-x: hidden;
         }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 2px; }
+        
+        .gold-glow {
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
         }
-        ::-webkit-scrollbar-track {
-            background: #163f28;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #d4af37;
-            border-radius: 3px;
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
+        
+        .glass-panel {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
     </style>
 <script type="importmap">

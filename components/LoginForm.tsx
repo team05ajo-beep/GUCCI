@@ -14,79 +14,74 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !phoneNumber.trim() || !password.trim()) {
-      setError('Please fill in all fields');
+      setError('Required');
       return;
     }
-    
-    // Simple validation passed
     onLogin({ fullName, phoneNumber, password });
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-center animate-fade-in-up">
-      <div className="bg-gucci-cream p-6 md:p-10 shadow-2xl relative border-4 border-double border-gucci-gold h-full md:h-auto flex flex-col justify-center">
-        {/* Decorative Top */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gucci-green via-gucci-red to-gucci-green"></div>
-
-        <div className="mb-6 md:mb-8 text-center">
-            <h3 className="text-xl md:text-2xl font-serif font-bold text-gucci-green mb-2 uppercase tracking-wide">
+    <div className="w-full h-full flex flex-col justify-center animate-fade-in">
+      <div className="p-8 h-full flex flex-col justify-center">
+        
+        <div className="mb-10 text-center">
+            <h3 className="text-xl font-display font-black text-gucci-gold mb-3 uppercase tracking-[0.3em]">
                 {t('loginTitle')}
             </h3>
-            <p className="text-xs text-gray-600 font-sans tracking-wide">
+            <p className="text-[9px] text-white/40 font-sans uppercase tracking-[0.4em] font-medium leading-relaxed">
                 {t('loginSubtitle')}
             </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-8">
             <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen block">
+                <label className="text-[9px] font-black uppercase tracking-[0.4em] text-gucci-gold/60 block">
                     {t('fullName')}
                 </label>
-                {/* Text base (16px) prevents iOS zoom */}
                 <input 
                     type="text" 
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-base focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black rounded-none appearance-none"
-                    placeholder="Jane Doe"
+                    className="w-full bg-transparent border-b border-white/10 py-3 text-sm text-white focus:outline-none focus:border-gucci-gold transition-all placeholder-white/10 rounded-none"
+                    placeholder="Enter Name"
                 />
             </div>
 
             <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen block">
+                <label className="text-[9px] font-black uppercase tracking-[0.4em] text-gucci-gold/60 block">
                     {t('phoneNumber')}
                 </label>
                 <input 
                     type="tel" 
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-base focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black rounded-none appearance-none"
-                    placeholder="+62 812..."
+                    className="w-full bg-transparent border-b border-white/10 py-3 text-sm text-white focus:outline-none focus:border-gucci-gold transition-all placeholder-white/10 rounded-none"
+                    placeholder="+62"
                 />
             </div>
 
             <div className="space-y-1">
-                <label className="text-[10px] font-bold uppercase tracking-widest text-gucci-darkGreen block">
+                <label className="text-[9px] font-black uppercase tracking-[0.4em] text-gucci-gold/60 block">
                     {t('password')}
                 </label>
                 <input 
                     type="password" 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-transparent border-b border-gucci-gold py-2 text-base focus:outline-none focus:border-gucci-red transition-colors placeholder-gray-400 text-black rounded-none appearance-none"
-                    placeholder="••••••••"
+                    className="w-full bg-transparent border-b border-white/10 py-3 text-sm text-white focus:outline-none focus:border-gucci-gold transition-all placeholder-white/10 rounded-none"
+                    placeholder="••••"
                 />
             </div>
 
             {error && (
-                <div className="text-gucci-red text-xs text-center pt-2 font-bold">{error}</div>
+                <div className="text-red-500 text-[8px] text-center font-black uppercase tracking-widest">{error}</div>
             )}
 
             <button 
                 type="submit" 
-                className="w-full bg-gucci-green text-gucci-gold py-4 mt-4 flex items-center justify-center gap-2 group hover:bg-gucci-black active:bg-black transition-all duration-300 border border-gucci-gold active:scale-[0.98]"
+                className="w-full bg-gucci-gold text-black py-5 mt-4 flex items-center justify-center gap-3 group hover:bg-white transition-all shadow-xl"
             >
-                <span className="text-xs font-bold uppercase tracking-[0.2em]">
+                <span className="text-[10px] font-black uppercase tracking-[0.4em]">
                     {t('startJourney')}
                 </span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

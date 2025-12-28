@@ -34,7 +34,7 @@ export const PRIZES: Prize[] = [
     { id: 'v-250', amount: 'Rp 250.000', isGrandPrize: false, category: 'voucher' },
 ];
 
-export const SCRATCH_THRESHOLD = 20;
+export const SCRATCH_THRESHOLD = 15; // Lowered from 20 for smoother UX
 
 export const generateRandomCode = (length = 12): string => {
     const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';

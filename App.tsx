@@ -5,12 +5,12 @@ import { PRIZES, generateRandomCode } from './constants';
 import WinnerCard from './components/WinnerCard';
 import ScratchCard from './components/ScratchCard';
 import LoginForm from './components/LoginForm';
-import { Globe, ShoppingBag, Menu, X, Snowflake, Camera, Download } from 'lucide-react';
+import { Globe, ShoppingBag, Menu, Camera, Download, PartyPopper } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import html2canvas from 'html2canvas';
 
-const STORAGE_KEY = 'gucci_lucky_draw_claim_v1';
-const USER_KEY = 'gucci_lucky_draw_user_v1';
+const STORAGE_KEY = 'gucci_new_year_2026_v1';
+const USER_KEY = 'gucci_new_year_user_v1';
 
 const App: React.FC = () => {
   const { t, language, setLanguage, availableLanguages } = useLanguage();
@@ -20,14 +20,12 @@ const App: React.FC = () => {
   const [isRevealed, setIsRevealed] = useState(false);
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [isLangOpen, setIsLangOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTicketOpen, setIsTicketOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
   const ticketRef = useRef<HTMLDivElement>(null);
 
-  // Check for existing User Login
   useEffect(() => {
     const storedUser = localStorage.getItem(USER_KEY);
     if (storedUser) {
@@ -39,15 +37,12 @@ const App: React.FC = () => {
     }
   }, []);
 
-  // Initialize Prize and Check Local Storage for Claim
   useEffect(() => {
     const storedData = localStorage.getItem(STORAGE_KEY);
-
     if (storedData) {
       try {
         const { prizeId, code: storedCode } = JSON.parse(storedData);
         const foundPrize = PRIZES.find(p => p.id === prizeId);
-
         if (foundPrize && storedCode) {
           setPrize(foundPrize);
           setCode(storedCode);
@@ -55,17 +50,14 @@ const App: React.FC = () => {
           return;
         }
       } catch (e) {
-        console.error("Error parsing stored claim data", e);
         localStorage.removeItem(STORAGE_KEY);
       }
     }
-
     const randomIndex = Math.floor(Math.random() * PRIZES.length);
     setPrize(PRIZES[randomIndex]);
     setCode(generateRandomCode());
   }, []);
 
-  // Handle Responsive Canvas Size
   useEffect(() => {
     const updateSize = () => {
         if (containerRef.current) {
@@ -75,13 +67,15 @@ const App: React.FC = () => {
             });
         }
     };
-
     updateSize();
     window.addEventListener('resize', updateSize);
-    // Slight delay to ensure layout is settled
-    setTimeout(updateSize, 500);
-    return () => window.removeEventListener('resize', updateSize);
-  }, [user]); // Update size when user state changes (login reveals card)
+    // Extra checks for mobile orientation changes
+    const timeout = setTimeout(updateSize, 800);
+    return () => {
+        window.removeEventListener('resize', updateSize);
+        clearTimeout(timeout);
+    };
+  }, [user, isTicketOpen]);
 
   const handleLogin = (userData: User) => {
       localStorage.setItem(USER_KEY, JSON.stringify(userData));
@@ -100,251 +94,119 @@ const App: React.FC = () => {
 
   const handleDownloadTicket = async () => {
     if (!ticketRef.current || isSaving) return;
-    
     setIsSaving(true);
-    
     try {
-        // Wait a bit to ensure fonts/images are rendered
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
         const canvas = await html2canvas(ticketRef.current, {
-            backgroundColor: '#0f2b1b', // Gucci Dark Green Background
-            scale: 2, // Higher quality
+            backgroundColor: '#0a0a0a',
+            scale: 2,
             useCORS: true,
-            logging: false,
-            allowTaint: true,
-            ignoreElements: (element) => element.classList.contains('no-capture')
+            allowTaint: true
         });
-
         const image = canvas.toDataURL("image/png");
-        
-        // Logic to support mobile download better
         const link = document.createElement('a');
         link.href = image;
-        link.download = `Gucci-Holiday-Ticket-${code}.png`;
-        document.body.appendChild(link);
+        link.download = `Gucci-Ticket-2026.png`;
         link.click();
-        document.body.removeChild(link);
-
     } catch (error) {
-        console.error("Error capturing ticket:", error);
-        alert("Gagal menyimpan otomatis. Silakan ambil Screenshot layar Anda.");
+        alert("Please take a screenshot of your ticket.");
     } finally {
         setIsSaving(false);
     }
   };
 
-  // Official Gucci Links
-  const navLinks = [
-    { name: "Gifts", url: "https://www.gucci.com/us/en/st/capsule/gifts" },
-    { name: "What's New", url: "https://www.gucci.com/us/en/ca/whats-new-c-new" },
-    { name: "Handbags", url: "https://www.gucci.com/us/en/ca/women/handbags-c-women-handbags" },
-    { name: "Women", url: "https://www.gucci.com/us/en/ca/women-c-women" },
-    { name: "Men", url: "https://www.gucci.com/us/en/ca/men-c-men" },
-    { name: "Children", url: "https://www.gucci.com/us/en/ca/children-c-children" },
-    { name: "Jewelry & Watches", url: "https://www.gucci.com/us/en/ca/jewelry-watches-c-jewelry-watches" },
-    { name: "Beauty", url: "https://www.gucci.com/us/en/ca/beauty-c-beauty" },
-    { name: "Decor & Lifestyle", url: "https://www.gucci.com/us/en/ca/decor-c-decor" }
-  ];
-
   return (
-    <div className="w-full bg-gucci-cream font-sans text-gucci-black min-h-screen flex flex-col">
+    <div className="w-full min-h-screen flex flex-col bg-transparent overflow-x-hidden">
       
-      {/* --- HEADER SECTION (BLACK) --- */}
-      <header className="bg-black text-gucci-gold w-full relative z-50 border-b border-gucci-gold/20">
-          {/* Top Bar: Search, Logo, Utilities */}
-          <div className="container mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between">
-              
-              {/* Left: Mobile Menu */}
-              <div className="flex items-center gap-4 w-1/4">
-                  <button 
-                    onClick={() => setIsMenuOpen(true)}
-                    className="md:hidden text-gucci-gold hover:text-white transition-colors"
-                  >
-                      <Menu className="w-6 h-6" />
-                  </button>
+      {/* HEADER - Precisely positioned icons as per screenshot */}
+      <header className="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md border-b border-white/10">
+          <div className="container mx-auto px-4 md:px-12 py-5 flex items-center justify-between">
+              {/* Left: Menu Icon */}
+              <div className="flex-1 flex justify-start">
+                  <Menu className="w-5 h-5 text-white/90 cursor-pointer hover:text-gucci-gold transition-colors" />
               </div>
 
-              {/* Center: LOGO */}
-              <div className="flex flex-col items-center justify-center w-1/2">
-                  <h1 className="text-3xl md:text-6xl font-display font-black tracking-[0.1em] leading-none text-gucci-gold drop-shadow-sm text-center">
+              {/* Center: Branding */}
+              <div className="flex flex-col items-center justify-center text-center">
+                  <h1 className="text-xl md:text-3xl font-display font-bold tracking-[0.45em] leading-none text-gucci-gold drop-shadow-lg">
                       GUCCI
                   </h1>
-                  <span className="text-[8px] md:text-[10px] font-bold tracking-[0.4em] uppercase mt-2 text-gray-500 text-center">
-                      {t('florenceSubtitle')}
+                  <span className="text-[6px] md:text-[8px] font-black tracking-[0.6em] uppercase mt-2 text-white/50">
+                      NEW YEAR CELEBRATION
                   </span>
               </div>
 
-              {/* Right: Utilities */}
-              <div className="flex items-center justify-end gap-4 md:gap-6 w-1/4">
-                  <div className="hidden md:flex items-center gap-4 text-[10px] font-bold uppercase tracking-wider text-white">
-                      <a href="https://www.gucci.com/us/en/st/services" target="_blank" rel="noopener noreferrer" className="hover:text-gucci-gold">Services</a>
-                  </div>
-                  
-                  {/* Language Switcher */}
+              {/* Right: Globe and Shopping Bag */}
+              <div className="flex-1 flex items-center justify-end gap-5">
                   <div className="relative">
-                    <button 
-                        onClick={() => setIsLangOpen(!isLangOpen)}
-                        className="flex items-center gap-1 hover:text-gucci-gold text-white"
-                    >
-                        <Globe className="w-4 h-4" />
-                        <span className="hidden md:inline text-[10px] font-bold uppercase">{language}</span>
+                    <button onClick={() => setIsLangOpen(!isLangOpen)} className="flex items-center gap-1.5 text-white/70 hover:text-white transition-colors">
+                        <Globe className="w-3.5 h-3.5" />
+                        <span className="text-[9px] font-black uppercase tracking-widest">{language}</span>
                     </button>
-                     {isLangOpen && (
-                        <div className="absolute top-full right-0 mt-2 w-40 bg-gucci-cream text-black shadow-xl py-1 z-50 border border-gucci-gold">
-                            {availableLanguages.map((lang) => (
-                                <button
+                    {isLangOpen && (
+                        <div className="absolute top-full right-0 mt-4 w-44 bg-black/95 border border-gucci-gold/20 shadow-2xl z-[60] backdrop-blur-2xl">
+                            {availableLanguages.map(lang => (
+                                <button 
                                     key={lang.code}
-                                    onClick={() => {
-                                        setLanguage(lang.code);
-                                        setIsLangOpen(false);
-                                    }}
-                                    className={`w-full text-left px-4 py-2 text-[10px] font-bold uppercase hover:bg-gucci-gold/20 ${language === lang.code ? 'text-gucci-green' : ''}`}
+                                    onClick={() => { setLanguage(lang.code); setIsLangOpen(false); }}
+                                    className={`w-full text-left px-5 py-3 text-[9px] uppercase font-black tracking-widest hover:bg-gucci-gold/10 ${language === lang.code ? 'text-gucci-gold' : 'text-white/60'}`}
                                 >
                                     {lang.label}
                                 </button>
                             ))}
                         </div>
-                     )}
+                    )}
                   </div>
-
-                  <div className="relative cursor-pointer text-white hover:text-gucci-gold">
-                      <a href="https://www.gucci.com/us/en/cart" target="_blank" rel="noopener noreferrer">
-                        <ShoppingBag className="w-5 h-5" />
-                      </a>
-                  </div>
+                  <ShoppingBag className="w-4 h-4 text-white/70 hover:text-white cursor-pointer" />
               </div>
           </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:block border-t border-white/10">
-              <div className="container mx-auto px-6">
-                  <ul className="flex items-center justify-center gap-8 py-4">
-                      {navLinks.map((link) => (
-                          <li key={link.name}>
-                              <a 
-                                href={link.url}
-                                target="_blank"
-                                rel="noopener noreferrer" 
-                                className="text-[10px] font-bold uppercase tracking-widest text-white/80 hover:text-gucci-gold transition-colors"
-                              >
-                                  {link.name}
-                              </a>
-                          </li>
-                      ))}
-                  </ul>
-              </div>
-          </nav>
-
-          {/* Mobile Menu Overlay */}
-          {isMenuOpen && (
-            <div className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-md">
-                <div className="p-6">
-                    <div className="flex justify-between items-center mb-8">
-                         <h2 className="text-gucci-gold font-display text-2xl tracking-widest">MENU</h2>
-                         <button onClick={() => setIsMenuOpen(false)} className="text-white hover:text-gucci-gold">
-                             <X className="w-8 h-8" />
-                         </button>
-                    </div>
-                    <ul className="flex flex-col gap-6 text-center">
-                        {navLinks.map((link) => (
-                             <li key={link.name}>
-                                 <a 
-                                   href={link.url}
-                                   target="_blank"
-                                   rel="noopener noreferrer" 
-                                   className="text-sm font-bold uppercase tracking-widest text-white hover:text-gucci-gold block py-2 border-b border-white/10"
-                                 >
-                                     {link.name}
-                                 </a>
-                             </li>
-                         ))}
-                    </ul>
-                </div>
-            </div>
-          )}
       </header>
 
-      {/* --- HERO SECTION (GREEN / GAME) --- */}
-      <section className="relative w-full flex-grow bg-gucci-green overflow-hidden flex items-center border-b-8 border-gucci-red py-12 md:py-0">
-          
-          {/* Background Gradient/Pattern */}
-          <div className="absolute inset-0 z-0">
-             <div className="absolute inset-0 bg-gucci-gradient opacity-90"></div>
-             {/* Gucci Pattern Overlay Effect (Subtle) */}
-             <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000)', backgroundPosition: '0 0, 10px 10px', backgroundSize: '20px 20px' }}></div>
-             
-             {/* SNOWFALL EFFECT */}
-             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-                {[...Array(50)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute bg-white rounded-full animate-snow"
-                        style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `-${Math.random() * 20}%`,
-                            width: `${Math.random() * 4 + 2}px`,
-                            height: `${Math.random() * 4 + 2}px`,
-                            opacity: Math.random() * 0.6 + 0.2,
-                            animationDuration: `${Math.random() * 10 + 5}s`,
-                            animationDelay: `${Math.random() * 5}s`
-                        }}
-                    />
-                ))}
-             </div>
-          </div>
-
-          <div className="container mx-auto px-4 md:px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+      {/* MAIN CONTENT SECTION */}
+      <main className="relative w-full flex-grow flex items-center pt-28 pb-16 px-4 md:px-16 lg:px-24">
+          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-16 lg:gap-32">
               
-              {/* Left Column: Text Content */}
-              <div className="text-gucci-cream space-y-6 md:pl-8 pt-4 md:pt-0 text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 border border-gucci-gold px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] bg-black/40 backdrop-blur-sm text-gucci-gold shadow-lg">
-                      <Snowflake className="w-3 h-3" />
-                      Holiday Season 2025
+              {/* Left: Hero Information */}
+              <div className="w-full md:w-1/2 text-left space-y-10 order-1 md:order-1 animate-fade-in-up">
+                  <div className="inline-flex items-center gap-4 bg-black/60 px-5 py-2 text-[9px] font-black uppercase tracking-[0.5em] text-gucci-gold border border-gucci-gold/40">
+                      <PartyPopper className="w-4 h-4" />
+                      GALA CELEBRATION 2026
                   </div>
-                  <h2 className="text-3xl md:text-6xl font-serif leading-tight text-white drop-shadow-md">
-                      <span className="block text-xl md:text-3xl mb-2 font-normal text-gucci-gold italic">{t('welcomeTitle')}</span>
-                      <span className="font-bold">{t('specialDiscount')}</span>
-                  </h2>
-                  <p className="text-sm md:text-base font-sans text-white/90 max-w-md leading-relaxed mx-auto md:mx-0">
-                      {t('welcomeText')}
-                  </p>
+                  
+                  <div className="space-y-6">
+                      <h2 className="text-white drop-shadow-2xl">
+                          <span className="block text-lg md:text-2xl text-gucci-gold font-display font-black tracking-[0.35em] mb-4 uppercase">
+                              New Year Celebration 2026
+                          </span>
+                          <span className="block text-5xl md:text-8xl font-serif italic font-light leading-none">
+                              Golden<br />
+                              Scratch <span className="not-italic font-normal">2026</span>
+                          </span>
+                      </h2>
+                      <p className="text-xs md:text-base font-sans text-white/80 leading-relaxed max-w-md tracking-widest drop-shadow-lg">
+                          {t('welcomeText')}
+                      </p>
+                  </div>
                   
                   {user && isRevealed && (
-                      <div className="pt-4 animate-fade-in-up">
-                          <button 
-                             onClick={() => setIsTicketOpen(true)}
-                             className="inline-flex items-center gap-3 bg-gucci-gold text-gucci-darkGreen px-8 py-4 rounded font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors border-2 border-transparent hover:border-gucci-gold shadow-lg active:scale-95"
-                          >
-                             {t('claimReward')}
-                             <Camera className="w-4 h-4" />
-                          </button>
-                      </div>
+                      <button 
+                         onClick={() => setIsTicketOpen(true)}
+                         className="flex items-center gap-5 bg-gucci-gold text-black px-12 py-6 font-black text-[11px] uppercase tracking-[0.45em] hover:bg-white transition-all shadow-2xl active:scale-95"
+                      >
+                         {t('claimReward')}
+                         <Camera className="w-4 h-4" />
+                      </button>
                   )}
               </div>
 
-              {/* Right Column: Login OR The Scratch Card */}
-              <div className="flex justify-center md:justify-end relative pb-10 md:pb-0">
-                  {/* Decorative Elements around card */}
-                  <div className="absolute -inset-2 bg-gucci-gold/30 rounded blur-xl"></div>
-                  
-                  <div className="relative w-full max-w-sm aspect-[4/5] bg-gucci-cream shadow-2xl rounded p-3 transform transition-transform duration-700 border-2 border-gucci-gold">
-                      
+              {/* Right: Interactive Card */}
+              <div className="w-full md:w-[450px] order-2 md:order-2 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+                  <div className="relative aspect-[3/4] bg-black/40 backdrop-blur-2xl shadow-[0_50px_150px_-30px_rgba(0,0,0,1)] p-4 border border-white/10 ring-1 ring-white/5">
                       {!user ? (
-                          // SHOW LOGIN FORM IF NO USER
-                          <div className="w-full h-full border border-gucci-green/20 bg-white overflow-hidden relative">
-                              <LoginForm onLogin={handleLogin} />
-                          </div>
+                          <LoginForm onLogin={handleLogin} />
                       ) : (
-                          // SHOW GAME IF LOGGED IN
-                          <div className="w-full h-full border border-gucci-green/20 bg-white relative overflow-hidden">
+                          <div className="w-full h-full relative overflow-hidden glass-panel border border-gucci-gold/20">
                               <div ref={containerRef} className="w-full h-full relative">
-                                  {/* Content behind scratch */}
-                                  {prize && (
-                                      <WinnerCard prize={prize} code={code} user={user} />
-                                  )}
-                                  
-                                  {/* Scratch Layer */}
+                                  {prize && <WinnerCard prize={prize} code={code} user={user} />}
                                   {containerSize.width > 0 && (
                                       <ScratchCard 
                                           width={containerSize.width} 
@@ -354,168 +216,44 @@ const App: React.FC = () => {
                                       />
                                   )}
                               </div>
-                              {/* Label */}
-                              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gucci-darkGreen text-gucci-gold px-4 py-2 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap shadow-lg animate-fade-in-up border border-gucci-gold">
-                                  Golden Scratch Card
-                              </div>
                           </div>
                       )}
                   </div>
               </div>
           </div>
-      </section>
+      </main>
 
-      {/* --- TICKET MODAL OVERLAY --- */}
+      {/* FOOTER */}
+      <footer className="w-full bg-black/90 backdrop-blur-xl py-12 border-t border-white/5 mt-auto relative z-10">
+          <div className="container mx-auto px-6 text-center space-y-6">
+              <h4 className="font-display text-3xl tracking-[0.5em] text-gucci-gold">GUCCI</h4>
+              <p className="text-[9px] text-white/30 uppercase tracking-[0.6em]">© 2026 Guccio Gucci S.p.A. — Global Celebration</p>
+          </div>
+      </footer>
+
+      {/* TICKET FULL SCREEN OVERLAY */}
       {isTicketOpen && prize && user && (
-        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in-up overflow-y-auto">
-             <div className="w-full max-w-md flex flex-col items-center my-auto">
-                 
-                 {/* Main Ticket Container to Capture */}
-                 <div ref={ticketRef} className="bg-gucci-darkGreen w-full shadow-2xl relative overflow-hidden flex flex-col items-center text-center p-6 border-4 border-double border-gucci-gold">
-                     
-                     {/* PREMIUM BATIK BACKGROUND */}
-                     <div 
-                        className="absolute inset-0 opacity-15 pointer-events-none" 
-                        style={{
-                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zm0 10c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm-10-20c-5.523 0-10-4.477-10-10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10zm0 20c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zM50 10c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zm0 20c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z' fill='%23d4af37' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-                            backgroundSize: '40px 40px'
-                        }}
-                     ></div>
-
-                     {/* Inner Frame */}
-                     <div className="relative w-full h-full border border-gucci-gold/50 p-6 flex flex-col items-center bg-gucci-darkGreen/50 backdrop-blur-sm">
-                        
-                         {/* Corner Ornaments */}
-                         <div className="absolute top-2 left-2 w-6 h-6 border-t-2 border-l-2 border-gucci-gold"></div>
-                         <div className="absolute top-2 right-2 w-6 h-6 border-t-2 border-r-2 border-gucci-gold"></div>
-                         <div className="absolute bottom-2 left-2 w-6 h-6 border-b-2 border-l-2 border-gucci-gold"></div>
-                         <div className="absolute bottom-2 right-2 w-6 h-6 border-b-2 border-r-2 border-gucci-gold"></div>
-
-                         {/* Header */}
-                         <h2 className="text-gucci-gold font-display text-4xl tracking-widest mb-1 drop-shadow-lg">GUCCI</h2>
-                         <div className="text-[10px] text-gucci-cream/80 uppercase tracking-[0.3em] mb-8 font-serif italic">Holiday Season 2025</div>
-
-                         {/* Winner Badge - REMOVED ROTATION HERE */}
-                         <div className="bg-gucci-cream text-gucci-black py-4 px-8 mb-6 shadow-xl border-2 border-gucci-gold w-full">
-                            <div className="text-[10px] font-bold uppercase tracking-widest mb-1 text-gucci-red flex items-center justify-center gap-2">
-                                <Snowflake className="w-3 h-3" />
-                                {t('officialWinner')}
-                                <Snowflake className="w-3 h-3" />
-                            </div>
-                            <div className="font-serif text-2xl font-bold border-b-2 border-gucci-red/20 pb-2 mb-2 break-words">{user.fullName}</div>
-                            <div className="text-xs font-mono font-bold tracking-widest text-gucci-darkGreen">{user.phoneNumber}</div>
-                         </div>
-
-                         {/* Prize Info */}
-                         <div className="space-y-3 mb-8 text-center relative z-10">
-                            <div className="text-gucci-gold text-xs uppercase tracking-widest font-bold">{prize.isGrandPrize ? t('specialDiscount') : t('giftVoucher')}</div>
-                            <div className="text-white font-serif text-3xl italic leading-tight drop-shadow-md">{prize.amount}</div>
-                         </div>
-
-                         {/* Code */}
-                         <div className="bg-black/80 border border-gucci-gold p-4 mb-2 w-full max-w-[280px]">
-                            <div className="text-[9px] text-gucci-gold uppercase tracking-widest mb-2 border-b border-gucci-gold/30 pb-1">{t('codeLabel')}</div>
-                            <div className="font-mono text-xl md:text-2xl text-white tracking-widest font-black drop-shadow-lg break-all">{code}</div>
-                         </div>
-                     </div>
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-6 md:p-12 overflow-y-auto">
+             <div className="w-full max-w-md flex flex-col items-center gap-10 my-auto animate-fade-in-up">
+                 <div ref={ticketRef} className="w-full relative aspect-[3/4] shadow-[0_50px_200px_rgba(0,0,0,1)] border border-white/10">
+                      <WinnerCard prize={prize} code={code} user={user} />
                  </div>
-
-                 {/* Action Buttons (Outside capture area) */}
-                 <div className="mt-6 flex flex-col items-center gap-4 w-full px-4">
+                 <div className="flex flex-col gap-4 w-full">
                      <button 
                         onClick={handleDownloadTicket}
                         disabled={isSaving}
-                        className="w-full md:w-auto flex items-center justify-center gap-3 text-gucci-gold bg-white/5 px-8 py-4 rounded-full border border-white/10 hover:bg-white/10 active:bg-white/20 transition-colors cursor-pointer disabled:opacity-50 hover:border-gucci-gold shadow-lg active:scale-95"
+                        className="w-full flex items-center justify-center gap-5 bg-gucci-gold text-black px-12 py-6 font-black text-[11px] uppercase tracking-[0.5em] hover:bg-white transition-all shadow-2xl active:scale-95"
                      >
-                        {isSaving ? (
-                             <span className="w-5 h-5 border-2 border-gucci-gold border-t-transparent rounded-full animate-spin"></span>
-                        ) : (
-                             <Download className="w-5 h-5" />
-                        )}
-                        <span className="text-[10px] font-bold uppercase tracking-widest">
-                            {isSaving ? 'Menyimpan...' : t('screenshotInstruction')}
-                        </span>
+                        {isSaving ? "..." : <Download className="w-5 h-5" />}
+                        {isSaving ? 'GENERATING...' : t('screenshotInstruction')}
                      </button>
-
-                     <button onClick={() => setIsTicketOpen(false)} className="text-white/50 hover:text-white transition-colors text-xs uppercase tracking-widest p-2">
-                        Tutup
+                     <button onClick={() => setIsTicketOpen(false)} className="text-white/40 hover:text-white transition-colors text-[10px] uppercase tracking-[0.6em] font-black py-4">
+                        {t('backToHome')}
                      </button>
                  </div>
             </div>
         </div>
       )}
-
-      {/* --- CONTENT SECTION (VISION & MISSION) --- */}
-      <section className="bg-gucci-cream py-16 md:py-28 relative">
-          <div className="container mx-auto px-6">
-              <div className="text-center mb-16">
-                  <h3 className="text-3xl md:text-4xl font-display text-gucci-darkGreen mb-4 drop-shadow-sm">
-                      {t('visionTitle')}
-                  </h3>
-                  <div className="w-24 h-[3px] bg-gucci-red mx-auto"></div>
-                  <div className="w-16 h-[3px] bg-gucci-green mx-auto mt-1"></div>
-              </div>
-
-              {/* Layout */}
-              <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 bg-white p-6 md:p-8 shadow-xl border border-gucci-gold/20">
-                   {/* Decorative Image Left */}
-                   <div className="md:col-span-4 relative h-[250px] md:h-auto bg-gucci-darkGreen overflow-hidden flex items-center justify-center">
-                       <span className="text-gucci-gold font-display text-5xl md:text-6xl opacity-20 rotate-90 whitespace-nowrap">GUCCI 1921</span>
-                       <div className="absolute inset-0 border-[10px] border-gucci-red/80 m-4"></div>
-                   </div>
-
-                   {/* Text Content Right */}
-                   <div className="md:col-span-8 flex flex-col justify-center">
-                       <div className="h-[400px] md:h-[500px] overflow-y-auto pr-2 md:pr-6 custom-scrollbar">
-                            <h4 className="font-serif text-xl mb-6 text-gucci-darkGreen italic font-bold">
-                                {t('visionText1')}
-                            </h4>
-                            <p className="text-sm font-sans text-gray-700 leading-8 whitespace-pre-line text-justify">
-                                {t('visionText2')}
-                            </p>
-                       </div>
-                   </div>
-              </div>
-          </div>
-      </section>
-
-      {/* --- FOOTER SECTION (BLACK) --- */}
-      <footer className="bg-black text-gucci-cream py-12 md:py-16 border-t-4 border-gucci-red mt-auto">
-          <div className="container mx-auto px-6">
-              
-              {/* Footer Links Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-4 text-[10px] uppercase tracking-widest text-gray-400">
-                  <div className="space-y-4">
-                      <h5 className="text-gucci-gold font-bold mb-6">Customer Service</h5>
-                      <a href="https://www.gucci.com/us/en/st/contact-us" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Contact Us</a>
-                      <a href="https://www.gucci.com/us/en/st/faq" target="_blank" rel="noopener noreferrer" className="block hover:text-white">FAQ</a>
-                      <a href="https://www.gucci.com/us/en/st/shipping-info" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Shipping</a>
-                  </div>
-                  <div className="space-y-4">
-                      <h5 className="text-gucci-gold font-bold mb-6">The Brand</h5>
-                      <a href="https://www.gucci.com/us/en/st/stories" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Stories</a>
-                      <a href="https://www.gucci.com/us/en/st/careers" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Careers</a>
-                      <a href="https://www.gucci.com/us/en/st/legal" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Legal</a>
-                  </div>
-                  <div className="space-y-4">
-                      <h5 className="text-gucci-gold font-bold mb-6">Services</h5>
-                      <a href="https://www.gucci.com/us/en/st/store-locator" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Store Locator</a>
-                      <a href="https://www.gucci.com/us/en/st/book-an-appointment" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Appointments</a>
-                  </div>
-                  <div className="space-y-4">
-                      <h5 className="text-gucci-gold font-bold mb-6">Social</h5>
-                      <a href="https://www.instagram.com/gucci/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Instagram</a>
-                      <a href="https://www.facebook.com/GUCCI/" target="_blank" rel="noopener noreferrer" className="block hover:text-white">Facebook</a>
-                      <a href="https://twitter.com/gucci" target="_blank" rel="noopener noreferrer" className="block hover:text-white">X (Twitter)</a>
-                  </div>
-              </div>
-
-              {/* Bottom Copyright */}
-              <div className="text-center mt-12 md:mt-16 text-[9px] text-gray-600 uppercase tracking-widest">
-                  © 2024 Guccio Gucci S.p.A. - All rights reserved. SIAE LICENCE # 2294/I/1936
-              </div>
-          </div>
-      </footer>
     </div>
   );
 };

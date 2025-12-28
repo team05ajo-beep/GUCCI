@@ -2,98 +2,91 @@
 import React, { useMemo } from 'react';
 import { WinnerCardProps } from '../types';
 import { useLanguage } from '../LanguageContext';
-import { Snowflake, Sparkles } from 'lucide-react';
 
 const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   
   const expiryDateString = useMemo(() => {
-    const date = new Date();
-    date.setHours(date.getHours() + 24); 
-    
-    const localeMap: Record<string, string> = {
-        'en': 'en-US',
-        'id': 'id-ID',
-        'it': 'it-IT',
-        'fr': 'fr-FR'
-    };
-
-    const locale = localeMap[language] || 'en-US';
-
-    return new Intl.DateTimeFormat(locale, {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-    }).format(date);
-  }, [language]);
+    return "1 Januari 2026";
+  }, []);
 
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-gucci-darkGreen overflow-hidden">
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-black/95 backdrop-blur-md overflow-hidden border-[12px] border-double border-gucci-gold/25 shadow-2xl">
       
-      {/* PREMIUM BATIK BACKGROUND (KAWUNG MOTIF) */}
-      <div 
-        className="absolute inset-0 opacity-10 pointer-events-none" 
-        style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zm0 10c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zm-10-20c-5.523 0-10-4.477-10-10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10zm0 20c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10zM50 10c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10zm0 20c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z' fill='%23d4af37' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-            backgroundSize: '30px 30px'
-        }}
-      ></div>
-
-      {/* Border Frame */}
-      <div className="absolute inset-2 border-2 border-gucci-gold/30 rounded-sm pointer-events-none"></div>
-
-      {/* Holiday Decorations */}
-      <div className="absolute top-4 left-4 animate-bounce z-20">
-          <Snowflake className="w-5 h-5 text-white/30" />
-      </div>
-      <div className="absolute top-4 right-4 animate-bounce delay-700 z-20">
-          <Sparkles className="w-5 h-5 text-gucci-gold/30" />
+      {/* LUXURY DIAMOND BACKGROUND */}
+      <div className="absolute inset-0 opacity-[0.08] pointer-events-none" 
+           style={{ 
+             backgroundImage: `url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 0l25 25-25 25-25-25z' fill='none' stroke='%23d4af37' stroke-width='0.5'/%3E%3C/svg%3E")`,
+             backgroundSize: '50px 50px'
+           }}>
       </div>
 
-      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-6 space-y-3">
+      {/* ORNATE FRAME ELEMENTS */}
+      <div className="absolute inset-5 border border-gucci-gold/10 pointer-events-none"></div>
+      <div className="absolute top-8 left-8 w-10 h-10 border-t border-l border-gucci-gold pointer-events-none"></div>
+      <div className="absolute bottom-8 right-8 w-10 h-10 border-b border-r border-gucci-gold pointer-events-none"></div>
+
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-12 px-6">
         
-        {/* Header: Official Winner */}
-        <div>
-            <h2 className="text-gucci-gold text-xs font-sans font-bold tracking-[0.25em] uppercase flex items-center gap-2 justify-center drop-shadow-md">
-                <Sparkles className="w-3 h-3" />
-                {t('officialWinner')}
-                <Sparkles className="w-3 h-3" />
-            </h2>
-            
-            {/* User Details */}
-            {user && (
-                <div className="mt-2 animate-fade-in-up">
-                    <div className="text-white text-lg md:text-xl font-serif font-bold uppercase tracking-wide drop-shadow-lg border-b border-gucci-gold/50 pb-1 mx-6 mb-1">
-                        {user.fullName}
-                    </div>
-                    <div className="text-gucci-cream/80 text-xs font-mono tracking-wider">
-                        {user.phoneNumber}
-                    </div>
-                </div>
-            )}
-        </div>
-        
-        {/* Prize Name (Text Only) */}
-        <div className="w-full px-2 py-3 border-y border-gucci-gold/30 bg-gucci-darkGreen/60 backdrop-blur-sm my-1">
-            <div className="text-[9px] text-gucci-gold uppercase tracking-widest mb-1">{prize.isGrandPrize ? t('specialDiscount') : t('giftVoucher')}</div>
-            <div className="text-gucci-cream text-xl md:text-2xl font-serif italic font-bold leading-tight drop-shadow-md">
-                {prize.amount}
+        {/* LOGO & OFFICIAL HEADER */}
+        <div className="space-y-4 w-full">
+            <h1 className="text-gucci-gold text-4xl font-display font-bold tracking-[0.45em] uppercase drop-shadow-[0_0_12px_rgba(212,175,55,0.5)]">
+                GUCCI
+            </h1>
+            <div className="flex flex-col items-center gap-2">
+                <div className="w-2 h-2 border border-gucci-gold rotate-45 mb-1 bg-black"></div>
+                <h2 className="text-white/60 text-[10px] font-sans font-black tracking-[0.5em] uppercase">
+                    {t('officialWinner')}
+                </h2>
             </div>
         </div>
 
-        {/* Code Section */}
-        <div className="w-full max-w-[220px] bg-gucci-cream text-gucci-black px-4 py-2 rounded shadow-xl border-2 border-gucci-gold relative overflow-hidden group transform hover:scale-105 transition-transform duration-300">
-            <div className="text-[9px] text-gucci-darkGreen uppercase tracking-widest mb-1 font-bold">Kode Unik</div>
-            <span className="font-mono text-lg md:text-xl tracking-[0.1em] font-black block">
-                {code}
-            </span>
+        {/* WINNER NAME & PRIZE DISPLAY */}
+        <div className="w-full space-y-4">
+            {user && (
+                <div className="text-gucci-gold text-3xl font-serif font-bold italic tracking-wide drop-shadow-md">
+                    {user.fullName}
+                </div>
+            )}
+            <div className="text-gucci-gold/60 text-[10px] font-serif uppercase tracking-[0.6em] italic">
+                {t('congratsTitle')}
+            </div>
+            
+            <div className="text-white text-6xl md:text-7xl font-serif italic font-black leading-tight">
+                <span className="bg-gradient-to-b from-white via-white/95 to-gray-500 bg-clip-text text-transparent drop-shadow-[0_15px_30px_rgba(0,0,0,1)]">
+                    {prize.amount}
+                </span>
+            </div>
         </div>
 
-        {/* Footer Info */}
-        <div className="text-gucci-cream text-[9px] font-sans leading-relaxed opacity-80 mt-2 bg-black/20 px-2 py-1 rounded">
-            {t('validUntil')} <span className="text-gucci-gold font-bold">{expiryDateString}</span>
+        {/* CODE BOX (High Contrast for Visibility) */}
+        <div className="w-full flex flex-col items-center">
+            <div className="relative w-full max-w-[300px]">
+                {/* Overlapping Box Header */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 bg-[#050505] border border-gucci-gold/40 px-6 py-1 min-w-[180px]">
+                    <div className="text-[8px] text-gucci-gold uppercase font-black tracking-[0.4em]">
+                        {t('codeLabel')}
+                    </div>
+                </div>
+                
+                {/* Physical Card Area */}
+                <div className="bg-gucci-cream border-2 border-gucci-gold/50 pt-9 pb-7 px-4 shadow-[0_30px_60px_rgba(0,0,0,1)]">
+                    <span className="font-sans text-xl md:text-2xl tracking-[0.2em] font-black text-[#0a0a0a] block leading-relaxed">
+                        {code.replace(/-/g, ' - ')}
+                    </span>
+                </div>
+            </div>
+
+            {/* EXPIRY INFORMATION */}
+            <div className="mt-10 space-y-2">
+                <div className="text-gucci-gold/40 text-[9px] font-sans uppercase tracking-[0.6em] font-black">
+                    {t('validUntil')}
+                </div>
+                <div className="text-white/90 text-sm font-serif font-bold italic tracking-widest drop-shadow-lg">
+                    {expiryDateString}
+                </div>
+            </div>
         </div>
-        
       </div>
     </div>
   );
