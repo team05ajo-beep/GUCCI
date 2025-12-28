@@ -2,17 +2,17 @@
 import React, { useMemo } from 'react';
 import { PRIZES } from '../constants';
 
-const FULL_NAMES = [
-    'Agus Saputra', 'Siti Aminah', 'Budi Santoso', 'Dewi Lestari', 'Rian Hidayat',
-    'Lestari Wahyuni', 'Andi Pratama', 'Maya Kartika', 'Fajar Ramadhan', 'Putri Utami',
-    'Hendra Kurniawan', 'Sari Indah', 'Rudi Hermawan', 'Indah Permata', 'Agus Setiawan',
-    'Wulan Dari', 'Bambang Sudarsono', 'Ratna Sari', 'Eko Prasetyo', 'Anita Wijaya',
-    'Yusuf Mansyur', 'Rizky Aditya', 'Dian Sastro', 'Muhammad Arifin', 'Nur Hasanah',
-    'Slamet Riadi', 'Endang Sri', 'Wahyu Hidayat', 'Sri Mulyani', 'Joko Susilo',
-    'Arif Budiman', 'Fitri Handayani', 'Dani Irawan', 'Linda Permatasari', 'Surya Kencana',
-    'Mega Citra', 'Bagus Permadi', 'Citra Kirana', 'Dedi Mulyadi', 'Hana Pertiwi',
-    'Irfan Hakim', 'Lia Ananta', 'Prasetyo Utomo', 'Siska Amelia', 'Teguh Iman',
-    'Vera Wati', 'Yanto Subagio', 'Zul Hendra', 'Rina Marlina', 'Dedi Kusnandar'
+const COMMON_NAMES = [
+    'Bambang Wijaya', 'Siti Aminah', 'Joko Susilo', 'Sri Wahyuni', 'Ahmad Hidayat',
+    'Dewi Lestari', 'Budi Santoso', 'Lestari Putri', 'Andi Pratama', 'Maya Sari',
+    'Hendra Kurniawan', 'Sari Utami', 'Rudi Hermawan', 'Indah Permata', 'Agus Setiawan',
+    'Wulan Dari', 'Eko Prasetyo', 'Ratna Sari', 'Mulyono', 'Anita Wijaya',
+    'Yanto Subagyo', 'Rina Marlina', 'Dedi Kusnandar', 'Slamet Riyadi', 'Endang Sri',
+    'Wahyu Hidayat', 'Nur Hasanah', 'Arif Budiman', 'Fitri Handayani', 'Dani Irawan',
+    'Linda Permatasari', 'Surya Kencana', 'Mega Citra', 'Bagus Permadi', 'Dedi Mulyadi',
+    'Hana Pertiwi', 'Irfan Hakim', 'Lia Ananta', 'Prasetyo Utomo', 'Siska Amelia',
+    'Teguh Iman', 'Vera Wati', 'Zul Hendra', 'Rizky Aditya', 'Muhamad Arifin',
+    'Kartini', 'Supardi', 'Dwi Cahyo', 'Tri Utami', 'Puji Astuti'
 ];
 
 const INDONESIAN_PREFIXES = [
@@ -20,12 +20,13 @@ const INDONESIAN_PREFIXES = [
 ];
 
 const WinnerTicker: React.FC = () => {
-    // Generate 50 random winners data
+    // Generate exactly 50 random winners based on the list
     const winners = useMemo(() => {
-        // Create a copy and shuffle to ensure randomness
-        const shuffledNames = [...FULL_NAMES].sort(() => Math.random() - 0.5);
+        // Shuffle names to ensure random order every time
+        const shuffled = [...COMMON_NAMES].sort(() => Math.random() - 0.5);
         
-        return shuffledNames.map((name, i) => {
+        return shuffled.map((name, i) => {
+            // Pick a random prize for each winner
             const prize = PRIZES[Math.floor(Math.random() * PRIZES.length)];
             
             // Authentic Indonesian Provider Prefix
@@ -39,16 +40,23 @@ const WinnerTicker: React.FC = () => {
     }, []);
 
     return (
-        <div className="fixed bottom-0 left-0 w-full z-40 overflow-hidden bg-black/80 backdrop-blur-md border-t border-gucci-gold/20 py-2.5">
+        <div className="fixed bottom-0 left-0 w-full z-40 overflow-hidden bg-black backdrop-blur-md border-t border-gucci-gold/30 py-3">
+            {/* Top accent line */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gucci-gold to-transparent opacity-50"></div>
+            
             <div className="flex whitespace-nowrap animate-marquee">
                 {/* Double the list for seamless loop */}
                 {[...winners, ...winners].map((winner, index) => (
-                    <div key={index} className="flex items-center mx-8 group">
-                        <div className="w-1.5 h-1.5 bg-gucci-gold rotate-45 mr-4 shadow-[0_0_8px_rgba(212,175,55,0.8)]"></div>
-                        <span className="text-[10px] md:text-xs font-display font-bold text-gucci-gold uppercase tracking-[0.2em]">
-                            SELAMAT! <span className="text-white ml-2">{winner.name}</span> 
-                            <span className="text-white/40 font-sans mx-2">({winner.phone})</span> 
-                            BERHASIL MENDAPATKAN <span className="text-white italic ml-2">{winner.amount}</span>
+                    <div key={index} className="flex items-center mx-12 group">
+                        <div className="w-2 h-2 bg-gucci-gold rotate-45 mr-6 shadow-[0_0_10px_rgba(212,175,55,1)]"></div>
+                        <span className="text-[11px] md:text-[13px] font-display font-bold tracking-[0.2em] flex items-center">
+                            <span className="text-gucci-gold mr-3">SELAMAT!</span>
+                            <span className="text-white uppercase mr-2">{winner.name}</span>
+                            <span className="text-white/40 font-sans tracking-normal mr-6">({winner.phone})</span>
+                            <span className="text-gucci-gold/80 mr-3">BERHASIL MENDAPATKAN</span>
+                            <span className="text-white font-serif italic font-black text-sm md:text-lg tracking-wider drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]">
+                                {winner.amount}
+                            </span>
                         </span>
                     </div>
                 ))}
