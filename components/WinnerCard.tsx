@@ -35,41 +35,41 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
       <div className="absolute top-6 left-6 w-12 h-12 border-t border-l border-gucci-gold/50 pointer-events-none"></div>
       <div className="absolute bottom-6 right-6 w-12 h-12 border-b border-r border-gucci-gold/50 pointer-events-none"></div>
 
-      <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-10 px-5 md:py-16 md:px-10">
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-8 px-5 md:py-16 md:px-10">
         
         {/* HEADER BRANDING */}
-        <div className="w-full space-y-2 md:space-y-3">
-            <h1 className="text-gucci-gold text-3xl md:text-5xl font-display font-bold tracking-[0.45em] uppercase drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+        <div className="w-full space-y-1 md:space-y-3">
+            <h1 className="text-gucci-gold text-2xl md:text-5xl font-display font-bold tracking-[0.45em] uppercase drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
                 GUCCI
             </h1>
-            <div className="flex flex-col items-center gap-1.5">
-                <div className="w-2 h-2 bg-gucci-gold rotate-45 mb-1 shadow-[0_0_12px_rgba(212,175,55,0.6)]"></div>
-                <h2 className="text-white/90 text-[8px] md:text-[11px] font-sans font-black tracking-[0.6em] uppercase">
+            <div className="flex flex-col items-center gap-1">
+                <div className="w-1.5 h-1.5 bg-gucci-gold rotate-45 mb-1 shadow-[0_0_10px_rgba(212,175,55,0.6)]"></div>
+                <h2 className="text-white/90 text-[7px] md:text-[11px] font-sans font-black tracking-[0.6em] uppercase">
                     {t('officialWinner')}
                 </h2>
             </div>
         </div>
 
-        {/* PRIZE DISPLAY - IMPROVED SPACING & RESOLUTION */}
-        <div className="w-full flex flex-col items-center justify-center space-y-3 md:space-y-5">
+        {/* PRIZE DISPLAY - RESPONSIVE SCALING TO PREVENT OVERLAP */}
+        <div className="w-full flex flex-col items-center justify-center space-y-2 md:space-y-5">
             {user && (
-                <div className="text-gucci-gold text-xl md:text-4xl font-serif font-bold italic tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] px-2">
+                <div className="text-gucci-gold text-lg md:text-4xl font-serif font-bold italic tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] px-2">
                     {user.fullName}
                 </div>
             )}
             
-            <div className="text-white/60 text-[8px] md:text-[10px] font-serif uppercase tracking-[0.7em] italic font-bold">
+            <div className="text-white/60 text-[7px] md:text-[10px] font-serif uppercase tracking-[0.7em] italic font-bold">
                 SELAMAT TAHUN BARU
             </div>
             
-            <div className="flex flex-col items-center justify-center w-full space-y-1">
+            <div className="flex flex-col items-center justify-center w-full space-y-0.5 md:space-y-1">
                 {amountParts.currency && (
-                  <span className="text-white text-3xl md:text-5xl font-serif italic font-black drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] leading-none tracking-widest">
+                  <span className="text-white text-2xl md:text-5xl font-serif italic font-black drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] leading-none">
                     {amountParts.currency}
                   </span>
                 )}
-                <div className="w-full flex justify-center items-center px-4">
-                    <span className="text-white text-[42px] md:text-[82px] font-serif italic font-black leading-none tracking-normal whitespace-nowrap drop-shadow-[0_8px_20px_rgba(0,0,0,1)] bg-gradient-to-b from-white via-white to-[#d1d1d1] bg-clip-text text-transparent">
+                <div className="w-full flex justify-center items-center px-2 md:px-4">
+                    <span className="text-white text-[32px] sm:text-[38px] md:text-[82px] font-serif italic font-black leading-none tracking-normal whitespace-nowrap drop-shadow-[0_8px_20px_rgba(0,0,0,1)] bg-gradient-to-b from-white via-white to-[#d1d1d1] bg-clip-text text-transparent">
                         {amountParts.value}
                     </span>
                 </div>
@@ -78,28 +78,28 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
 
         {/* VOUCHER IDENTIFIER */}
         <div className="w-full flex flex-col items-center">
-            <div className="relative w-full max-w-[280px] md:max-w-[360px]">
-                {/* Badge Label */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 bg-black border border-gucci-gold/60 px-6 py-1.5 md:px-8 md:py-2 min-w-[160px] md:min-w-[200px] shadow-2xl">
-                    <div className="text-[7px] md:text-[10px] text-gucci-gold uppercase font-black tracking-[0.5em] text-center">
+            <div className="relative w-full max-w-[260px] md:max-w-[360px]">
+                {/* Badge Label - Reduced size and margin */}
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 bg-black border border-gucci-gold/60 px-4 py-1 md:px-8 md:py-2 min-w-[140px] md:min-w-[200px] shadow-2xl">
+                    <div className="text-[6px] md:text-[10px] text-gucci-gold uppercase font-black tracking-[0.4em] text-center">
                         {t('codeLabel')}
                     </div>
                 </div>
                 
                 {/* The Code Content */}
-                <div className="bg-[#fcfaf2] border-2 border-gucci-gold/40 pt-10 pb-7 md:pt-12 md:pb-9 px-4 md:px-6 shadow-[0_30px_70px_rgba(0,0,0,1)]">
-                    <span className="font-sans text-sm md:text-3xl tracking-[0.15em] font-black text-[#050505] block leading-tight break-words uppercase">
+                <div className="bg-[#fcfaf2] border-2 border-gucci-gold/40 pt-8 pb-6 md:pt-12 md:pb-9 px-3 md:px-6 shadow-[0_30px_70px_rgba(0,0,0,1)]">
+                    <span className="font-sans text-xs md:text-3xl tracking-[0.15em] font-black text-[#050505] block leading-tight break-words uppercase">
                         {code.replace(/-/g, ' ')}
                     </span>
                 </div>
             </div>
 
             {/* EXPIRY FOOTER */}
-            <div className="mt-8 md:mt-12 space-y-1 md:space-y-2">
-                <div className="text-white/50 text-[8px] md:text-[10px] font-sans uppercase tracking-[0.7em] font-black">
+            <div className="mt-6 md:mt-12 space-y-1 md:space-y-2">
+                <div className="text-white/50 text-[7px] md:text-[10px] font-sans uppercase tracking-[0.7em] font-black">
                     VALID UNTIL
                 </div>
-                <div className="text-white text-xs md:text-xl font-serif font-bold italic tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]">
+                <div className="text-white text-[10px] md:text-xl font-serif font-bold italic tracking-widest drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]">
                     {expiryDateString}
                 </div>
             </div>
