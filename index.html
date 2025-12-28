@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GUCCI Indonesia - New Year Celebration</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;800;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
@@ -44,22 +45,38 @@
         }
     </script>
     <style>
+        :root {
+            --app-height: 100%;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             background-color: #050505;
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://media.gucci.com/content/DiaryArticleDouble_Standard_1400x894/1671723004/DiaryArticleDouble_Gucci-CNY-Campaign-Dec2022-01_001_Default.jpg');
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://media.gucci.com/content/DiaryArticleDouble_Standard_1400x894/1671723004/DiaryArticleDouble_Gucci-CNY-Campaign-Dec2022-01_001_Default.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: white;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
         }
+
+        #root {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 2px; }
-        
-        .gold-glow {
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-        }
         
         .glass-panel {
             background: rgba(0, 0, 0, 0.7);
@@ -68,10 +85,17 @@
         }
 
         .custom-scrollbar::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #d4af37;
+        }
+
+        /* Fix for iOS viewport height */
+        @supports (-webkit-touch-callout: none) {
+            .min-h-screen {
+                min-height: -webkit-fill-available;
+            }
         }
     </style>
 <script type="importmap">
