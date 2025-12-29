@@ -22,7 +22,7 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
     <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center bg-[#050505] overflow-hidden border-[10px] md:border-[16px] border-double border-gucci-gold/30 shadow-inner select-none">
       
       {/* LUXURY BACKGROUND PATTERN */}
-      <div className="absolute inset-0 opacity-[0.1] pointer-events-none" 
+      <div className="absolute inset-0 opacity-[0.12] pointer-events-none" 
            style={{ 
              backgroundImage: `url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M25 0l25 25-25 25-25-25z' fill='none' stroke='%23d4af37' stroke-width='0.6'/%3E%3C/svg%3E")`,
              backgroundSize: '50px 50px'
@@ -50,7 +50,7 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
             </div>
         </div>
 
-        {/* PRIZE DISPLAY - RESPONSIVE SCALING TO PREVENT OVERLAP */}
+        {/* PRIZE DISPLAY - FIXED FOR DOWNLOAD COMPATIBILITY */}
         <div className="w-full flex flex-col items-center justify-center space-y-2 md:space-y-5">
             {user && (
                 <div className="text-gucci-gold text-lg md:text-4xl font-serif font-bold italic tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] px-2">
@@ -64,12 +64,13 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
             
             <div className="flex flex-col items-center justify-center w-full space-y-0.5 md:space-y-1">
                 {amountParts.currency && (
-                  <span className="text-white text-2xl md:text-5xl font-serif italic font-black drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] leading-none">
+                  <span className="text-white text-2xl md:text-5xl font-serif italic font-black drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] leading-none">
                     {amountParts.currency}
                   </span>
                 )}
                 <div className="w-full flex justify-center items-center px-2 md:px-4">
-                    <span className="text-white text-[32px] sm:text-[38px] md:text-[82px] font-serif italic font-black leading-none tracking-normal whitespace-nowrap drop-shadow-[0_8px_20px_rgba(0,0,0,1)] bg-gradient-to-b from-white via-white to-[#d1d1d1] bg-clip-text text-transparent">
+                    {/* Using text-white instead of text-transparent for canvas compatibility */}
+                    <span className="text-white text-[34px] sm:text-[40px] md:text-[84px] font-serif italic font-black leading-none tracking-normal whitespace-nowrap drop-shadow-[0_10px_25px_rgba(0,0,0,1)]">
                         {amountParts.value}
                     </span>
                 </div>
@@ -79,7 +80,7 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
         {/* VOUCHER IDENTIFIER */}
         <div className="w-full flex flex-col items-center">
             <div className="relative w-full max-w-[260px] md:max-w-[360px]">
-                {/* Badge Label - Reduced size and margin */}
+                {/* Badge Label */}
                 <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-20 bg-black border border-gucci-gold/60 px-4 py-1 md:px-8 md:py-2 min-w-[140px] md:min-w-[200px] shadow-2xl">
                     <div className="text-[6px] md:text-[10px] text-gucci-gold uppercase font-black tracking-[0.4em] text-center">
                         {t('codeLabel')}

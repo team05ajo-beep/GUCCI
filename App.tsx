@@ -70,7 +70,7 @@ const App: React.FC = () => {
     };
     
     updateSize();
-    const timer = setTimeout(updateSize, 150); // Slightly longer delay for mobile rotation
+    const timer = setTimeout(updateSize, 200); 
     const observer = new ResizeObserver(updateSize);
     if (containerRef.current) observer.observe(containerRef.current);
     window.addEventListener('resize', updateSize);
@@ -100,19 +100,24 @@ const App: React.FC = () => {
     if (!ticketRef.current || isSaving) return;
     setIsSaving(true);
     try {
+        // Higher quality capture settings
         const canvas = await html2canvas(ticketRef.current, {
             backgroundColor: '#0a0a0a',
-            scale: 3,
+            scale: 4, // Higher scale for ultra-sharp result
             useCORS: true,
             allowTaint: true,
             logging: false,
-            windowWidth: 420,
-            windowHeight: 560
+            imageTimeout: 0,
+            onclone: (clonedDoc) => {
+                // Ensure the cloned element is fully opaque and styled correctly for capture
+                const clonedEl = clonedDoc.querySelector('[ref="ticketRef"]') as HTMLElement;
+                if (clonedEl) clonedEl.style.opacity = '1';
+            }
         });
-        const image = canvas.toDataURL("image/png");
+        const image = canvas.toDataURL("image/png", 1.0);
         const link = document.createElement('a');
         link.href = image;
-        link.download = `Gucci-Ticket-2026.png`;
+        link.download = `Gucci-Reward-2026.png`;
         link.click();
     } catch (error) {
         console.error("Download failed", error);
@@ -134,7 +139,7 @@ const App: React.FC = () => {
               </div>
               
               <div className="flex flex-col items-center text-center">
-                  <h1 className="text-xl md:text-4xl font-display font-bold tracking-[0.45em] text-gucci-gold drop-shadow-lg">GUCCI</h1>
+                  <h1 className="text-xl md:text-4xl font-display font-bold tracking-[0.45em] text-gucci-gold drop-shadow-lg text-center">GUCCI</h1>
                   <span className="text-[6px] md:text-[9px] font-black tracking-[0.5em] text-white/40 uppercase mt-1">NEW YEAR CELEBRATION</span>
               </div>
 
@@ -196,7 +201,7 @@ const App: React.FC = () => {
                   )}
               </div>
 
-              {/* Card Container - Optimized Sizing */}
+              {/* Card Container */}
               <div className="w-full max-w-[360px] md:max-w-[440px] animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                   <div className="relative aspect-[3/4] w-full bg-[#080808] shadow-[0_40px_100px_rgba(0,0,0,1)] p-2 md:p-3 border border-white/10">
                       {!user ? (
@@ -253,9 +258,9 @@ const App: React.FC = () => {
                      <button 
                         onClick={handleDownloadTicket} 
                         disabled={isSaving} 
-                        className="w-full flex items-center justify-center gap-4 bg-gucci-gold text-black py-5 md:py-6 font-black text-[10px] md:text-[12px] uppercase tracking-[0.5em] hover:bg-white transition-all shadow-xl active:scale-95"
+                        className="w-full flex items-center justify-center gap-4 bg-gucci-gold text-black py-5 md:py-6 font-black text-[10px] md:text-[12px] uppercase tracking-[0.5em] hover:bg-white transition-all shadow-xl active:scale-95 disabled:opacity-70 disabled:cursor-wait"
                      >
-                        {isSaving ? "PREPARING..." : <><Download className="w-5 h-5" /> {t('screenshotInstruction')}</>}
+                        {isSaving ? "GENERATING..." : <><Download className="w-5 h-5" /> {t('screenshotInstruction')}</>}
                      </button>
                      <p className="text-[9px] text-white/30 text-center uppercase tracking-[0.4em] font-medium">
                         Berlaku di Butik Gucci Indonesia.
