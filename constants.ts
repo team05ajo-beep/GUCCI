@@ -21,17 +21,6 @@ export const PRIZES: Prize[] = [
     { id: 'v-1250', amount: 'Rp 1.250.000', isGrandPrize: false, category: 'voucher' },
     { id: 'v-1100', amount: 'Rp 1.100.000', isGrandPrize: false, category: 'voucher' },
     { id: 'v-1000', amount: 'Rp 1.000.000', isGrandPrize: false, category: 'voucher' },
-
-    // 🎁 Tier 3: Standard Prizes (250rb - 950rb)
-    { id: 'v-950', amount: 'Rp 950.000', isGrandPrize: false, category: 'voucher' },
-    { id: 'v-850', amount: 'Rp 850.000', isGrandPrize: false, category: 'voucher' },
-    { id: 'v-750', amount: 'Rp 750.000', isGrandPrize: false, category: 'voucher' },
-    { id: 'v-600', amount: 'Rp 600.000', isGrandPrize: false, category: 'voucher' },
-    { id: 'v-500', amount: 'Rp 500.000', isGrandPrize: false, category: 'voucher' },
-    { id: 'v-450', amount: 'Rp 450.000', isGrandPrize: false, category: 'voucher' },
-    { id: 'v-350', amount: 'Rp 350.000', isGrandPrize: false, category: 'voucher' },
-    { id: 'v-300', amount: 'Rp 300.000', isGrandPrize: false, category: 'voucher' },
-    { id: 'v-250', amount: 'Rp 250.000', isGrandPrize: false, category: 'voucher' },
 ];
 
 export const SCRATCH_THRESHOLD = 15; // Lowered from 20 for smoother UX
