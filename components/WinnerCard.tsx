@@ -27,99 +27,92 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
   }, [prize.amount]);
 
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 overflow-hidden select-none box-border">
+    <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-between p-[6%] overflow-hidden select-none box-border">
       
-      {/* BACKGROUND */}
+      {/* BACKGROUND & PATTERN */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#8A6E2F] to-[#0a0a0a] shadow-2xl"></div>
-      
-      {/* PATTERN */}
-      <div className="absolute inset-0 opacity-[0.15]" 
+      <div className="absolute inset-0 opacity-[0.12]" 
            style={{ 
              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30-30-30z' fill='none' stroke='%23fff' stroke-width='0.5'/%3E%3C/svg%3E")`,
-             backgroundSize: '30px 30px'
+             backgroundSize: '25px 25px'
            }}>
       </div>
 
-      {/* BORDERS */}
-      <div className="absolute inset-[3%] border border-white/30 pointer-events-none"></div>
+      {/* TICKET BORDER FRAME */}
+      <div className="absolute inset-[3%] border border-white/20 pointer-events-none"></div>
       <div className="absolute inset-[4.5%] border-2 border-white/10 pointer-events-none"></div>
 
-      {/* MAIN LAYOUT */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center justify-between text-white py-[5%] px-[4%] box-border">
-        
-        {/* HEADER */}
-        <div className="w-full flex flex-col items-center flex-shrink-0">
-            <h1 className="text-[min(5vh,35px)] md:text-[min(6vh,45px)] font-display font-black tracking-[0.5em] leading-none ml-[0.5em] text-center">
-                GUCCI
-            </h1>
-            <div className="w-[15%] h-[1px] bg-white/40 my-2"></div>
-            <p className="text-[min(1.2vh,10px)] font-sans font-black tracking-[0.4em] uppercase opacity-80 text-center px-2">
-                PLATINUM SYNERGY RECOGNITION
-            </p>
-        </div>
-
-        {/* REWARD - Centered Body */}
-        <div className="w-full flex flex-col items-center justify-center flex-grow py-2 min-h-0">
-            <p className="text-[min(1.5vh,12px)] font-sans font-bold uppercase tracking-[0.3em] opacity-80 mb-2 text-center">
-                SELAMAT! ANDA MENDAPATKAN
-            </p>
-            
-            {user && (
-                <div className="w-[90%] border-b border-white/20 mb-3 text-center truncate">
-                    <span className="text-[min(2.5vh,24px)] md:text-[min(3.5vh,32px)] font-serif font-black italic tracking-tight block">
-                        {user.fullName}
-                    </span>
-                </div>
-            )}
-
-            <div className="bg-white/5 backdrop-blur-xl px-4 py-4 md:px-8 md:py-6 border border-white/20 rounded-sm shadow-2xl flex flex-col items-center justify-center w-full max-w-[95%]">
-                <div className="flex flex-col items-center leading-tight">
-                    <span className="text-[min(3vh,18px)] font-serif font-black italic opacity-90">Rp</span>
-                    <span className="text-[min(6vh,50px)] md:text-[min(9vh,75px)] font-serif font-black tracking-tighter block leading-none">
-                        {amountDisplay.replace('Rp ', '')}
-                    </span>
-                </div>
-                <div className="h-[1px] w-8 bg-white/20 my-2"></div>
-                <span className="text-[min(1vh,9px)] font-sans font-black tracking-[0.4em] uppercase opacity-60 text-center">
-                    EXCLUSIVE REWARD
-                </span>
-            </div>
-        </div>
-
-        {/* FOOTER / CODE */}
-        <div className="w-full flex flex-col items-center flex-shrink-0 space-y-4">
-            <div className="relative w-full max-w-[85%]">
-                <div className="absolute -top-[1.2vh] left-1/2 -translate-x-1/2 bg-white px-3 py-1 shadow-lg z-20 whitespace-nowrap">
-                    <span className="text-[min(0.9vh,9px)] text-black font-black tracking-[0.4em] uppercase leading-none block">
-                        KODE APRESIASI
-                    </span>
-                </div>
-                <div className="bg-transparent border-2 border-white/40 pt-5 pb-4 px-2 shadow-xl backdrop-blur-sm">
-                    <span className="font-sans text-[min(2vh,18px)] md:text-[min(3vh,24px)] font-black tracking-[0.2em] text-white block text-center break-words leading-none">
-                        {code.replace(/-/g, ' ')}
-                    </span>
-                </div>
-            </div>
-
-            <div className="flex flex-col items-center gap-1 w-full pb-2">
-                <div className="flex items-center gap-2 w-full justify-center opacity-60">
-                    <div className="h-[1px] w-4 bg-white"></div>
-                    <p className="text-[min(0.9vh,9px)] font-sans font-black uppercase tracking-[0.4em]">BERLAKU 1X24 JAM</p>
-                    <div className="h-[1px] w-4 bg-white"></div>
-                </div>
-                <p className="text-[min(1.4vh,14px)] md:text-[min(2vh,18px)] font-serif font-black italic text-center leading-none">
-                    {expiryDetails.full} @ {expiryDetails.time} WIB
-                </p>
-            </div>
-        </div>
-
+      {/* 1. HEADER SECTION (Capped size) */}
+      <div className="relative z-10 w-full flex flex-col items-center pt-[5%] flex-shrink-0">
+          <h1 className="text-[min(4.5vh,30px)] md:text-[min(6vh,45px)] font-display font-black tracking-[0.4em] text-white leading-none ml-[0.4em]">
+              GUCCI
+          </h1>
+          <div className="w-[12%] h-[1px] bg-white/40 my-2"></div>
+          <p className="text-[min(1vh,8px)] md:text-[min(1.2vh,10px)] font-sans font-black tracking-[0.3em] uppercase text-white/80 text-center">
+              PLATINUM SYNERGY RECOGNITION
+          </p>
       </div>
 
-      {/* DECORATIVE CORNERS */}
-      <div className="absolute top-[3%] left-[3%] w-[4vh] h-[4vh] border-t-2 border-l-2 border-white/60"></div>
-      <div className="absolute top-[3%] right-[3%] w-[4vh] h-[4vh] border-t-2 border-r-2 border-white/60"></div>
-      <div className="absolute bottom-[3%] left-[3%] w-[4vh] h-[4vh] border-b-2 border-l-2 border-white/60"></div>
-      <div className="absolute bottom-[3%] right-[3%] w-[4vh] h-[4vh] border-b-2 border-r-2 border-white/60"></div>
+      {/* 2. REWARD BODY (Flexible container to avoid overlap) */}
+      <div className="relative z-10 w-full flex flex-col items-center justify-center flex-grow py-2 min-h-0">
+          <p className="text-[min(1.3vh,10px)] md:text-[min(1.5vh,12px)] font-sans font-bold uppercase tracking-[0.2em] text-white/70 mb-1">
+              SELAMAT! ANDA MENDAPATKAN
+          </p>
+          
+          {user && (
+              <div className="w-[85%] border-b border-white/10 mb-2 md:mb-4 text-center truncate">
+                  <span className="text-[min(2.5vh,20px)] md:text-[min(3.5vh,32px)] font-serif font-black italic tracking-tight text-white block">
+                      {user.fullName}
+                  </span>
+              </div>
+          )}
+
+          <div className="bg-white/5 backdrop-blur-xl px-4 py-4 md:px-8 md:py-6 border border-white/20 rounded-sm shadow-2xl flex flex-col items-center justify-center w-full max-w-[90%]">
+              <div className="flex flex-col items-center leading-none">
+                  <span className="text-[min(2.5vh,16px)] font-serif font-black italic text-white/80">Rp</span>
+                  <span className="text-[min(5.5vh,45px)] md:text-[min(8.5vh,70px)] font-serif font-black tracking-tighter text-white drop-shadow-lg">
+                      {amountDisplay.replace('Rp ', '')}
+                  </span>
+              </div>
+              <div className="h-[1px] w-6 bg-white/20 my-1 md:my-2"></div>
+              <span className="text-[min(0.8vh,8px)] font-sans font-black tracking-[0.3em] uppercase opacity-50 text-center">
+                  EXCLUSIVE REWARD
+              </span>
+          </div>
+      </div>
+
+      {/* 3. CODE & FOOTER SECTION (Fixed at bottom) */}
+      <div className="relative z-10 w-full flex flex-col items-center space-y-4 pb-[5%] flex-shrink-0">
+          <div className="relative w-full max-w-[80%]">
+              <div className="absolute -top-[1.1vh] left-1/2 -translate-x-1/2 bg-white px-3 py-0.5 shadow-lg z-20">
+                  <span className="text-[min(0.8vh,8px)] text-black font-black tracking-[0.3em] uppercase whitespace-nowrap">
+                      KODE APRESIASI
+                  </span>
+              </div>
+              <div className="bg-transparent border border-white/30 pt-4 pb-3 px-2 shadow-xl backdrop-blur-sm">
+                  <span className="font-sans text-[min(1.8vh,16px)] md:text-[min(2.8vh,24px)] font-black tracking-[0.2em] text-white block text-center leading-none">
+                      {code.replace(/-/g, ' ')}
+                  </span>
+              </div>
+          </div>
+
+          <div className="flex flex-col items-center gap-1 w-full">
+              <div className="flex items-center gap-2 w-full justify-center opacity-40">
+                  <div className="h-[1px] w-4 bg-white"></div>
+                  <p className="text-[min(0.8vh,8px)] font-sans font-black uppercase tracking-[0.3em]">BERLAKU 1X24 JAM</p>
+                  <div className="h-[1px] w-4 bg-white"></div>
+              </div>
+              <p className="text-[min(1.2vh,12px)] md:text-[min(2vh,18px)] font-serif font-black italic text-white text-center">
+                  {expiryDetails.full} @ {expiryDetails.time} WIB
+              </p>
+          </div>
+      </div>
+
+      {/* CORNER ACCENTS */}
+      <div className="absolute top-[4%] left-[4%] w-[3vh] h-[3vh] border-t-2 border-l-2 border-white/50"></div>
+      <div className="absolute top-[4%] right-[4%] w-[3vh] h-[3vh] border-t-2 border-r-2 border-white/50"></div>
+      <div className="absolute bottom-[4%] left-[4%] w-[3vh] h-[3vh] border-b-2 border-l-2 border-white/50"></div>
+      <div className="absolute bottom-[4%] right-[4%] w-[3vh] h-[3vh] border-b-2 border-r-2 border-white/50"></div>
     </div>
   );
 };
