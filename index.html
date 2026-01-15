@@ -3,22 +3,22 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GUCCI Indonesia - New Year Celebration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>GUCCI Indonesia - Platinum Synergy 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;800;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;600;800;900&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         gucci: {
-                            green: '#163f28',
-                            darkGreen: '#0f2b1b',
-                            red: '#c51f28',
-                            gold: '#d4af37',
-                            cream: '#f7f4e9',
-                            black: '#000000',
+                            silver: '#C0C0C0',
+                            platinum: '#E5E4E2',
+                            gold: '#D4AF37',
+                            richGold: '#BF953F',
+                            darkGold: '#8A6E2F',
+                            black: '#0A0A0A',
                         }
                     },
                     fontFamily: {
@@ -28,16 +28,21 @@
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'marquee': 'marquee 25s linear infinite',
+                        'marquee': 'marquee 30s linear infinite',
+                        'shine': 'shine 3s infinite',
                     },
                     keyframes: {
                         fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(15px) scale(0.98)' },
-                            '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
                         marquee: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
+                        },
+                        shine: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' },
                         }
                     }
                 }
@@ -46,7 +51,7 @@
     </script>
     <style>
         :root {
-            --app-height: 100%;
+          --app-height: 100%;
         }
         
         html, body {
@@ -55,62 +60,60 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: #050505;
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://media.gucci.com/content/DiaryArticleDouble_Standard_1400x894/1671723004/DiaryArticleDouble_Gucci-CNY-Campaign-Dec2022-01_001_Default.jpg');
+            background-color: #0A0A0A;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+                url('https://media.gucci.com/dynamic/b3c8/Hs6N6vSSego0HdQDD987dYdxWhXfLuMFEdqdh5l5nhLJr3wlGFz0_sHXzN8GNP2C0yFl0azwLwbXAthrrZTmn49ysN7VRz35+_ES+Mm15C0vBdN3E9DRxANNxuVXn145a7755qc_e14kCU2LFb1qKHuFl_Ni+bMzaBvy6XT7JKbcWZvrNtJnoxKAVR3KQuKPaMAg7roOywYPn6nHHBPVPH2fxaWEgeh5RVUpxW50kbk6Dw89VyF4n5XramBDverJhd_njEUJdjZX+AsvLGAMOuPB5oS025OodqVQcR_sxeIGTIpJRUI2ECtOqtrDJY5Txx456gQd7EtCN2tsJY6kAK8e8HMIPA7nsI4bpx_e64s=/HP_Hero-FullBleed-Desktop_Gucci-SS26-NOV25-250917-19-051-C-V2_001_Default.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: white;
-            font-family: 'Inter', sans-serif;
         }
 
-        #root {
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
+        .metallic-grad {
+            background: linear-gradient(135deg, #A9A9A9 0%, #C0C0C0 25%, #D4AF37 50%, #C0C0C0 75%, #A9A9A9 100%);
+            background-size: 200% auto;
         }
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 2px; }
-        
-        .glass-panel {
-            background: rgba(0, 0, 0, 0.7);
+        .glass-dark {
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 3px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #d4af37;
-        }
-
-        /* Fix for iOS viewport height */
-        @supports (-webkit-touch-callout: none) {
-            .min-h-screen {
-                min-height: -webkit-fill-available;
+        /* Fluid Typography and Scaling */
+        @media (max-width: 640px) {
+            .card-container {
+                width: 90vw;
+                height: 120vw;
             }
+        }
+        
+        /* Smooth scrolling */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
         }
     </style>
 <script type="importmap">
 {
   "imports": {
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.0/client",
-    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
-    "react/jsx-runtime": "https://aistudiocdn.com/react@^19.2.0/jsx-runtime",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "vite": "https://aistudiocdn.com/vite@^7.2.4",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1"
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "html2canvas": "https://esm.sh/html2canvas@^1.4.1"
   }
 }
 </script>

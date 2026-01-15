@@ -1,5 +1,5 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { ScratchCardProps } from '../types';
 
 const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, onReveal, className }) => {
@@ -8,6 +8,7 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
   const lastPosition = useRef<{ x: number, y: number } | null>(null);
   const strokeCount = useRef(0);
   const hasMovedInStroke = useRef(false);
+  const [glowPos, setGlowPos] = useState({ x: -100, y: -100 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -22,10 +23,10 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
     ctx.fillStyle = '#050505';
     ctx.fillRect(0, 0, width, height);
 
-    // 2. Subtle Diamond Watermark Pattern
+    // 2. Subtle Diamond Watermark Pattern (Silver)
     ctx.save();
-    ctx.globalAlpha = 0.04;
-    ctx.strokeStyle = '#d4af37';
+    ctx.globalAlpha = 0.06;
+    ctx.strokeStyle = '#C0C0C0';
     const patternSize = 40;
     for (let x = 0; x < width + patternSize; x += patternSize) {
       for (let y = 0; y < height + patternSize; y += patternSize) {
@@ -40,9 +41,9 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
     }
     ctx.restore();
 
-    // 3. Gold Accented Borders
+    // 3. Silver Accented Borders
     const margin = 20;
-    ctx.strokeStyle = '#d4af37';
+    ctx.strokeStyle = '#E8E8E8';
     ctx.lineWidth = 1.5;
     ctx.strokeRect(margin, margin, width - margin * 2, height - margin * 2);
     ctx.lineWidth = 0.5;
@@ -50,7 +51,7 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
 
     // 4. Central Text Styling
     ctx.textAlign = 'center';
-    ctx.fillStyle = '#d4af37';
+    ctx.fillStyle = '#E8E8E8';
     
     ctx.font = 'bold 32px "Cinzel", serif';
     ctx.letterSpacing = '6px';
@@ -58,28 +59,28 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
     
     ctx.font = 'bold 12px "Inter", sans-serif';
     ctx.letterSpacing = '3px';
-    ctx.fillText('THE GOLDEN SCRATCH 2026', width / 2, height * 0.35);
+    ctx.fillText('PARTNER SYNERGY 2026', width / 2, height * 0.35);
 
-    // 5. Foil Scratch Box
+    // 5. Silver Foil Scratch Box
     const boxW = width * 0.75;
     const boxH = height * 0.35;
     const boxX = (width - boxW) / 2;
     const boxY = (height - boxH) / 2 + 30;
 
     const foilGrad = ctx.createLinearGradient(boxX, boxY, boxX + boxW, boxY + boxH);
-    foilGrad.addColorStop(0, '#8B6B23');
-    foilGrad.addColorStop(0.3, '#D4AF37');
-    foilGrad.addColorStop(0.5, '#FBF0D5');
-    foilGrad.addColorStop(0.7, '#D4AF37');
-    foilGrad.addColorStop(1, '#8B6B23');
+    foilGrad.addColorStop(0, '#707070');
+    foilGrad.addColorStop(0.3, '#C0C0C0');
+    foilGrad.addColorStop(0.5, '#F5F5F5');
+    foilGrad.addColorStop(0.7, '#C0C0C0');
+    foilGrad.addColorStop(1, '#707070');
     
     ctx.fillStyle = foilGrad;
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = 'rgba(212, 175, 55, 0.3)';
+    ctx.shadowBlur = 20;
+    ctx.shadowColor = 'rgba(255, 255, 255, 0.2)';
     ctx.fillRect(boxX, boxY, boxW, boxH);
     ctx.shadowBlur = 0;
     
-    ctx.strokeStyle = '#d4af37';
+    ctx.strokeStyle = '#E8E8E8';
     ctx.lineWidth = 1;
     ctx.strokeRect(boxX, boxY, boxW, boxH);
 
@@ -103,7 +104,9 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     isDrawing.current = true;
     hasMovedInStroke.current = false;
-    lastPosition.current = getPosition(e);
+    const pos = getPosition(e);
+    lastPosition.current = pos;
+    setGlowPos(pos);
   };
 
   const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
@@ -114,11 +117,11 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    setGlowPos(currentPos);
     hasMovedInStroke.current = true;
     ctx.globalCompositeOperation = 'destination-out';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
-    // Dynamically sized brush based on screen size
     ctx.lineWidth = Math.min(width, height) * 0.25; 
 
     ctx.beginPath();
@@ -132,19 +135,27 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
   const handleEnd = () => {
     if (isDrawing.current && hasMovedInStroke.current) {
         strokeCount.current += 1;
-        // Faster reveal for better UX on mobile
         if (strokeCount.current >= 4) {
             onReveal();
         }
     }
     isDrawing.current = false;
     lastPosition.current = null;
+    setGlowPos({ x: -200, y: -200 });
   };
 
   if (isRevealed) return null;
 
   return (
-    <div className={`absolute inset-0 z-20 select-none ${className}`}>
+    <div className={`absolute inset-0 z-20 select-none overflow-hidden ${className}`}>
+        <div 
+            className="absolute pointer-events-none w-40 h-40 rounded-full blur-[60px] opacity-30 mix-blend-screen transition-opacity duration-300 z-30 bg-white"
+            style={{ 
+                left: glowPos.x - 80, 
+                top: glowPos.y - 80,
+                display: isDrawing.current ? 'block' : 'none'
+            }}
+        />
         <canvas
             ref={canvasRef}
             onMouseDown={handleStart}

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { LoginFormProps } from '../types';
 import { useLanguage } from '../LanguageContext';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Lock } from 'lucide-react';
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const { t } = useLanguage();
@@ -14,75 +14,83 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !phoneNumber.trim() || !password.trim()) {
-      setError('Required');
+      setError('Harap lengkapi semua data');
       return;
     }
     onLogin({ fullName, phoneNumber, password });
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-center animate-fade-in p-6 md:p-8">
-      <div className="text-center mb-8">
-          <h3 className="text-lg md:text-xl font-display font-black text-gucci-gold mb-2 uppercase tracking-[0.3em]">
+    <div className="w-full h-full flex flex-col justify-center p-8 md:p-12 glass-panel shadow-2xl relative overflow-hidden">
+      
+      {/* DECORATIVE LOCK */}
+      <div className="absolute top-0 right-0 p-8 opacity-5">
+        <Lock className="w-24 h-24 text-white" />
+      </div>
+
+      <div className="text-center mb-12">
+          <h3 className="text-2xl md:text-3xl font-display font-black text-white mb-3 uppercase tracking-[0.4em]">
               {t('loginTitle')}
           </h3>
-          <p className="text-[8px] md:text-[9px] text-white/40 font-sans uppercase tracking-[0.3em] font-medium leading-relaxed">
+          <p className="text-[9px] md:text-[11px] text-white/50 font-sans uppercase tracking-[0.4em] font-black leading-relaxed">
               {t('loginSubtitle')}
           </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
-          <div className="space-y-1 text-left">
-              <label className="text-[8px] font-black uppercase tracking-[0.3em] text-gucci-gold/50 block">
+      <form onSubmit={handleSubmit} className="space-y-8 md:space-y-10">
+          <div className="space-y-3">
+              <label className="text-[10px] font-black uppercase tracking-[0.5em] text-gucci-silver/80 block">
                   {t('fullName')}
               </label>
               <input 
                   type="text" 
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white focus:outline-none focus:border-gucci-gold transition-all placeholder-white/5 rounded-none"
-                  placeholder="Enter Name"
+                  className="w-full bg-transparent border-b border-white/20 py-3 text-base md:text-lg text-white focus:outline-none focus:border-gucci-silver transition-all placeholder-white/5 rounded-none"
+                  placeholder="EX: BAMBANG WIJAYA"
               />
           </div>
 
-          <div className="space-y-1 text-left">
-              <label className="text-[8px] font-black uppercase tracking-[0.3em] text-gucci-gold/50 block">
+          <div className="space-y-3">
+              <label className="text-[10px] font-black uppercase tracking-[0.5em] text-gucci-silver/80 block">
                   {t('phoneNumber')}
               </label>
               <input 
                   type="tel" 
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  className="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white focus:outline-none focus:border-gucci-gold transition-all placeholder-white/5 rounded-none"
-                  placeholder="+62"
+                  className="w-full bg-transparent border-b border-white/20 py-3 text-base md:text-lg text-white focus:outline-none focus:border-gucci-silver transition-all placeholder-white/5 rounded-none"
+                  placeholder="+62 812 XXXX"
               />
           </div>
 
-          <div className="space-y-1 text-left">
-              <label className="text-[8px] font-black uppercase tracking-[0.3em] text-gucci-gold/50 block">
+          <div className="space-y-3">
+              <label className="text-[10px] font-black uppercase tracking-[0.5em] text-gucci-silver/80 block">
                   {t('password')}
               </label>
               <input 
                   type="password" 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white focus:outline-none focus:border-gucci-gold transition-all placeholder-white/5 rounded-none"
-                  placeholder="••••"
+                  className="w-full bg-transparent border-b border-white/20 py-3 text-base md:text-lg text-white focus:outline-none focus:border-gucci-silver transition-all placeholder-white/5 rounded-none"
+                  placeholder="••••••••"
               />
           </div>
 
           {error && (
-              <div className="text-red-500 text-[8px] text-center font-black uppercase tracking-widest">{error}</div>
+              <div className="text-red-500 text-[10px] text-center font-black uppercase tracking-widest bg-red-500/5 py-3 border border-red-500/20">
+                {error}
+              </div>
           )}
 
           <button 
               type="submit" 
-              className="w-full bg-gucci-gold text-black py-4 mt-2 flex items-center justify-center gap-3 group hover:bg-white transition-all shadow-xl active:scale-[0.98]"
+              className="group relative w-full bg-gradient-to-r from-gucci-chrome via-gucci-platinum to-gucci-chrome text-black py-5 md:py-6 mt-6 flex items-center justify-center gap-4 transition-all hover:brightness-110 active:scale-95 shadow-xl border border-white/10"
           >
-              <span className="text-[9px] font-black uppercase tracking-[0.3em]">
+              <span className="text-[11px] font-black uppercase tracking-[0.5em]">
                   {t('startJourney')}
               </span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
           </button>
       </form>
     </div>
