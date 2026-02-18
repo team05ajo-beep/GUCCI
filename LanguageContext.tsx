@@ -1,8 +1,7 @@
 
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-export type Language = 
-  | 'id' | 'en' | 'zh' | 'it' | 'fr' | 'ja' | 'ko' | 'ar' | 'es';
+export type Language = 'id' | 'en' | 'zh' | 'it';
 
 interface LanguageContextType {
   language: Language;
@@ -20,44 +19,35 @@ const availableLanguages: { code: Language; label: string }[] = [
 
 const translations: Record<Language, Record<string, string>> = {
   id: {
-    loginTitle: "AKSES ANGGOTA AKTIF",
-    loginSubtitle: "Masuk untuk menerima apresiasi platinum Anda.",
+    loginTitle: "RAMADAN BERKAH ACCESS",
+    loginSubtitle: "Masuk untuk menerima apresiasi Ramadan eksklusif Anda.",
     fullName: "Nama Lengkap",
     phoneNumber: "Nomor HP",
     password: "Kode Akses",
-    startJourney: "KLAIM APRESIASI",
-    claimReward: "UNDUH E-VOUCHER",
-    officialWinner: "PENERIMA APRESIASI",
+    startJourney: "TERIMA BERKAH",
+    claimReward: "UNDUH E-VOUCHER RAMADAN",
     screenshotInstruction: "SIMPAN E-TICKET",
-    welcomeText: "Terima kasih telah menjadi bagian dari anggota yang aktif berkontribusi. Sebagai bentuk apresiasi nyata, Gucci menghadirkan Platinum Synergy 2026. Klaim hadiah eksklusif Anda sekarang.",
-    codeLabel: "KODE APRESIASI PLATINUM",
-    validUntil: "MASA BERLAKU",
-    thankYouBadge: "APRESIASI ANGGOTA AKTIF 2026",
-    redeemable: "Berlaku di Butik Gucci Terpilih",
-    congratsTitle: "SELAMAT! ANDA BERHASIL",
-    congratsSubtitle: "HADIAH EKSKLUSIF ANGGOTA",
+    welcomeText: "Selamat menjalankan ibadah di bulan suci. Sebagai bentuk syukur, Gucci menghadirkan Ramadan Kareem Recognition 2026. Klaim berkah eksklusif Anda sebagai mitra platinum kami.",
+    thankYouBadge: "RAMADAN KAREEM 2026",
+    codeLabel: "KODE APRESIASI RAMADAN",
+    officialWinner: "PENERIMA BERKAH",
   },
   en: {
-    loginTitle: "ACTIVE MEMBER ACCESS",
-    loginSubtitle: "Sign in to receive your platinum appreciation.",
+    loginTitle: "RAMADAN BLESSED ACCESS",
+    loginSubtitle: "Sign in to receive your exclusive Ramadan appreciation.",
     fullName: "Full Name",
     phoneNumber: "Phone Number",
     password: "Access Code",
-    startJourney: "CLAIM RECOGNITION",
-    claimReward: "DOWNLOAD E-VOUCHER",
-    officialWinner: "RECIPIENT",
+    startJourney: "RECEIVE BLESSING",
+    claimReward: "DOWNLOAD RAMADAN E-VOUCHER",
     screenshotInstruction: "SAVE E-TICKET",
-    welcomeText: "Thank you for being an active contributor. As a sincere token of appreciation, Gucci presents Platinum Synergy 2026. Claim your exclusive rewards now.",
-    codeLabel: "PLATINUM APPRECIATION CODE",
-    validUntil: "VALIDITY PERIOD",
-    thankYouBadge: "2026 MEMBER RECOGNITION",
-    redeemable: "Redeemable at Selected Gucci Boutiques",
-    congratsTitle: "CONGRATS! YOU WON",
-    congratsSubtitle: "EXCLUSIVE MEMBER REWARD",
+    welcomeText: "Wishing you a blessed holy month. As a token of gratitude, Gucci presents Ramadan Kareem Recognition 2026. Claim your exclusive blessings as our platinum partner.",
+    thankYouBadge: "RAMADAN KAREEM 2026",
+    codeLabel: "RAMADAN APPRECIATION CODE",
+    officialWinner: "BLESSED RECIPIENT",
   },
-  zh: { loginTitle: "会员访问", loginSubtitle: "登录以获取您的白金奖励。", fullName: "全名", phoneNumber: "电话", password: "访问码", startJourney: "领取奖励", claimReward: "下载电子凭证", officialWinner: "获表彰者", screenshotInstruction: "保存电子票", welcomeText: "感谢您作为活跃成员的贡献。Gucci 推出 2026 白金协同计划。立即领取您的专属奖励。", codeLabel: "白金感谢码", validUntil: "有效期", thankYouBadge: "2026 会员表彰", redeemable: "可在指定精品店兑换", congratsTitle: "恭喜！您获得了", congratsSubtitle: "会员专属奖励" },
-  it: { loginTitle: "ACCESSO MEMBRO", loginSubtitle: "Accedi per il tuo premio Platinum.", fullName: "Nome", phoneNumber: "Tel", password: "Codice", startJourney: "RICEVI PREMIO", claimReward: "SCARICA E-VOUCHER", officialWinner: "DESTINATARIO", screenshotInstruction: "SALVA E-TICKET", welcomeText: "Grazie per il tuo contributo attivo. Gucci presenta Platinum Synergy 2026. Richiedi subito il tuo premio esclusivo.", codeLabel: "CODICE PLATINUM", validUntil: "VALIDITÀ", thankYouBadge: "RICONOSCIMENTO 2026", redeemable: "Valido presso boutique selezionate", congratsTitle: "CONGRATULAZIONI!", congratsSubtitle: "PREMIO ESCLUSIVO" },
-  fr: {}, ja: {}, ko: {}, ar: {}, es: {}
+  zh: { loginTitle: "斋月特别访问", loginSubtitle: "登录以获取您的专属斋月奖励。", fullName: "全名", phoneNumber: "电话", password: "访问码", startJourney: "领取祝福", claimReward: "下载斋月凭证", screenshotInstruction: "保存电子票单", welcomeText: "祝您斋月快乐。作为感激之情，Gucci 推出 2026 斋月表彰。立即领取专属白金奖励。", thankYouBadge: "2026 斋月吉祥", codeLabel: "斋月感谢码", officialWinner: "获表彰者" },
+  it: { loginTitle: "ACCESSO RAMADAN", loginSubtitle: "Accedi per il tuo premio esclusivo di Ramadan.", fullName: "Nome", phoneNumber: "Tel", password: "Codice", startJourney: "RICEVI BENEDIZIONE", claimReward: "SCARICA E-VOUCHER", screenshotInstruction: "SALVA E-TICKET", welcomeText: "Vi auguriamo un mese sacro benedetto. In segno di gratitudine, Gucci presenta Ramadan Kareem 2026. Richiedi subito il tuo premio.", thankYouBadge: "RAMADAN KAREEM 2026", codeLabel: "CODICE RAMADAN", officialWinner: "DESTINATARIO" }
 } as any;
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
