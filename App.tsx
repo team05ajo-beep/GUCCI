@@ -92,70 +92,71 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`w-full min-h-screen flex flex-col bg-transparent overflow-x-hidden ${language === 'ar' ? 'rtl' : 'ltr'}`}>
+    <div className={`w-full min-h-screen flex flex-col bg-transparent overflow-x-hidden relative ${language === 'ar' ? 'rtl' : 'ltr'}`}>
       
       {/* RAMADAN NAV */}
       <nav className="fixed top-0 left-0 w-full z-[60] glass-dark border-b border-gucci-gold/10">
-          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
               <div className="flex-1 hidden lg:flex items-center gap-3">
                   <Moon className="w-4 h-4 text-gucci-gold animate-twinkle" />
                   <span className="text-[10px] font-black tracking-[0.4em] text-gucci-gold uppercase">Ramadan Kareem</span>
               </div>
               
               <div className="flex flex-col items-center">
-                  <h1 className="text-xl md:text-3xl font-display font-black tracking-[0.5em] text-white leading-none">GUCCI</h1>
-                  <p className="text-[7px] md:text-[9px] font-black tracking-[0.6em] text-gucci-gold uppercase mt-1 opacity-80">PLATINUM SYNERGY 2026</p>
+                  <h1 className="text-lg md:text-3xl font-display font-black tracking-[0.5em] text-white leading-none">GUCCI</h1>
+                  <p className="text-[6px] md:text-[9px] font-black tracking-[0.6em] text-gucci-gold uppercase mt-1 opacity-80">PLATINUM SYNERGY 2026</p>
               </div>
 
               <div className="flex-1 flex justify-end">
-                  <button onClick={() => setIsLangOpen(!isLangOpen)} className="flex items-center gap-2 bg-gucci-gold/10 px-3 py-1.5 rounded-full border border-gucci-gold/20 hover:bg-gucci-gold/20 transition-all">
-                      <Globe className="w-3.5 h-3.5 text-gucci-gold" />
-                      <span className="text-[9px] font-black uppercase tracking-widest text-white">{language}</span>
+                  <button onClick={() => setIsLangOpen(!isLangOpen)} className="flex items-center gap-2 bg-gucci-gold/10 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-gucci-gold/20 hover:bg-gucci-gold/20 transition-all">
+                      <Globe className="w-3 h-3 md:w-3.5 md:h-3.5 text-gucci-gold" />
+                      <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-white">{language}</span>
                   </button>
               </div>
           </div>
       </nav>
 
-      <main className="flex-grow flex items-center justify-center pt-24 pb-44 px-6">
-          <div className="w-full max-w-7xl flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24">
+      {/* MAIN CONTENT AREA */}
+      <main className="flex-grow flex items-center justify-center pt-20 md:pt-28 pb-32 md:pb-44 px-4 md:px-6 overflow-y-auto">
+          <div className="w-full max-w-7xl flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-16 lg:gap-24">
               
-              {/* HERO */}
-              <div className="w-full lg:w-1/2 text-center lg:text-left space-y-6 md:space-y-10 animate-fade-in-up">
-                  <div className="space-y-6 md:space-y-8">
-                      <div className="inline-flex items-center gap-3 px-5 py-2 border border-gucci-gold/20 bg-gucci-gold/5 backdrop-blur-xl rounded-full">
-                          <Star className="w-3.5 h-3.5 text-gucci-gold fill-gucci-gold" />
-                          <span className="text-[9px] md:text-[11px] text-gucci-gold font-black tracking-[0.5em] uppercase">
+              {/* HERO TEXT */}
+              <div className="w-full lg:w-1/2 text-center lg:text-left space-y-4 md:space-y-8 animate-fade-in-up">
+                  <div className="space-y-4 md:space-y-6">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-gucci-gold/20 bg-gucci-gold/5 backdrop-blur-xl rounded-full">
+                          <Star className="w-3 h-3 text-gucci-gold fill-gucci-gold" />
+                          <span className="text-[8px] md:text-[10px] text-gucci-gold font-black tracking-[0.4em] uppercase">
                               {t('thankYouBadge')}
                           </span>
                       </div>
-                      <h2 className="text-white space-y-1">
-                          <span className="block text-4xl md:text-7xl lg:text-[85px] font-serif italic font-light tracking-tight leading-none text-gucci-gold">
+                      <h2 className="text-white space-y-0 md:space-y-1">
+                          <span className="block text-3xl md:text-6xl lg:text-[75px] font-serif italic font-light tracking-tight leading-none text-gucci-gold">
                               Ramadan
                           </span>
-                          <span className="block text-4xl md:text-7xl lg:text-[85px] font-serif font-black tracking-tighter leading-none text-white">
+                          <span className="block text-3xl md:text-6xl lg:text-[75px] font-serif font-black tracking-tighter leading-none text-white">
                               Berkah <span className="font-light italic opacity-80">2026</span>
                           </span>
                       </h2>
-                      <p className="text-sm md:text-lg font-sans text-white/70 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium tracking-wide">
+                      <p className="text-xs md:text-base lg:text-lg font-sans text-white/70 leading-relaxed max-w-md mx-auto lg:mx-0 font-medium tracking-wide">
                           {t('welcomeText')}
                       </p>
                   </div>
                   
                   {user && isRevealed && (
                       <button onClick={() => setIsTicketOpen(true)} 
-                        className="group relative inline-flex items-center gap-5 bg-gucci-gold text-black px-12 py-5 md:px-16 md:py-6 font-black text-[11px] md:text-[14px] uppercase tracking-[0.6em] transition-all hover:tracking-[0.8em] active:scale-95 shadow-[0_20px_50px_rgba(212,175,55,0.3)] overflow-hidden">
-                         <span className="relative z-10 flex items-center gap-4">
+                        className="group relative inline-flex items-center gap-4 bg-gucci-gold text-black px-10 py-4 md:px-14 md:py-6 font-black text-[10px] md:text-[13px] uppercase tracking-[0.5em] transition-all hover:tracking-[0.7em] active:scale-95 shadow-xl overflow-hidden mt-4">
+                         <span className="relative z-10 flex items-center gap-3">
                             {t('claimReward')}
-                            <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                            <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                          </span>
                          <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-white to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                       </button>
                   )}
               </div>
 
-              {/* INTERACTIVE CARD */}
-              <div className="w-full max-w-[340px] md:max-w-[440px] lg:max-w-[460px] animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                  <div className="relative aspect-[3/4] max-h-[80vh] w-full bg-[#051505] p-3 md:p-6 shadow-[0_50px_100px_rgba(0,0,0,0.8)] border border-gucci-gold/10 rounded-sm">
+              {/* CARD CONTAINER */}
+              <div className="w-full max-w-[320px] md:max-w-[420px] lg:max-w-[440px] animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                  <div className="relative aspect-[3/4] w-full bg-[#051505] p-2 md:p-4 shadow-2xl border border-gucci-gold/10 rounded-sm">
                       {!user ? (
                           <LoginForm onLogin={handleLogin} />
                       ) : (
@@ -177,10 +178,10 @@ const App: React.FC = () => {
       <WinnerTicker />
 
       {/* FOOTER */}
-      <footer className="w-full py-16 text-center border-t border-gucci-gold/10 bg-[#020a02] relative z-30">
-          <div className="max-w-7xl mx-auto px-6 space-y-8">
-              <h4 className="font-display text-xl md:text-3xl tracking-[0.8em] text-white uppercase font-black ml-[0.8em]">GUCCI</h4>
-              <p className="text-[7px] md:text-[9px] text-gucci-gold/40 uppercase tracking-[0.6em] leading-loose max-w-lg mx-auto font-bold">
+      <footer className="w-full py-12 md:py-16 text-center border-t border-gucci-gold/10 bg-[#020a02] relative z-30">
+          <div className="max-w-7xl mx-auto px-6 space-y-6">
+              <h4 className="font-display text-lg md:text-2xl tracking-[0.8em] text-white uppercase font-black ml-[0.8em]">GUCCI</h4>
+              <p className="text-[6px] md:text-[8px] text-gucci-gold/40 uppercase tracking-[0.5em] leading-loose max-w-sm mx-auto font-bold">
                   © 2026 Guccio Gucci S.p.A. — Ramadan Kareem Partner Recognition.
               </p>
           </div>
@@ -188,29 +189,29 @@ const App: React.FC = () => {
 
       {/* MODAL TICKET */}
       {isTicketOpen && prize && user && (
-        <div className="fixed inset-0 z-[100] bg-black/98 backdrop-blur-3xl flex items-center justify-center p-6 box-border overflow-y-auto">
-             <div className="w-full max-w-[420px] flex flex-col items-center gap-6 animate-fade-in-up my-auto">
+        <div className="fixed inset-0 z-[100] bg-black/98 backdrop-blur-3xl flex items-center justify-center p-4 md:p-6 box-border overflow-y-auto">
+             <div className="w-full max-w-[400px] flex flex-col items-center gap-4 md:gap-6 animate-fade-in-up my-auto">
                  <div className="w-full flex justify-between items-center px-2">
                     <div className="flex flex-col">
-                        <span className="text-gucci-gold font-serif italic text-2xl">Voucher Ramadan</span>
-                        <span className="text-white/40 text-[9px] tracking-[0.4em] uppercase font-black">Eksklusif Platinum Member</span>
+                        <span className="text-gucci-gold font-serif italic text-xl md:text-2xl">E-Voucher</span>
+                        <span className="text-white/40 text-[8px] tracking-[0.3em] uppercase font-black">Eksklusif Platinum Member</span>
                     </div>
-                    <button onClick={() => setIsTicketOpen(false)} className="text-white/30 hover:text-white transition-all bg-white/5 p-3 rounded-full border border-white/10">
-                        <X className="w-7 h-7" />
+                    <button onClick={() => setIsTicketOpen(false)} className="text-white/30 hover:text-white transition-all bg-white/5 p-2 rounded-full border border-white/10">
+                        <X className="w-6 h-6" />
                     </button>
                  </div>
 
-                 <div ref={ticketRef} className="w-full relative aspect-[3/4] max-h-[65vh] shadow-[0_50px_100px_rgba(0,0,0,1)] rounded-sm overflow-hidden border border-gucci-gold/30">
+                 <div ref={ticketRef} className="w-full relative aspect-[3/4] max-h-[60vh] md:max-h-[65vh] shadow-2xl rounded-sm overflow-hidden border border-gucci-gold/30">
                       <WinnerCard prize={prize} code={code} user={user} />
                  </div>
 
-                 <div className="flex flex-col gap-4 w-full px-2">
+                 <div className="flex flex-col gap-3 w-full px-2">
                      <button onClick={handleDownloadTicket} disabled={isSaving} 
-                        className="w-full flex items-center justify-center gap-5 bg-white text-black py-6 font-black text-[11px] md:text-[13px] uppercase tracking-[0.5em] hover:bg-gucci-gold transition-all shadow-2xl disabled:opacity-50">
-                        {isSaving ? "PROCESSING..." : <><Download className="w-5 h-5" /> {t('screenshotInstruction')}</>}
+                        className="w-full flex items-center justify-center gap-4 bg-white text-black py-4 md:py-6 font-black text-[10px] md:text-[12px] uppercase tracking-[0.4em] hover:bg-gucci-gold transition-all shadow-xl disabled:opacity-50">
+                        {isSaving ? "SAVING..." : <><Download className="w-4 h-4" /> {t('screenshotInstruction')}</>}
                      </button>
-                     <p className="text-[8px] text-gucci-gold/40 text-center uppercase tracking-[0.5em] font-black italic">
-                        Authorized Member Access Only — Ramadan Berkah 2026
+                     <p className="text-[7px] text-gucci-gold/40 text-center uppercase tracking-[0.4em] font-black italic">
+                        Authorized Member Access — Ramadan Berkah 2026
                      </p>
                  </div>
             </div>
