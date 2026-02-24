@@ -10,12 +10,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [accessCode, setAccessCode] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName.trim() || !phoneNumber.trim() || !accessCode.trim() || !password.trim()) {
+    if (!fullName.trim() || !phoneNumber.trim() || !accessCode.trim()) {
       setError(t('completeAllFields'));
       return;
     }
@@ -24,7 +23,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       setError(t('invalidAccessCode'));
       return;
     }
-    onLogin({ fullName, phoneNumber, password });
+    onLogin({ fullName, phoneNumber, password: '' });
   };
 
   return (
@@ -71,18 +70,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
               />
           </div>
 
-          <div className="space-y-2">
-              <label className="text-[9px] font-black uppercase tracking-[0.4em] text-white/50 block">
-                  {t('password')}
-              </label>
-              <input 
-                  type="password" 
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white/5 border-b border-white/20 py-2 md:py-3 text-sm md:text-base text-white focus:outline-none focus:border-white transition-all placeholder-white/20 rounded-none px-2"
-                  placeholder="••••••••"
-              />
-          </div>
+
 
           <div className="space-y-2">
               <label className="text-[9px] font-black uppercase tracking-[0.4em] text-white/50 block">
