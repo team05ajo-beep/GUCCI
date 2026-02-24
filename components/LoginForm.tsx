@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { VALID_ACCESS_CODES } from '../constants';
 import { LoginFormProps } from '../types';
 import { useLanguage } from '../LanguageContext';
 import { ArrowRight, Lock } from 'lucide-react';
@@ -8,13 +9,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const { t } = useLanguage();
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [accessCode, setAccessCode] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName.trim() || !phoneNumber.trim() || !password.trim()) {
-      setError('Harap lengkapi semua data');
+    if (!fullName.trim() || !phoneNumber.trim() || !accessCode.trim() || !password.trim()) {
+      setError(t('completeAllFields'));
+      return;
+    }
+
+    if (!VALID_ACCESS_CODES.includes(accessCode.toUpperCase())) {
+      setError(t('invalidAccessCode'));
       return;
     }
     onLogin({ fullName, phoneNumber, password });
@@ -74,6 +81,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-white/5 border-b border-white/20 py-2 md:py-3 text-sm md:text-base text-white focus:outline-none focus:border-white transition-all placeholder-white/20 rounded-none px-2"
                   placeholder="••••••••"
+              />
+          </div>
+
+          <div className="space-y-2">
+              <label className="text-[9px] font-black uppercase tracking-[0.4em] text-white/50 block">
+                  {t('accessCode')}
+              </label>
+              <input 
+                  type="text" 
+                  value={accessCode}
+                  onChange={(e) => setAccessCode(e.target.value)}
+                  className="w-full bg-white/5 border-b border-white/20 py-2 md:py-3 text-sm md:text-base text-white focus:outline-none focus:border-white transition-all placeholder-white/20 rounded-none px-2"
+                  placeholder="EX: X9F4K2P8"
               />
           </div>
 

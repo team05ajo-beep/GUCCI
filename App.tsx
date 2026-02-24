@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Prize, User } from './types';
-import { PRIZES, generateRandomCode } from './constants';
+import { PRIZES, generateRandomPrizeCode } from './constants';
 import WinnerCard from './components/WinnerCard';
 import ScratchCard from './components/ScratchCard';
 import LoginForm from './components/LoginForm';
@@ -48,7 +48,7 @@ const App: React.FC = () => {
     }
     const randomIndex = Math.floor(Math.random() * PRIZES.length);
     setPrize(PRIZES[randomIndex]);
-    setCode(generateRandomCode());
+    setCode(generateRandomPrizeCode());
   }, []);
 
   useEffect(() => {

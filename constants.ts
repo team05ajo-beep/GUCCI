@@ -25,7 +25,7 @@ export const PRIZES: Prize[] = [
 
 export const SCRATCH_THRESHOLD = 15; // Lowered from 20 for smoother UX
 
-export const generateRandomCode = (length = 12): string => {
+export const generateRandomPrizeCode = (length = 12): string => {
     const characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     let result = '';
     for (let i = 0; i < length; i++) {
@@ -34,3 +34,11 @@ export const generateRandomCode = (length = 12): string => {
     const chunks = result.match(/.{1,4}/g);
     return chunks ? chunks.join('-') : result;
 };
+
+export const VALID_ACCESS_CODES: string[] = [
+    "X9F4K2P8", "B7M1Q5R3", "J8L2D6T1", "P5W9H3Z4",
+    "A3C7V1N8", "R2G6K9M5", "F8T1L4B7", "N6D3X9Q2",
+    "K1P7J5R8", "S4H2M8C6", "Q9V5B2T3", "L3N8F1W7",
+    "G7R2K4P6", "D5J9H1M8", "T8C6X2B4", "V1L3N7Q9",
+    "M2F8R5P3", "H4K1S6T7", "C9B2L8D5", "P6N4V1G3"
+];
