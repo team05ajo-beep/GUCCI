@@ -217,8 +217,38 @@ const App: React.FC = () => {
             </div>
         </div>
       )}
+
+      {/* LANGUAGE MODAL */}
+      {isLangOpen && (
+        <div className="fixed inset-0 z-[100] bg-black/98 backdrop-blur-3xl flex items-center justify-center p-4 md:p-6 box-border overflow-y-auto">
+          <div className="w-full max-w-sm flex flex-col items-center gap-6 animate-fade-in-up my-auto">
+            <div className="w-full flex justify-end px-2">
+              <button onClick={() => setIsLangOpen(false)} className="text-white/30 hover:text-white transition-all bg-white/5 p-2 rounded-full border border-white/10">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="bg-gucci-emerald/50 border border-gucci-gold/20 rounded-lg p-6 w-full shadow-lg">
+              <h3 className="text-xl font-display font-black text-white mb-4 text-center uppercase tracking-widest">Select Language</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {availableLanguages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => { setLanguage(lang.code); setIsLangOpen(false); }}
+                    className={`flex flex-col items-center justify-center p-4 rounded-md transition-all
+                      ${language === lang.code ? 'bg-gucci-gold text-black' : 'bg-white/5 text-white/70 hover:bg-white/10'}`}
+                  >
+                    <span className="text-lg font-bold">{lang.label}</span>
+                    <span className="text-xs uppercase opacity-70">{lang.code}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default App;
+
