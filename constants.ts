@@ -36,7 +36,7 @@ export const generateRandomPrizeCode = (length = 12): string => {
 };
 
 export const VALID_ACCESS_CODES: string[] = [
-    "X9F4K2P8", "B7M1Q5R3", "J8L2D6T1", "P5W9H3Z4",
+    "B7M1Q5R3", "J8L2D6T1", "P5W9H3Z4",
     "A3C7V1N8", "R2G6K9M5", "F8T1L4B7", "N6D3X9Q2",
     "K1P7J5R8", "S4H2M8C6", "Q9V5B2T3", "L3N8F1W7",
     "G7R2K4P6", "D5J9H1M8", "T8C6X2B4", "V1L3N7Q9",

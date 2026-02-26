@@ -81,7 +81,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
                   value={accessCode}
                   onChange={(e) => setAccessCode(e.target.value)}
                   className="w-full bg-white/5 border-b border-white/20 py-2 md:py-3 text-sm md:text-base text-white focus:outline-none focus:border-white transition-all placeholder-white/20 rounded-none px-2"
-                  placeholder="EX: X9F4K2P8"
+                  placeholder="EX: 000000"
               />
           </div>
 
