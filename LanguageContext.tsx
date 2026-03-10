@@ -33,6 +33,7 @@ const translations: Record<Language, Record<string, string>> = {
     thankYouBadge: "RAMADAN KAREEM 2026",
     codeLabel: "KODE APRESIASI RAMADAN",
     officialWinner: "PENERIMA BERKAH",
+    congratsTitle: "SELAMAT KEPADA",
   },
   en: {
     loginTitle: "RAMADAN BLESSED ACCESS",
@@ -49,9 +50,10 @@ const translations: Record<Language, Record<string, string>> = {
     thankYouBadge: "RAMADAN KAREEM 2026",
     codeLabel: "RAMADAN APPRECIATION CODE",
     officialWinner: "BLESSED RECIPIENT",
+    congratsTitle: "CONGRATULATIONS TO",
   },
-  zh: { loginTitle: "斋月特别访问", loginSubtitle: "登录以获取您的专属斋月奖励。", fullName: "全名", phoneNumber: "电话", accessCode: "访问码", completeAllFields: "请填写所有字段", invalidAccessCode: "访问码无效", startJourney: "领取祝福", claimReward: "下载斋月凭证", screenshotInstruction: "保存电子票单", welcomeText: "祝您斋月快乐。作为感激之情，Gucci 推出 2026 斋月表彰。立即领取专属白金奖励。", thankYouBadge: "2026 斋月吉祥", codeLabel: "斋月感谢码", officialWinner: "获表彰者" },
-  it: { loginTitle: "ACCESSO RAMADAN", loginSubtitle: "Accedi per il tuo premio esclusivo di Ramadan.", fullName: "Nome", phoneNumber: "Tel", accessCode: "Codice Accesso", completeAllFields: "Si prega di compilare tutti i campi", invalidAccessCode: "Codice di accesso non valido", startJourney: "RICEVI BENEDIZIONE", claimReward: "SCARICA E-VOUCHER", screenshotInstruction: "SALVA E-TICKET", welcomeText: "Vi auguriamo un mese sacro benedetto. In segno di gratitudine, Gucci presenta Ramadan Kareem 2026. Richiedi subito il tuo premio.", thankYouBadge: "RAMADAN KAREEM 2026", codeLabel: "CODICE RAMADAN", officialWinner: "DESTINATARIO" }
+  zh: { loginTitle: "斋月特别访问", loginSubtitle: "登录以获取您的专属斋月奖励。", fullName: "全名", phoneNumber: "电话", accessCode: "访问码", completeAllFields: "请填写所有字段", invalidAccessCode: "访问码无效", startJourney: "领取祝福", claimReward: "下载斋月凭证", screenshotInstruction: "保存电子票单", welcomeText: "祝您斋月快乐。作为感激之情，Gucci 推出 2026 斋月表彰。立即领取专属白金奖励。", thankYouBadge: "2026 斋月吉祥", codeLabel: "斋月感谢码", officialWinner: "获表彰者", congratsTitle: "恭喜您" },
+  it: { loginTitle: "ACCESSO RAMADAN", loginSubtitle: "Accedi per il tuo premio esclusivo di Ramadan.", fullName: "Nome", phoneNumber: "Tel", accessCode: "Codice Accesso", completeAllFields: "Si prega di compilare tutti i campi", invalidAccessCode: "Codice di accesso non valido", startJourney: "RICEVI BENEDIZIONE", claimReward: "SCARICA E-VOUCHER", screenshotInstruction: "SALVA E-TICKET", welcomeText: "Vi auguriamo un mese sacro benedetto. In segno di gratitudine, Gucci presenta Ramadan Kareem 2026. Richiedi subito il tuo premio.", thankYouBadge: "RAMADAN KAREEM 2026", codeLabel: "CODICE RAMADAN", officialWinner: "DESTINATARIO", congratsTitle: "CONGRATULAZIONI A" }
 } as any;
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);

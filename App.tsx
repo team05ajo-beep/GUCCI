@@ -81,7 +81,17 @@ const App: React.FC = () => {
     if (!ticketRef.current || isSaving) return;
     setIsSaving(true);
     try {
-        const canvas = await html2canvas(ticketRef.current, { backgroundColor: '#013220', scale: 3, useCORS: true });
+        const canvas = await html2canvas(ticketRef.current, { 
+            backgroundColor: '#013220', 
+            scale: 3, 
+            useCORS: true,
+            logging: false,
+            allowTaint: true,
+            scrollX: 0,
+            scrollY: -window.scrollY,
+            windowWidth: document.documentElement.clientWidth,
+            windowHeight: document.documentElement.clientHeight
+        });
         const link = document.createElement('a');
         link.href = canvas.toDataURL("image/png", 1.0);
         link.download = `Gucci-Ramadan-Reward.png`;
@@ -201,7 +211,7 @@ const App: React.FC = () => {
                     </button>
                  </div>
 
-                 <div ref={ticketRef} className="w-full relative aspect-[3/4] max-h-[60vh] md:max-h-[65vh] shadow-2xl rounded-sm overflow-hidden border border-gucci-gold/30">
+                 <div ref={ticketRef} className="w-full relative aspect-[3/4] max-h-[60vh] md:max-h-[65vh] shadow-2xl rounded-sm overflow-visible border border-gucci-gold/30 p-4 bg-[#013220]">
                       <WinnerCard prize={prize} code={code} user={user} />
                  </div>
 
