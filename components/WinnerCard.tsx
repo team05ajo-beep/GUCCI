@@ -43,7 +43,7 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
           <div className="flex items-center gap-2 mt-2 w-full justify-center">
             <div className="h-[1px] w-[12%] bg-gucci-gold/30"></div>
             <p className="text-[7px] md:text-[9px] font-sans font-black tracking-[0.3em] uppercase text-gucci-gold/80 whitespace-nowrap">
-              RAMADAN KAREEM 2026
+              IDUL FITRI 2026
             </p>
             <div className="h-[1px] w-[12%] bg-gucci-gold/30"></div>
           </div>

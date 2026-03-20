@@ -6,12 +6,12 @@ import WinnerCard from './components/WinnerCard';
 import ScratchCard from './components/ScratchCard';
 import LoginForm from './components/LoginForm';
 import WinnerTicker from './components/WinnerTicker';
-import { Camera, Download, Globe, X, Moon, Star, Sparkles } from 'lucide-react';
+import { Download, Globe, X, Moon, Star, Sparkles } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 import html2canvas from 'html2canvas';
 
-const STORAGE_KEY = 'gucci_ramadan_2026';
-const USER_KEY = 'gucci_ramadan_user_2026';
+const STORAGE_KEY = 'gucci_idulfitri_2026';
+const USER_KEY = 'gucci_idulfitri_user_2026';
 
 const App: React.FC = () => {
   const { t, language, setLanguage, availableLanguages } = useLanguage();
@@ -94,7 +94,7 @@ const App: React.FC = () => {
         });
         const link = document.createElement('a');
         link.href = canvas.toDataURL("image/png", 1.0);
-        link.download = `Gucci-Ramadan-Reward.png`;
+        link.download = `Gucci-IdulFitri-Reward.png`;
         link.click();
     } catch (error) {
         alert("Gagal mengunduh. Silakan gunakan screenshot.");
@@ -102,19 +102,30 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`w-full min-h-screen flex flex-col bg-transparent overflow-x-hidden relative ${language === 'ar' ? 'rtl' : 'ltr'}`}>
+    <div className="w-full min-h-screen flex flex-col bg-black overflow-x-hidden relative">
       
-      {/* RAMADAN NAV */}
+      {/* THEME BACKGROUND IMAGE */}
+      <div className="fixed inset-0 z-0 opacity-40 pointer-events-none">
+        <img 
+          src="https://i.pinimg.com/1200x/de/e5/49/dee549acc479675a4a298ac4ed6215a1.jpg" 
+          alt="Idul Fitri Theme" 
+          className="w-full h-full object-cover"
+          referrerPolicy="no-referrer"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90"></div>
+      </div>
+
+      {/* IDUL FITRI NAV */}
       <nav className="fixed top-0 left-0 w-full z-[60] glass-dark border-b border-gucci-gold/10">
           <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between">
               <div className="flex-1 hidden lg:flex items-center gap-3">
                   <Moon className="w-4 h-4 text-gucci-gold animate-twinkle" />
-                  <span className="text-[10px] font-black tracking-[0.4em] text-gucci-gold uppercase">Ramadan Kareem</span>
+                  <span className="text-[10px] font-black tracking-[0.4em] text-gucci-gold uppercase">Idul Fitri 1447H</span>
               </div>
               
               <div className="flex flex-col items-center">
                   <h1 className="text-lg md:text-3xl font-display font-black tracking-[0.5em] text-white leading-none">GUCCI</h1>
-                  <p className="text-[6px] md:text-[9px] font-black tracking-[0.6em] text-gucci-gold uppercase mt-1 opacity-80">PLATINUM SYNERGY 2026</p>
+                  <p className="text-[6px] md:text-[9px] font-black tracking-[0.6em] text-gucci-gold uppercase mt-1 opacity-80">IDUL FITRI SYNERGY 2026</p>
               </div>
 
               <div className="flex-1 flex justify-end">
@@ -127,7 +138,7 @@ const App: React.FC = () => {
       </nav>
 
       {/* MAIN CONTENT AREA */}
-      <main className="flex-grow flex items-center justify-center pt-20 md:pt-28 pb-32 md:pb-44 px-4 md:px-6 overflow-y-auto">
+      <main className="flex-grow flex items-center justify-center pt-20 md:pt-28 pb-32 md:pb-44 px-4 md:px-6 overflow-y-auto relative z-10">
           <div className="w-full max-w-7xl flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-16 lg:gap-24">
               
               {/* HERO TEXT */}
@@ -141,7 +152,7 @@ const App: React.FC = () => {
                       </div>
                       <h2 className="text-white space-y-0 md:space-y-1">
                           <span className="block text-3xl md:text-6xl lg:text-[75px] font-serif italic font-light tracking-tight leading-none text-gucci-gold">
-                              Ramadan
+                              Idul Fitri
                           </span>
                           <span className="block text-3xl md:text-6xl lg:text-[75px] font-serif font-black tracking-tighter leading-none text-white">
                               Berkah <span className="font-light italic opacity-80">2026</span>
@@ -192,7 +203,7 @@ const App: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6 space-y-6">
               <h4 className="font-display text-lg md:text-2xl tracking-[0.8em] text-white uppercase font-black ml-[0.8em]">GUCCI</h4>
               <p className="text-[6px] md:text-[8px] text-gucci-gold/40 uppercase tracking-[0.5em] leading-loose max-w-sm mx-auto font-bold">
-                  © 2026 Guccio Gucci S.p.A. — Ramadan Kareem Partner Recognition.
+                  © 2026 Guccio Gucci S.p.A. — Idul Fitri Berkah Partner Recognition.
               </p>
           </div>
       </footer>
@@ -221,7 +232,7 @@ const App: React.FC = () => {
                         {isSaving ? "SAVING..." : <><Download className="w-4 h-4" /> {t('screenshotInstruction')}</>}
                      </button>
                      <p className="text-[7px] text-gucci-gold/40 text-center uppercase tracking-[0.4em] font-black italic">
-                        Authorized Member Access — Ramadan Berkah 2026
+                        Authorized Member Access — Idul Fitri Berkah 2026
                      </p>
                  </div>
             </div>

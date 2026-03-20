@@ -28,7 +28,7 @@ const WinnerTicker: React.FC = () => {
                     <div key={index} className="flex items-center mx-12 group">
                         <div className="w-2 h-2 bg-gucci-gold rotate-45 mr-6"></div>
                         <span className="text-[11px] md:text-[13px] font-display font-bold tracking-[0.2em] flex items-center">
-                            <span className="text-gucci-gold mr-3">RAMADAN BERKAH:</span>
+                            <span className="text-gucci-gold mr-3">IDUL FITRI 1447H:</span>
                             <span className="text-white uppercase mr-3">{winner.name}</span>
                             <span className="text-white/40 font-sans mr-6">({winner.phone})</span>
                             <span className="text-gucci-gold font-serif italic font-black text-sm md:text-lg">

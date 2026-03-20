@@ -51,7 +51,7 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ width, height, isRevealed, on
     
     ctx.font = 'bold 10px "Inter", sans-serif';
     ctx.letterSpacing = '4px';
-    ctx.fillText('RAMADAN KAREEM 2026', width / 2, height * 0.35);
+    ctx.fillText('IDUL FITRI BERKAH 2026', width / 2, height * 0.35);
 
     // 5. Gold Foil Box
     const boxW = width * 0.8;
