@@ -8,7 +8,7 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
   
   const expiryDetails = useMemo(() => {
     const now = new Date();
-    const expiry = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+    const expiry = new Date(now.getTime() + 24 * 60 * 60 * 1000);
     const day = expiry.getDate().toString().padStart(2, '0');
     const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     const month = monthNames[expiry.getMonth()];
@@ -97,7 +97,7 @@ const WinnerCard: React.FC<WinnerCardProps> = ({ prize, code, user }) => {
           <div className="flex flex-col items-center gap-1 w-full overflow-visible">
               <div className="flex items-center gap-2 w-full justify-center opacity-40">
                   <div className="h-[0.5px] w-4 bg-gucci-gold"></div>
-                  <p className="text-[7px] md:text-[8px] font-sans font-black uppercase tracking-[0.2em] text-gucci-gold">EXPIRED WITHIN 48H</p>
+                  <p className="text-[7px] md:text-[8px] font-sans font-black uppercase tracking-[0.2em] text-gucci-gold">EXPIRED WITHIN 24H</p>
                   <div className="h-[0.5px] w-4 bg-gucci-gold"></div>
               </div>
               <p className="text-[10px] md:text-xs font-serif font-black italic text-gucci-gold/90 text-center leading-none mt-1 pb-1 px-4">
